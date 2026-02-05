@@ -1,0 +1,7 @@
+[submodule "EthProofValidator"]
+	path = EthProofValidator
+	url = https://github.com/ManuelArto/EthProofValidator
+[submodule "nethermind"]
+	path = nethermind
+	url = https://github.com/ManuelArto/nethermind
+	branch = feature/zk-validator
