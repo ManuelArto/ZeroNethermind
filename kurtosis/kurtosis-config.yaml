@@ -1,0 +1,39 @@
+# ZeroNethermind Demo Configuration
+# Use with: kurtosis run --enclave zero-demo ./kurtosis --args-file kurtosis-config.yaml
+
+# Ethereum network participants
+participants:
+  - el_type: nethermind
+    cl_type: lighthouse
+    count: 1
+    el_image: "zero-nethermind:latest"
+    el_extra_params:
+      - "--Init.DiscoveryEnabled=false"
+      - "--Init.PeerManagerEnabled=false"
+      - "--Init.ProcessingEnabled=false"
+      - "--JsonRpc.EnabledModules=Net,Web3,Engine"
+      - "--Sync.SynchronizationEnabled=false"
+      - "--Sync.NonValidatorNode=true"
+      - "--Sync.DownloadReceiptsInFastSync=false"
+      - "--Sync.DownloadBodiesInFastSync=false"
+      - "--Sync.PivotTotalDifficulty=58750003716598352816469"
+      - "--TxPool.Size=0"
+      - "--TxPool.BlobsSupport=Disabled"
+      - "--Metrics.Enabled=true"
+      - "--Merge.Enabled=true"
+      - "--HealthChecks.Enabled=true"
+      - "--ZkValidation.Enabled=true"
+      - "--ZkValidation.ProverUrl=http://zero-prover:5000"
+  - el_type: nethermind
+    cl_type: lighthouse
+    count: 2
+
+# Additional services to run
+additional_services:
+  - dora
+  - prometheus
+  - grafana
+  - spamoor
+
+# Enable metrics
+ethereum_metrics_exporter_enabled: true
