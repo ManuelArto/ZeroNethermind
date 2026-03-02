@@ -3,30 +3,36 @@
 
 # Ethereum network participants
 participants:
+  # Block-producing nodes with validators (regular Nethermind)
+  - el_type: nethermind
+    cl_type: lighthouse
+    count: 2
+    el_extra_params:
+      - "--HealthChecks.Enabled=true"
+
+  # ZeroNethermind verifier nodes - NO validators, just verifies via ZK
   - el_type: nethermind
     cl_type: lighthouse
     count: 1
     el_image: "zero-nethermind:latest"
+    validator_count: 64
     el_extra_params:
       - "--Init.DiscoveryEnabled=false"
       - "--Init.PeerManagerEnabled=false"
       - "--Init.ProcessingEnabled=false"
-      - "--JsonRpc.EnabledModules=Net,Web3,Engine"
       - "--Sync.SynchronizationEnabled=false"
       - "--Sync.NonValidatorNode=true"
       - "--Sync.DownloadReceiptsInFastSync=false"
       - "--Sync.DownloadBodiesInFastSync=false"
       - "--Sync.PivotTotalDifficulty=58750003716598352816469"
       - "--TxPool.Size=0"
-      - "--TxPool.BlobsSupport=Disabled"
-      - "--Metrics.Enabled=true"
+      - "--TxPool.BlobsSupport=disabled"
       - "--Merge.Enabled=true"
       - "--HealthChecks.Enabled=true"
       - "--ZkValidation.Enabled=true"
       - "--ZkValidation.ProverUrl=http://zero-prover:5000"
-  - el_type: nethermind
-    cl_type: lighthouse
-    count: 2
+
+mev_type: flashbots
 
 # Additional services to run
 additional_services:
