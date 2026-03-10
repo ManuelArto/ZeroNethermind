@@ -1,0 +1,1479 @@
+Mar 16:31:14 | mNethermind is starting up 
+Mar 16:31:14 | Version: 1.37.0-unstable 
+Mar 16:31:14 | Loading embedded plugins 
+Mar 16:31:14 |   Found plugin type Nethermind.Consensus.AuRa.AuRaPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Consensus.Clique.CliquePlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Consensus.Ethash.EthashPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Consensus.Ethash.NethDevPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.EthStats.EthStatsPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Flashbots.Flashbots 
+Mar 16:31:14 |   Found plugin type Nethermind.HealthChecks.HealthChecksPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Hive.HivePlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Init.Snapshot.SnapshotPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Merge.AuRa.AuRaMergePlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Merge.Plugin.MergePlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.ZkValidation.Plugin.ZkValidationPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Optimism.OptimismPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Shutter.ShutterPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Taiko.TaikoPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.UPnP.Plugin.UPnPPlugin 
+Mar 16:31:14 |   Found plugin type Nethermind.Xdc.XdcPlugin 
+Mar 16:31:14 | Loading 15 assemblies from /nethermind/plugins 
+Mar 16:31:14 | Loading assembly Nethermind.Init 
+Mar 16:31:14 | Loading assembly Nethermind.Shutter 
+Mar 16:31:14 | Loading assembly Nethermind.HealthChecks 
+Mar 16:31:14 | Loading assembly Nethermind.Taiko 
+Mar 16:31:15 | Loading assembly Nethermind.Api 
+Mar 16:31:15 | Loading assembly Nethermind.Flashbots 
+Mar 16:31:15 | Loading assembly Nethermind.ExternalSigner.Plugin 
+Mar 16:31:15 |   Found plugin type Nethermind.ExternalSigner.Plugin 
+Mar 16:31:15 | Loading assembly Nethermind.JsonRpc.TraceStore 
+Mar 16:31:15 |   Found plugin type Nethermind.JsonRpc.TraceStore 
+Mar 16:31:15 | Loading assembly Nethermind.Merge.Plugin 
+Mar 16:31:15 | Loading assembly Nethermind.Init.Snapshot 
+Mar 16:31:15 | Loading assembly Nethermind.ZkValidation.Plugin 
+Mar 16:31:15 | Loading assembly Nethermind.Merge.AuRa 
+Mar 16:31:15 | Loading assembly Nethermind.Optimism 
+Mar 16:31:15 | Loading assembly Nethermind.Consensus.AuRa 
+Mar 16:31:15 | Loading assembly Nethermind.EthStats 
+Mar 16:31:15 | Loading configuration from /nethermind/configs/zk-mainnet.json 
+Mar 16:31:15 | Configuration complete 
+Mar 16:31:15 | mRocksDB: v10.4.2 
+Mar 16:31:15 | Loading ChainSpec from embedded resources 
+Mar 16:31:15 | Detected 19 plugins 
+Mar 16:31:15 |   HealthChecks by mNethermind     Enabled 
+Mar 16:31:15 |   Clique by mNethermind           Disabled 
+Mar 16:31:15 |   AuRa by mNethermind             Disabled 
+Mar 16:31:15 |   Ethash by mNethermind           Enabled 
+Mar 16:31:15 |   Optimism by mNethermind         Disabled 
+Mar 16:31:15 |   Shutter by mNethermind          Disabled 
+Mar 16:31:15 |   Taiko by mNethermind            Disabled 
+Mar 16:31:15 |   AuRaMerge by mNethermind        Disabled 
+Mar 16:31:15 |   Merge by mNethermind            Enabled 
+Mar 16:31:15 |   Hive by mNethermind             Disabled 
+Mar 16:31:15 |   Clef signer by mNethermind      Disabled 
+Mar 16:31:15 |   EthStats by mNethermind         Disabled 
+Mar 16:31:15 |   Flashbots by mNethermind        Disabled 
+Mar 16:31:15 |   NethDev by mNethermind          Disabled 
+Mar 16:31:15 |   Snapshot by mNethermind         Disabled 
+Mar 16:31:15 |   TraceStore by mNethermind       Disabled 
+Mar 16:31:15 |   UPnP by mNethermind             Disabled 
+Mar 16:31:15 |   Xdc by mNethermind              Disabled 
+Mar 16:31:15 |   ZkValidation by mNethermind     Enabled 
+Mar 16:31:16 | Setting up memory allowances 
+Mar 16:31:16 |   Memory hint:         2048 MB 
+Mar 16:31:16 |   General memory:        32 MB 
+Mar 16:31:16 |   Peers memory:          50 MB 
+Mar 16:31:16 |   Netty memory:         134 MB 
+Mar 16:31:16 |   Mempool memory:         0 MB 
+Mar 16:31:16 |   Fast blocks memory:     0 MB 
+Mar 16:31:16 |   Trie memory:          366 MB 
+Mar 16:31:16 |   DB memory:           1465 MB 
+Mar 16:31:16 | Loading Ckzg trusted setup from file /nethermind/kzg_trusted_setup.txt 
+Mar 16:31:16 | CPU: mIntel(R) Core(TM) i5-7400 CPU @ 3.00GHz (4C4T) 
+Mar 16:31:16 | Using mhttp://ipv4.icanhazip.com to get external ip 
+Mar 16:31:16 | Initializing 4 plugins 
+Mar 16:31:16 |   HealthChecks by mNethermind 
+Mar 16:31:16 |   HealthChecks by mNethermind initialized in 8ms 
+Mar 16:31:16 |   Ethash by mNethermind 
+Mar 16:31:16 |   Ethash by mNethermind initialized in 0ms 
+Mar 16:31:16 |   Merge by mNethermind 
+Mar 16:31:17 | Block tree initialized, last processed is 0, best queued is 0, best known is 0, lowest inserted header , lowest sync inserted block number  
+Mar 16:31:17 | Client started with TTD: 58750000000000000000000, TTD reached: True, Terminal Block Number , FinalTotalDifficulty: 58750003716598352816469 
+Mar 16:31:17 |   Merge by mNethermind initialized in 363ms 
+Mar 16:31:17 |   ZkValidation by mNethermind 
+Mar 16:31:17 | Initializing ZkValidation plugin. 
+Mar 16:31:17 |   ZkValidation by mNethermind initialized in 0ms 
+Mar 16:31:17 | Started monitoring for the group: mnethermind, instance: ZkMainnet 
+Mar 16:31:17 | System.Diagnostics.Metrics mdisabled 
+Mar 16:31:19 | No current state db key scheme. 
+Mar 16:31:19 | Detected 1536MB of dirty pruning cache config. Dirty cache more than 1000MB is not recommended with 4 logical core as it may cause long memory pruning time which affect attestation. 
+Mar 16:31:19 | mSnap serving enabled, but PruningBoundary is less than 128. Setting to 128. 
+Mar 16:31:19 | BlockchainProcessor started. 
+Mar 16:31:20 | Full Pruning Persist Cache started. 
+Mar 16:31:20 | Saving all commit set took 00:00:00.0000014 for 0 commit sets. 
+Mar 16:31:20 | Clear cache took 00:00:00.0762067. 
+Mar 16:31:20 | Shutting down the blockchain processor due to InitConfig.ProcessingEnabled set to false 
+Mar 16:31:20 | BlockchainProcessor shutdown complete. 
+Mar 16:31:20 | Loaded 0 nodes from /nethermind/static-nodes.json 
+Mar 16:31:20 | Loaded 0 nodes from /nethermind/trusted-nodes.json 
+Mar 16:31:20 | Adding eth/69 capability 
+Mar 16:31:20 | Adding eth/70 capability 
+Mar 16:31:20 | Skipping blockchain synchronization init due to SynchronizationEnabled set to false 
+Mar 16:31:20 | Skipping discovery init due to DiscoveryEnabled set to false 
+Mar 16:31:20 | Skipping peer manager init due to PeerManagerEnabled set to false 
+Mar 16:31:20 | Starting Merge block producer & sealer 
+Mar 16:31:20 | Starting Ethash block producer & sealer 
+Mar 16:31:20 | Health RPC Module has been enabled 
+Mar 16:31:20 | Reading authentication secret from '/nethermind/keystore/jwt-secret' 
+Mar 16:31:20 | 
+
+        ------                ~~~~~~~~        
+     --------- ----        ~~~~~~~~~~~~~~     
+   -  -------  ------        ~~~~~~~~~~~~~~   
+ -----  -      ----           ~~~    ~~~~~~~~        ++   ++   +++++  ++++++  ++   ++   +++++  ++++++    ++    ++    ++   ++   ++   +++++ 
+ ------         -                      ~~~           +++  ++  ++        ++    ++   ++  ++      ++   ++  ++++   +++   ++   +++  ++   ++  ++ 
+-------                                   ----       ++ + ++  ++++++    ++    +++++++  ++++++  ++++++   ++ +  + ++   ++   ++ + ++   ++  ++
+----                                   -------       ++  +++  ++        ++    ++   ++  ++      ++  ++   ++ ++++ ++   ++   ++  +++   ++  ++
+    ~~~                      -         ------        ++   ++   +++++    ++    ++   ++   +++++  ++   ++  ++  ++  ++   ++   ++   ++   +++++ 
+ ~~~~~~~~      ~           ----      -  ----- 
+   ~~~~~~~~~~~~~~        ------  -------  -   
+     ~~~~~~~~~~~~~~        ---- ---------     
+        ~~~~~~~~                ------                                                                          mhttps://www.nethermind.io
+
+-----------------------------  Initialization Completed  -----------------------------
+
+This node    : enode://53c8db9cd36cd5d8960e9b68988203768f6367bc9c487eb6e23612d9ab8d491413139b3f85b19a2a23a2620b5d2e431e915499f0c81ae2912d947a69ac066535@2.44.103.121:30303 
+RPC modules  : Engine, Net, Web3
+Public id    : Nethermind/v1.37.0-unstable/linux-x64/dotnet10.0.3
+Node address : 0xc14010fa9a129e1ec7d7bbe1838130a4937425c9 (do not use as an account)
+JSON RPC     : mhttp://0.0.0.0:8545 ; mhttp://0.0.0.0:8551
+Genesis hash : 0xd4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3
+Gaslimit     : 
+ExtraData    : mNethermind v1.37.0a
+External IP  : 2.44.103.121
+Ethereum     : tcp://2.44.103.121:30303 
+Client id    : Nethermind/v1.37.0-unstable/linux-x64/dotnet10.0.3
+Chainspec    : chainspec/foundation.json
+Chain head   : 0
+Chain ID     : Mainnet
+-------------------------------------------------------------------------------------- 
+Mar 16:31:21 | Skipping pivot update 
+Mar 16:34:12 | Syncing Unknown ForkChoiceState head hash Request: ForkChoice: 0xba1264...0321d2, Safe: 0xba1264...0321d2, Finalized: 0xba1264...0321d2. 
+Mar 16:34:50 | Searching the tree of "all.mainnet.ethdisco.net" had an error: Unknown Error 
+Mar 16:35:06 | Received New Block:  24628200 (0x2d7436...cdc2d9)      | limit    59,941,408    
+Mar 16:35:08 |    Proof 5216309 - Zisk            : ✅ Valid (DL: 742ms | Verify: 29ms) 
+Mar 16:35:08 |    Proof 5216308 - Zisk            : ✅ Valid (DL: 1042ms | Verify: 24ms) 
+Mar 16:35:09 |    Proof 5216315 - OpenVM          : ✅ Valid (DL: 982ms | Verify: 125ms) 
+Mar 16:35:09 |    Proof 5216310 - Pico            : ✅ Valid (DL: 1213ms | Verify: 119ms) 
+Mar 16:35:09 |    Proof 5216317 - Airbender       : ✅ Valid (DL: 1067ms | Verify: 26ms) 
+Mar 16:35:09 | Block #24628200 Timing: TotalTime=2980ms | Max (DL=1213ms, Verify=125ms) 
+Mar 16:35:09 | Valid. Block 24628200 (2984 ms, retries 0) 
+Mar 16:35:10 | Received New Block:  24628201 (0x82ecea...3a9a5f)      | limit    59,999,943 👆 
+Mar 16:35:11 |    Proof 5216335 - Zisk            : ✅ Valid (DL: 629ms | Verify: 22ms) 
+Mar 16:35:11 |    Proof 5216337 - Zisk            : ✅ Valid (DL: 766ms | Verify: 25ms) 
+Mar 16:35:11 |    Proof 5216341 - OpenVM          : ✅ Valid (DL: 1165ms | Verify: 98ms) 
+Mar 16:35:11 |    Proof 5216345 - Airbender       : ✅ Valid (DL: 1311ms | Verify: 26ms) 
+Mar 16:35:11 |    Proof 5216338 - Pico            : ✅ Valid (DL: 1272ms | Verify: 127ms) 
+Mar 16:35:11 | Block #24628201 Timing: TotalTime=1676ms | Max (DL=1311ms, Verify=127ms) 
+Mar 16:35:11 | Valid. Block 24628201 (1676 ms, retries 0) 
+Mar 16:35:11 | Received New Block:  24628201 (0x82ecea...3a9a5f)      | limit    59,999,943    
+Mar 16:35:11 | Valid. Block 24628201 already validated. 
+Mar 16:35:11 | Received New Block:  24628201 (0x82ecea...3a9a5f)      | limit    59,999,943    
+Mar 16:35:11 | Valid. Block 24628201 already validated. 
+Mar 16:35:12 | Received New Block:  24628202 (0x069576...34699d)      | limit    60,000,000 👆 
+Mar 16:35:13 |    Proof 5216353 - Zisk            : ✅ Valid (DL: 532ms | Verify: 12ms) 
+Mar 16:35:13 |    Proof 5216355 - Zisk            : ✅ Valid (DL: 910ms | Verify: 22ms) 
+Mar 16:35:13 |    Proof 5216359 - OpenVM          : ✅ Valid (DL: 1083ms | Verify: 95ms) 
+Mar 16:35:13 |    Proof 5216363 - Airbender       : ✅ Valid (DL: 1317ms | Verify: 19ms) 
+Mar 16:35:14 |    Proof 5216356 - Pico            : ✅ Valid (DL: 1542ms | Verify: 129ms) 
+Mar 16:35:14 | Block #24628202 Timing: TotalTime=1964ms | Max (DL=1542ms, Verify=129ms) 
+Mar 16:35:14 | Valid. Block 24628202 (1964 ms, retries 0) 
+Mar 16:35:14 | Received New Block:  24628202 (0x069576...34699d)      | limit    60,000,000    
+Mar 16:35:14 | Valid. Block 24628202 already validated. 
+Mar 16:35:14 | Received New Block:  24628202 (0x069576...34699d)      | limit    60,000,000    
+Mar 16:35:14 | Valid. Block 24628202 already validated. 
+Mar 16:35:14 | Received New Block:  24628203 (0x1e6489...6b77c3)      | limit    60,000,000    
+Mar 16:35:15 |    Proof 5216380 - Zisk            : ✅ Valid (DL: 912ms | Verify: 11ms) 
+Mar 16:35:15 |    Proof 5216384 - Zisk            : ✅ Valid (DL: 1012ms | Verify: 22ms) 
+Mar 16:35:16 |    Proof 5216386 - OpenVM          : ✅ Valid (DL: 1306ms | Verify: 118ms) 
+Mar 16:35:16 |    Proof 5216385 - Pico            : ✅ Valid (DL: 1504ms | Verify: 98ms) 
+Mar 16:35:16 |    Proof 5216390 - Airbender       : ✅ Valid (DL: 1986ms | Verify: 14ms) 
+Mar 16:35:16 | Block #24628203 Timing: TotalTime=2380ms | Max (DL=1986ms, Verify=118ms) 
+Mar 16:35:16 | Valid. Block 24628203 (2380 ms, retries 0) 
+Mar 16:35:16 | Received New Block:  24628203 (0x1e6489...6b77c3)      | limit    60,000,000    
+Mar 16:35:16 | Valid. Block 24628203 already validated. 
+Mar 16:35:16 | Received New Block:  24628203 (0x1e6489...6b77c3)      | limit    60,000,000    
+Mar 16:35:16 | Valid. Block 24628203 already validated. 
+Mar 16:35:17 | Received New Block:  24628204 (0xee17fc...ea2335)      | limit    60,000,000    
+Mar 16:35:18 |    Proof 5216401 - Zisk            : ✅ Valid (DL: 788ms | Verify: 12ms) 
+Mar 16:35:18 |    Proof 5216403 - Zisk            : ✅ Valid (DL: 850ms | Verify: 22ms) 
+Mar 16:35:19 |    Proof 5216412 - Airbender       : ✅ Valid (DL: 1528ms | Verify: 15ms) 
+Mar 16:35:19 |    Proof 5216407 - OpenVM          : ✅ Valid (DL: 1566ms | Verify: 97ms) 
+Mar 16:35:19 |    Proof 5216406 - Pico            : ✅ Valid (DL: 1695ms | Verify: 102ms) 
+Mar 16:35:19 | Block #24628204 Timing: TotalTime=2121ms | Max (DL=1695ms, Verify=102ms) 
+Mar 16:35:19 | Valid. Block 24628204 (2121 ms, retries 0) 
+Mar 16:35:19 | Received New Block:  24628204 (0xee17fc...ea2335)      | limit    60,000,000    
+Mar 16:35:19 | Valid. Block 24628204 already validated. 
+Mar 16:35:19 | Received New Block:  24628204 (0xee17fc...ea2335)      | limit    60,000,000    
+Mar 16:35:19 | Valid. Block 24628204 already validated. 
+Mar 16:35:19 | Received New Block:  24628205 (0xb15ef4...bd55ec)      | limit    60,000,000    
+Mar 16:35:21 |    Proof 5216425 - Zisk            : ✅ Valid (DL: 1000ms | Verify: 24ms) 
+Mar 16:35:21 |    Proof 5216424 - Zisk            : ✅ Valid (DL: 1106ms | Verify: 24ms) 
+Mar 16:35:21 |    Proof 5216431 - OpenVM          : ✅ Valid (DL: 1665ms | Verify: 97ms) 
+Mar 16:35:22 |    Proof 5216434 - Airbender       : ✅ Valid (DL: 1863ms | Verify: 15ms) 
+Mar 16:35:22 |    Proof 5216428 - Pico            : ✅ Valid (DL: 1841ms | Verify: 128ms) 
+Mar 16:35:22 | Block #24628205 Timing: TotalTime=2275ms | Max (DL=1863ms, Verify=128ms) 
+Mar 16:35:22 | Valid. Block 24628205 (2275 ms, retries 0) 
+Mar 16:35:22 | Received New Block:  24628205 (0xb15ef4...bd55ec)      | limit    60,000,000    
+Mar 16:35:22 | Valid. Block 24628205 already validated. 
+Mar 16:35:22 | Received New Block:  24628205 (0xb15ef4...bd55ec)      | limit    60,000,000    
+Mar 16:35:22 | Valid. Block 24628205 already validated. 
+Mar 16:35:22 | Received New Block:  24628206 (0x56fee1...9b0d16)      | limit    60,000,000    
+Mar 16:35:23 |    Proof 5216440 - Zisk            : ✅ Valid (DL: 681ms | Verify: 9ms) 
+Mar 16:35:23 |    Proof 5216442 - Zisk            : ✅ Valid (DL: 771ms | Verify: 26ms) 
+Mar 16:35:24 |    Proof 5216451 - Airbender       : ✅ Valid (DL: 1241ms | Verify: 76ms) 
+Mar 16:35:24 |    Proof 5216448 - OpenVM          : ✅ Valid (DL: 1107ms | Verify: 256ms) 
+Mar 16:35:24 |    Proof 5216446 - Pico            : ✅ Valid (DL: 1223ms | Verify: 240ms) 
+Mar 16:35:24 | Block #24628206 Timing: TotalTime=1768ms | Max (DL=1241ms, Verify=256ms) 
+Mar 16:35:24 | Valid. Block 24628206 (1768 ms, retries 0) 
+Mar 16:35:24 | Received New Block:  24628206 (0x56fee1...9b0d16)      | limit    60,000,000    
+Mar 16:35:24 | Valid. Block 24628206 already validated. 
+Mar 16:35:24 | Received New Block:  24628206 (0x56fee1...9b0d16)      | limit    60,000,000    
+Mar 16:35:24 | Valid. Block 24628206 already validated. 
+Mar 16:35:24 | Received New Block:  24628207 (0xa53212...278077)      | limit    60,000,000    
+Mar 16:35:25 |    Proof 5216467 - Zisk            : ✅ Valid (DL: 587ms | Verify: 10ms) 
+Mar 16:35:26 |    Proof 5216468 - Zisk            : ✅ Valid (DL: 1006ms | Verify: 24ms) 
+Mar 16:35:26 |    Proof 5216472 - OpenVM          : ✅ Valid (DL: 1003ms | Verify: 108ms) 
+Mar 16:35:26 |    Proof 5216471 - Pico            : ✅ Valid (DL: 1666ms | Verify: 106ms) 
+Mar 16:35:27 |    Proof 5216475 - Airbender       : ✅ Valid (DL: 1931ms | Verify: 26ms) 
+Mar 16:35:27 | Block #24628207 Timing: TotalTime=2243ms | Max (DL=1931ms, Verify=108ms) 
+Mar 16:35:27 | Valid. Block 24628207 (2247 ms, retries 0) 
+Mar 16:35:27 | Received New Block:  24628207 (0xa53212...278077)      | limit    60,000,000    
+Mar 16:35:27 | Valid. Block 24628207 already validated. 
+Mar 16:35:27 | Received New Block:  24628207 (0xa53212...278077)      | limit    60,000,000    
+Mar 16:35:27 | Valid. Block 24628207 already validated. 
+Mar 16:35:27 | Received New Block:  24628208 (0xafa96f...fe6de8)      | limit    60,000,000    
+Mar 16:35:29 |    Proof 5216489 - Zisk            : ✅ Valid (DL: 1105ms | Verify: 28ms) 
+Mar 16:35:29 |    Proof 5216487 - Zisk            : ⚠️  Skipped (Could not download proof) 
+Mar 16:35:29 |    Proof 5216496 - Airbender       : ✅ Valid (DL: 1783ms | Verify: 25ms) 
+Mar 16:35:30 |    Proof 5216492 - OpenVM          : ✅ Valid (DL: 2129ms | Verify: 98ms) 
+Mar 16:35:30 |    Proof 5216491 - Pico            : ✅ Valid (DL: 2398ms | Verify: 123ms) 
+Mar 16:35:30 | Block #24628208 Timing: TotalTime=2868ms | Max (DL=2398ms, Verify=123ms) 
+Mar 16:35:30 | Valid. Block 24628208 (2868 ms, retries 0) 
+Mar 16:35:30 | Received New Block:  24628208 (0xafa96f...fe6de8)      | limit    60,000,000    
+Mar 16:35:30 | Valid. Block 24628208 already validated. 
+Mar 16:35:30 | Received New Block:  24628208 (0xafa96f...fe6de8)      | limit    60,000,000    
+Mar 16:35:30 | Valid. Block 24628208 already validated. 
+Mar 16:35:30 | Received New Block:  24628209 (0x8b6228...6836ad)      | limit    60,000,000    
+Mar 16:35:32 |    Proof 5216504 - Zisk            : ✅ Valid (DL: 1074ms | Verify: 25ms) 
+Mar 16:35:32 |    Proof 5216507 - Zisk            : ✅ Valid (DL: 1291ms | Verify: 22ms) 
+Mar 16:35:33 |    Proof 5216510 - Pico            : ✅ Valid (DL: 2249ms | Verify: 133ms) 
+Mar 16:35:33 |    Proof 5216513 - Airbender       : ✅ Valid (DL: 2529ms | Verify: 15ms) 
+Mar 16:35:33 |    Proof 5216511 - OpenVM          : ✅ Valid (DL: 2717ms | Verify: 102ms) 
+Mar 16:35:33 | Block #24628209 Timing: TotalTime=3231ms | Max (DL=2717ms, Verify=133ms) 
+Mar 16:35:33 | Valid. Block 24628209 (3232 ms, retries 0) 
+Mar 16:35:33 | Received New Block:  24628209 (0x8b6228...6836ad)      | limit    60,000,000    
+Mar 16:35:33 | Valid. Block 24628209 already validated. 
+Mar 16:35:33 | Received New Block:  24628209 (0x8b6228...6836ad)      | limit    60,000,000    
+Mar 16:35:33 | Valid. Block 24628209 already validated. 
+Mar 16:35:34 | Received New Block:  24628210 (0x25a7cf...7e246b)      | limit    60,000,000    
+Mar 16:35:35 |    Proof 5216527 - Zisk            : ✅ Valid (DL: 1224ms | Verify: 16ms) 
+Mar 16:35:35 |    Proof 5216529 - Zisk            : ✅ Valid (DL: 1250ms | Verify: 22ms) 
+Mar 16:35:36 |    Proof 5216531 - Pico            : ✅ Valid (DL: 1904ms | Verify: 95ms) 
+Mar 16:35:37 |    Proof 5216532 - OpenVM          : ✅ Valid (DL: 2471ms | Verify: 157ms) 
+Mar 16:35:37 |    Proof 5216537 - Airbender       : ✅ Valid (DL: 3088ms | Verify: 14ms) 
+Mar 16:35:37 | Block #24628210 Timing: TotalTime=3413ms | Max (DL=3088ms, Verify=157ms) 
+Mar 16:35:37 | Valid. Block 24628210 (3413 ms, retries 0) 
+Mar 16:35:37 | Received New Block:  24628210 (0x25a7cf...7e246b)      | limit    60,000,000    
+Mar 16:35:37 | Valid. Block 24628210 already validated. 
+Mar 16:35:37 | Received New Block:  24628210 (0x25a7cf...7e246b)      | limit    60,000,000    
+Mar 16:35:37 | Valid. Block 24628210 already validated. 
+Mar 16:35:37 | Received New Block:  24628211 (0x5233c4...0a09c2)      | limit    59,941,408 👇 
+Mar 16:35:39 |    Proof 5216547 - Zisk            : ✅ Valid (DL: 1093ms | Verify: 31ms) 
+Mar 16:35:39 |    Proof 5216544 - Zisk            : ✅ Valid (DL: 1376ms | Verify: 14ms) 
+Mar 16:35:40 |    Proof 5216551 - Pico            : ✅ Valid (DL: 2095ms | Verify: 98ms) 
+Mar 16:35:40 |    Proof 5216553 - OpenVM          : ✅ Valid (DL: 2187ms | Verify: 97ms) 
+Mar 16:35:40 |    Proof 5216555 - Airbender       : ✅ Valid (DL: 2562ms | Verify: 15ms) 
+Mar 16:35:40 | Block #24628211 Timing: TotalTime=2944ms | Max (DL=2562ms, Verify=98ms) 
+Mar 16:35:40 | Valid. Block 24628211 (2944 ms, retries 0) 
+Mar 16:35:40 | Received New Block:  24628211 (0x5233c4...0a09c2)      | limit    59,941,408    
+Mar 16:35:40 | Valid. Block 24628211 already validated. 
+Mar 16:35:40 | Received New Block:  24628211 (0x5233c4...0a09c2)      | limit    59,941,408    
+Mar 16:35:40 | Valid. Block 24628211 already validated. 
+Mar 16:35:41 | Received New Block:  24628212 (0x9cb1e7...ef3071)      | limit    59,999,943 👆 
+Mar 16:35:42 |    Proof 5216572 - Zisk            : ✅ Valid (DL: 899ms | Verify: 28ms) 
+Mar 16:35:43 |    Proof 5216570 - Zisk            : ✅ Valid (DL: 1414ms | Verify: 19ms) 
+Mar 16:35:43 |    Proof 5216574 - Pico            : ✅ Valid (DL: 1783ms | Verify: 118ms) 
+Mar 16:35:43 |    Proof 5216575 - OpenVM          : ✅ Valid (DL: 1814ms | Verify: 146ms) 
+Mar 16:35:43 |    Proof 5216578 - Airbender       : ✅ Valid (DL: 2023ms | Verify: 30ms) 
+Mar 16:35:43 | Block #24628212 Timing: TotalTime=2395ms | Max (DL=2023ms, Verify=146ms) 
+Mar 16:35:43 | Valid. Block 24628212 (2395 ms, retries 0) 
+Mar 16:35:43 | Received New Block:  24628212 (0x9cb1e7...ef3071)      | limit    59,999,943    
+Mar 16:35:43 | Valid. Block 24628212 already validated. 
+Mar 16:35:43 | Received New Block:  24628212 (0x9cb1e7...ef3071)      | limit    59,999,943    
+Mar 16:35:43 | Valid. Block 24628212 already validated. 
+Mar 16:35:44 | Received New Block:  24628213 (0xb4cb6e...451ebd)      | limit    60,000,000 👆 
+Mar 16:35:45 |    Proof 5216593 - Zisk            : ✅ Valid (DL: 764ms | Verify: 50ms) 
+Mar 16:35:45 |    Proof 5216591 - Zisk            : ✅ Valid (DL: 1143ms | Verify: 9ms) 
+Mar 16:35:46 |    Proof 5216594 - Pico            : ✅ Valid (DL: 1597ms | Verify: 116ms) 
+Mar 16:35:46 |    Proof 5216595 - OpenVM          : ✅ Valid (DL: 1719ms | Verify: 100ms) 
+Mar 16:35:46 |    Proof 5216600 - Airbender       : ✅ Valid (DL: 1898ms | Verify: 16ms) 
+Mar 16:35:46 | Block #24628213 Timing: TotalTime=2249ms | Max (DL=1898ms, Verify=116ms) 
+Mar 16:35:46 | Valid. Block 24628213 (2249 ms, retries 0) 
+Mar 16:35:46 | Received New Block:  24628213 (0xb4cb6e...451ebd)      | limit    60,000,000    
+Mar 16:35:46 | Valid. Block 24628213 already validated. 
+Mar 16:35:46 | Received New Block:  24628213 (0xb4cb6e...451ebd)      | limit    60,000,000    
+Mar 16:35:46 | Valid. Block 24628213 already validated. 
+Mar 16:35:46 | Received New Block:  24628215 (0xbaa99f...407b47)      | limit    60,000,000    
+Mar 16:35:48 |    Proof 5216615 - Zisk            : ✅ Valid (DL: 724ms | Verify: 21ms) 
+Mar 16:35:48 |    Proof 5216613 - Zisk            : ✅ Valid (DL: 918ms | Verify: 14ms) 
+Mar 16:35:48 |    Proof 5216620 - Airbender       : ✅ Valid (DL: 1163ms | Verify: 20ms) 
+Mar 16:35:48 |    Proof 5216616 - OpenVM          : ✅ Valid (DL: 1142ms | Verify: 134ms) 
+Mar 16:35:48 |    Proof 5216617 - Pico            : ✅ Valid (DL: 1177ms | Verify: 111ms) 
+Mar 16:35:48 | Block #24628215 Timing: TotalTime=1573ms | Max (DL=1177ms, Verify=134ms) 
+Mar 16:35:48 | Valid. Block 24628215 (1573 ms, retries 0) 
+Mar 16:35:48 | Received New Block:  24628215 (0xbaa99f...407b47)      | limit    60,000,000    
+Mar 16:35:48 | Valid. Block 24628215 already validated. 
+Mar 16:35:48 | Received New Block:  24628215 (0xbaa99f...407b47)      | limit    60,000,000    
+Mar 16:35:48 | Valid. Block 24628215 already validated. 
+Mar 16:35:48 | Received New Block:  24628222 (0x6baac3...60d96d)      | limit    59,941,408    
+Mar 16:35:50 |    Proof 5216635 - Zisk            : ✅ Valid (DL: 613ms | Verify: 10ms) 
+Mar 16:35:50 |    Proof 5216637 - Zisk            : ✅ Valid (DL: 790ms | Verify: 24ms) 
+Mar 16:35:50 |    Proof 5216641 - OpenVM          : ✅ Valid (DL: 1058ms | Verify: 110ms) 
+Mar 16:35:50 |    Proof 5216644 - Airbender       : ✅ Valid (DL: 1218ms | Verify: 31ms) 
+Mar 16:35:50 |    Proof 5216639 - Pico            : ✅ Valid (DL: 1178ms | Verify: 110ms) 
+Mar 16:35:50 | Block #24628222 Timing: TotalTime=1720ms | Max (DL=1218ms, Verify=110ms) 
+Mar 16:35:50 | Valid. Block 24628222 (1720 ms, retries 0) 
+Mar 16:35:50 | Received New Block:  24628222 (0x6baac3...60d96d)      | limit    59,941,408    
+Mar 16:35:50 | Valid. Block 24628222 already validated. 
+Mar 16:35:50 | Received New Block:  24628222 (0x6baac3...60d96d)      | limit    59,941,408    
+Mar 16:35:50 | Valid. Block 24628222 already validated. 
+Mar 16:35:51 | Received New Block:  24628230 (0x13c66b...5e4dff)      | limit    59,999,943    
+Mar 16:35:52 |    Proof 5216651 - Zisk            : ✅ Valid (DL: 817ms | Verify: 44ms) 
+Mar 16:35:52 |    Proof 5216652 - Zisk            : ✅ Valid (DL: 770ms | Verify: 92ms) 
+Mar 16:35:52 |    Proof 5216663 - Airbender       : ✅ Valid (DL: 1088ms | Verify: 64ms) 
+Mar 16:35:52 |    Proof 5216656 - OpenVM          : ✅ Valid (DL: 1009ms | Verify: 222ms) 
+Mar 16:35:53 |    Proof 5216657 - Pico            : ✅ Valid (DL: 1195ms | Verify: 203ms) 
+Mar 16:35:53 | Block #24628230 Timing: TotalTime=1654ms | Max (DL=1195ms, Verify=222ms) 
+Mar 16:35:53 | Valid. Block 24628230 (1654 ms, retries 0) 
+Mar 16:35:53 | Received ForkChoice: 0x13c66b...5e4dff, Safe: 0xba1264...0321d2, Finalized: 0xba1264...0321d2 
+Mar 16:35:53 | Synced Chain Head to 24628230 (0x13c66b...5e4dff) 
+Mar 16:35:53 | Received New Block:  24628230 (0x13c66b...5e4dff)      | limit    59,999,943    
+Mar 16:35:53 | Valid. Block 24628230 already validated. 
+Mar 16:35:53 | Received ForkChoice: 0x13c66b...5e4dff, Safe: 0xba1264...0321d2, Finalized: 0xba1264...0321d2 
+Mar 16:36:11 | Syncing Unknown ForkChoiceState head hash Request: ForkChoice: 0x277ae8...0c3311, Safe: 0xba1264...0321d2, Finalized: 0xba1264...0321d2. 
+Mar 16:36:11 | Syncing Unknown ForkChoiceState head hash Request: ForkChoice: 0x372cfe...cc5c9d, Safe: 0xba1264...0321d2, Finalized: 0xba1264...0321d2. 
+Mar 16:36:17 | Syncing Unknown ForkChoiceState head hash Request: ForkChoice: 0xf8bc68...89b9e4, Safe: 0x73b42b...bb5267, Finalized: 0xba1264...0321d2. 
+Mar 16:36:25 | ***** JSON RPC report *****
+-----------------------------------------------------------------------------------------------------------------------------------------------
+method                                  | successes |   avg (ms) |   max (ms) |    errors |   avg (ms) |   max (ms) | avg size B | total (kB) |
+-----------------------------------------------------------------------------------------------------------------------------------------------
+engine_exchangeCapabilities             |         1 |    190.025 |    190.025 |         0 |      0.000 |      0.000 |        520 |       0.51 | 
+engine_forkchoiceUpdatedV3              |         6 |    299.315 |   1695.676 |         0 |      0.000 |      0.000 |        156 |       0.91 | 
+engine_getClientVersionV1               |         1 |     17.391 |     17.391 |         0 |      0.000 |      0.000 |        117 |       0.11 | 
+engine_newPayloadV4                     |        48 |   2251.841 |   3415.758 |         0 |      0.000 |      0.000 |        162 |       7.59 | 
+eth_syncing                             |        60 |      4.780 |    268.061 |         0 |      0.000 |      0.000 |         96 |       5.63 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                   |       116 |    951.538 |   3415.758 |         0 |      0.000 |      0.000 |        130 |      14.75 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 
+Mar 16:36:35 | Syncing Unknown ForkChoiceState head hash Request: ForkChoice: 0xb9a25e...7f726f, Safe: 0x73b42b...bb5267, Finalized: 0xba1264...0321d2. 
+Mar 16:36:35 | Syncing Unknown ForkChoiceState head hash Request: ForkChoice: 0xc2893b...38dd82, Safe: 0x73b42b...bb5267, Finalized: 0xba1264...0321d2. 
+Mar 16:36:40 | Syncing Unknown ForkChoiceState head hash Request: ForkChoice: 0xc075e2...72580a, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267. 
+Mar 16:36:40 | Syncing Unknown ForkChoiceState head hash Request: ForkChoice: 0x70828d...6909a0, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267. 
+Mar 16:36:41 | Received New Block:  24628294 (0xb5ad0e...b1899f)      | limit    60,000,000    
+Mar 16:36:42 |    Proof 5216678 - Zisk            : ✅ Valid (DL: 553ms | Verify: 25ms) 
+Mar 16:36:42 |    Proof 5216676 - Zisk            : ✅ Valid (DL: 778ms | Verify: 7ms) 
+Mar 16:36:42 |    Proof 5216685 - Airbender       : ✅ Valid (DL: 1227ms | Verify: 16ms) 
+Mar 16:36:42 |    Proof 5216679 - Pico            : ✅ Valid (DL: 1173ms | Verify: 108ms) 
+Mar 16:36:42 |    Proof 5216682 - OpenVM          : ✅ Valid (DL: 1170ms | Verify: 114ms) 
+Mar 16:36:42 | Block #24628294 Timing: TotalTime=1719ms | Max (DL=1227ms, Verify=114ms) 
+Mar 16:36:42 | Valid. Block 24628294 (1719 ms, retries 0) 
+Mar 16:36:42 | Received ForkChoice: 0xb5ad0e...b1899f, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:36:42 | Synced Chain Head to 24628294 (0xb5ad0e...b1899f) 
+Mar 16:36:53 | Received New Block:  24628295 (0xaf854a...9055a3)      | limit    60,000,000    
+Mar 16:36:54 |    Proof 5216692 - Zisk            : ✅ Valid (DL: 574ms | Verify: 43ms) 
+Mar 16:36:54 |    Proof 5216694 - Zisk            : ✅ Valid (DL: 550ms | Verify: 71ms) 
+Mar 16:36:54 |    Proof 5216705 - Airbender       : ✅ Valid (DL: 985ms | Verify: 16ms) 
+Mar 16:36:55 |    Proof 5216698 - OpenVM          : ✅ Valid (DL: 985ms | Verify: 164ms) 
+Mar 16:36:55 |    Proof 5216695 - Pico            : ✅ Valid (DL: 1187ms | Verify: 169ms) 
+Mar 16:36:55 | Block #24628295 Timing: TotalTime=1679ms | Max (DL=1187ms, Verify=169ms) 
+Mar 16:36:55 | Valid. Block 24628295 (1679 ms, retries 0) 
+Mar 16:36:55 | Received New Block:  24628295 (0xaf854a...9055a3)      | limit    60,000,000    
+Mar 16:36:55 | Valid. Block 24628295 already validated. 
+Mar 16:36:56 | Received New Block:  24628296 (0xc4b395...619617)      | limit    60,000,000    
+Mar 16:36:57 |    Proof 5216714 - Zisk            : ✅ Valid (DL: 526ms | Verify: 23ms) 
+Mar 16:36:57 |    Proof 5216713 - Zisk            : ✅ Valid (DL: 605ms | Verify: 9ms) 
+Mar 16:36:58 |    Proof 5216723 - Airbender       : ✅ Valid (DL: 924ms | Verify: 14ms) 
+Mar 16:36:58 |    Proof 5216722 - OpenVM          : ✅ Valid (DL: 888ms | Verify: 97ms) 
+Mar 16:36:58 | Block #24628296 Timing: TotalTime=1257ms | Max (DL=924ms, Verify=97ms) 
+Mar 16:36:58 | Valid. Block 24628296 (1257 ms, retries 0) 
+Mar 16:36:58 | Received New Block:  24628296 (0xc4b395...619617)      | limit    60,000,000    
+Mar 16:36:58 | Valid. Block 24628296 already validated. 
+Mar 16:36:58 | Received New Block:  24628297 (0x11ada8...474109)      | limit    60,000,000    
+Mar 16:36:59 |    Proof 5216732 - Zisk            : ✅ Valid (DL: 482ms | Verify: 11ms) 
+Mar 16:36:59 |    Proof 5216733 - Zisk            : ✅ Valid (DL: 545ms | Verify: 48ms) 
+Mar 16:36:59 |    Proof 5216745 - Airbender       : ✅ Valid (DL: 817ms | Verify: 30ms) 
+Mar 16:36:59 | Block #24628297 Timing: TotalTime=1269ms | Max (DL=817ms, Verify=48ms) 
+Mar 16:36:59 | Valid. Block 24628297 (1269 ms, retries 0) 
+Mar 16:36:59 | Received New Block:  24628297 (0x11ada8...474109)      | limit    60,000,000    
+Mar 16:36:59 | Valid. Block 24628297 already validated. 
+Mar 16:36:59 | Received ForkChoice: 0xc4b395...619617, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:36:59 | Synced Chain Head to 24628296 (0xc4b395...619617) 
+Mar 16:37:00 | Received New Block:  24628298 (0x6fd7a4...8f4d5d)      | limit    60,000,000    
+Mar 16:37:00 |    Proof 5216750 - Zisk            : ✅ Valid (DL: 474ms | Verify: 6ms) 
+Mar 16:37:01 |    Proof 5216761 - Airbender       : ✅ Valid (DL: 760ms | Verify: 41ms) 
+Mar 16:37:01 |    Proof 5216753 - Zisk            : ✅ Valid (DL: 847ms | Verify: 32ms) 
+Mar 16:37:01 |    Proof 5216756 - OpenVM          : ✅ Valid (DL: 896ms | Verify: 141ms) 
+Mar 16:37:01 | Block #24628298 Timing: TotalTime=1347ms | Max (DL=896ms, Verify=141ms) 
+Mar 16:37:01 | Valid. Block 24628298 (1347 ms, retries 0) 
+Mar 16:37:01 | Received New Block:  24628298 (0x6fd7a4...8f4d5d)      | limit    60,000,000    
+Mar 16:37:01 | Valid. Block 24628298 already validated. 
+Mar 16:37:01 | Received New Block:  24628299 (0x31daf6...724830)      | limit    60,000,000    
+Mar 16:37:02 |    Proof 5216774 - Zisk            : ✅ Valid (DL: 470ms | Verify: 26ms) 
+Mar 16:37:02 |    Proof 5216772 - Zisk            : ✅ Valid (DL: 539ms | Verify: 11ms) 
+Mar 16:37:02 |    Proof 5216777 - OpenVM          : ✅ Valid (DL: 844ms | Verify: 113ms) 
+Mar 16:37:02 |    Proof 5216781 - Airbender       : ✅ Valid (DL: 934ms | Verify: 23ms) 
+Mar 16:37:02 | Block #24628299 Timing: TotalTime=1241ms | Max (DL=934ms, Verify=113ms) 
+Mar 16:37:02 | Valid. Block 24628299 (1241 ms, retries 0) 
+Mar 16:37:02 | Received New Block:  24628299 (0x31daf6...724830)      | limit    60,000,000    
+Mar 16:37:02 | Valid. Block 24628299 already validated. 
+Mar 16:37:03 | Received ForkChoice: 0x31daf6...724830, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:37:03 | Synced Chain Head to 24628299 (0x31daf6...724830) 
+Mar 16:37:04 | Received New Block:  24628300 (0x4f4eb1...86d814)      | limit    60,000,000    
+Mar 16:37:05 |    Proof 5216793 - Zisk            : ✅ Valid (DL: 949ms | Verify: 7ms) 
+Mar 16:37:05 |    Proof 5216796 - Zisk            : ✅ Valid (DL: 1301ms | Verify: 20ms) 
+Mar 16:37:06 |    Proof 5216800 - Airbender       : ✅ Valid (DL: 2343ms | Verify: 16ms) 
+Mar 16:37:07 |    Proof 5216798 - OpenVM          : ✅ Valid (DL: 2667ms | Verify: 109ms) 
+Mar 16:37:07 | Block #24628300 Timing: TotalTime=3192ms | Max (DL=2667ms, Verify=109ms) 
+Mar 16:37:07 | Valid. Block 24628300 (3193 ms, retries 0) 
+Mar 16:37:07 | Received ForkChoice: 0x4f4eb1...86d814, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:37:07 | Synced Chain Head to 24628300 (0x4f4eb1...86d814) 
+Mar 16:37:07 | Received New Block:  24628301 (0xedf7e8...68446b)      | limit    60,000,000    
+Mar 16:37:09 |    Proof 5216811 - Zisk            : ✅ Valid (DL: 1240ms | Verify: 7ms) 
+Mar 16:37:09 |    Proof 5216813 - Zisk            : ✅ Valid (DL: 1529ms | Verify: 21ms) 
+Mar 16:37:09 |    Proof 5216816 - OpenVM          : ✅ Valid (DL: 1734ms | Verify: 94ms) 
+Mar 16:37:10 |    Proof 5216818 - Airbender       : ✅ Valid (DL: 2223ms | Verify: 16ms) 
+Mar 16:37:11 |    Proof 5216815 - Pico            : ✅ Valid (DL: 2984ms | Verify: 231ms) 
+Mar 16:37:11 | Block #24628301 Timing: TotalTime=3548ms | Max (DL=2984ms, Verify=231ms) 
+Mar 16:37:11 | Valid. Block 24628301 (3548 ms, retries 0) 
+Mar 16:37:11 | Received ForkChoice: 0xedf7e8...68446b, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:37:11 | Synced Chain Head to 24628301 (0xedf7e8...68446b) 
+Mar 16:37:13 | Received New Block:  24628302 (0xc4be00...302a99)      | limit    60,000,000    
+Mar 16:37:14 |    Proof 5216830 - Zisk            : ✅ Valid (DL: 979ms | Verify: 12ms) 
+Mar 16:37:15 |    Proof 5216832 - Zisk            : ✅ Valid (DL: 1130ms | Verify: 24ms) 
+Mar 16:37:15 |    Proof 5216837 - Airbender       : ✅ Valid (DL: 1957ms | Verify: 17ms) 
+Mar 16:37:15 |    Proof 5216835 - Pico            : ✅ Valid (DL: 1897ms | Verify: 114ms) 
+Mar 16:37:16 |    Proof 5216834 - OpenVM          : ✅ Valid (DL: 2144ms | Verify: 145ms) 
+Mar 16:37:16 | Block #24628302 Timing: TotalTime=2634ms | Max (DL=2144ms, Verify=145ms) 
+Mar 16:37:16 | Valid. Block 24628302 (2634 ms, retries 0) 
+Mar 16:37:16 | Received ForkChoice: 0xc4be00...302a99, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:37:16 | Synced Chain Head to 24628302 (0xc4be00...302a99) 
+Mar 16:37:26 | Received New Block:  24628303 (0x86d631...515e7e)      | limit    60,000,000    
+Mar 16:37:27 |    Proof 5216848 - Zisk            : ✅ Valid (DL: 696ms | Verify: 12ms) 
+Mar 16:37:27 |    Proof 5216850 - Zisk            : ✅ Valid (DL: 992ms | Verify: 21ms) 
+Mar 16:37:28 |    Proof 5216854 - OpenVM          : ✅ Valid (DL: 1219ms | Verify: 105ms) 
+Mar 16:37:28 |    Proof 5216856 - Airbender       : ✅ Valid (DL: 1402ms | Verify: 24ms) 
+Mar 16:37:28 |    Proof 5216853 - Pico            : ✅ Valid (DL: 1326ms | Verify: 106ms) 
+Mar 16:37:28 | Block #24628303 Timing: TotalTime=1775ms | Max (DL=1402ms, Verify=106ms) 
+Mar 16:37:28 | Valid. Block 24628303 (1775 ms, retries 0) 
+Mar 16:37:28 | Received ForkChoice: 0x86d631...515e7e, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:37:28 | Synced Chain Head to 24628303 (0x86d631...515e7e) 
+Mar 16:37:36 | Received New Block:  24628304 (0x71fd8d...e4924a)      | limit    60,000,000    
+Mar 16:37:38 |    Proof 5216869 - Zisk            : ✅ Valid (DL: 664ms | Verify: 24ms) 
+Mar 16:37:38 |    Proof 5216868 - Zisk            : ✅ Valid (DL: 876ms | Verify: 22ms) 
+Mar 16:37:38 |    Proof 5216872 - OpenVM          : ✅ Valid (DL: 1158ms | Verify: 94ms) 
+Mar 16:37:38 |    Proof 5216875 - Airbender       : ✅ Valid (DL: 1269ms | Verify: 14ms) 
+Mar 16:37:38 |    Proof 5216871 - Pico            : ✅ Valid (DL: 1322ms | Verify: 101ms) 
+Mar 16:37:38 | Block #24628304 Timing: TotalTime=1763ms | Max (DL=1322ms, Verify=101ms) 
+Mar 16:37:38 | Valid. Block 24628304 (1763 ms, retries 0) 
+Mar 16:37:38 | Received ForkChoice: 0x71fd8d...e4924a, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:37:38 | Synced Chain Head to 24628304 (0x71fd8d...e4924a) 
+Mar 16:37:48 | Received New Block:  24628305 (0xcb2a90...da8564)      | limit    60,000,000    
+Mar 16:37:49 |    Proof 5216887 - Zisk            : ✅ Valid (DL: 586ms | Verify: 27ms) 
+Mar 16:37:49 |    Proof 5216886 - Zisk            : ✅ Valid (DL: 953ms | Verify: 12ms) 
+Mar 16:37:49 |    Proof 5216893 - Airbender       : ✅ Valid (DL: 1171ms | Verify: 17ms) 
+Mar 16:37:49 |    Proof 5216888 - Pico            : ✅ Valid (DL: 1125ms | Verify: 115ms) 
+Mar 16:37:49 |    Proof 5216891 - OpenVM          : ✅ Valid (DL: 1214ms | Verify: 117ms) 
+Mar 16:37:49 | Block #24628305 Timing: TotalTime=1643ms | Max (DL=1214ms, Verify=117ms) 
+Mar 16:37:49 | Valid. Block 24628305 (1643 ms, retries 0) 
+Mar 16:37:49 | Received ForkChoice: 0xcb2a90...da8564, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:37:49 | Synced Chain Head to 24628305 (0xcb2a90...da8564) 
+Mar 16:38:00 | Received New Block:  24628306 (0x58d344...e766f2)      | limit    60,000,000    
+Mar 16:38:01 |    Proof 5216903 - Zisk            : ✅ Valid (DL: 852ms | Verify: 20ms) 
+Mar 16:38:01 |    Proof 5216916 - Zisk            : ✅ Valid (DL: 907ms | Verify: 45ms) 
+Mar 16:38:02 |    Proof 5216905 - OpenVM          : ✅ Valid (DL: 1416ms | Verify: 99ms) 
+Mar 16:38:02 |    Proof 5216908 - Airbender       : ✅ Valid (DL: 1799ms | Verify: 23ms) 
+Mar 16:38:02 |    Proof 5216906 - Pico            : ✅ Valid (DL: 1729ms | Verify: 103ms) 
+Mar 16:38:02 | Block #24628306 Timing: TotalTime=2253ms | Max (DL=1799ms, Verify=103ms) 
+Mar 16:38:02 | Valid. Block 24628306 (2253 ms, retries 0) 
+Mar 16:38:02 | Received ForkChoice: 0x58d344...e766f2, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:38:02 | Synced Chain Head to 24628306 (0x58d344...e766f2) 
+Mar 16:38:13 | Received New Block:  24628307 (0x9d9cf0...479061)      | limit    60,000,000    
+Mar 16:38:14 |    Proof 5216925 - Zisk            : ✅ Valid (DL: 927ms | Verify: 23ms) 
+Mar 16:38:15 |    Proof 5216923 - Zisk            : ✅ Valid (DL: 1084ms | Verify: 12ms) 
+Mar 16:38:15 |    Proof 5216928 - OpenVM          : ✅ Valid (DL: 1421ms | Verify: 101ms) 
+Mar 16:38:15 |    Proof 5216932 - Airbender       : ✅ Valid (DL: 1691ms | Verify: 14ms) 
+Mar 16:38:15 |    Proof 5216924 - Pico            : ✅ Valid (DL: 1897ms | Verify: 95ms) 
+Mar 16:38:15 | Block #24628307 Timing: TotalTime=2340ms | Max (DL=1897ms, Verify=101ms) 
+Mar 16:38:15 | Valid. Block 24628307 (2340 ms, retries 0) 
+Mar 16:38:16 | Received ForkChoice: 0x9d9cf0...479061, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:38:16 | Synced Chain Head to 24628307 (0x9d9cf0...479061) 
+Mar 16:38:25 | Received New Block:  24628308 (0xc0222c...999846)      | limit    60,000,000    
+Mar 16:38:27 |    Proof 5216946 - Zisk            : ✅ Valid (DL: 1287ms | Verify: 22ms) 
+Mar 16:38:27 |    Proof 5216944 - Zisk            : ✅ Valid (DL: 1313ms | Verify: 12ms) 
+Mar 16:38:27 |    Proof 5216950 - OpenVM          : ✅ Valid (DL: 1605ms | Verify: 100ms) 
+Mar 16:38:27 |    Proof 5216953 - Airbender       : ✅ Valid (DL: 1693ms | Verify: 24ms) 
+Mar 16:38:27 |    Proof 5216947 - Pico            : ✅ Valid (DL: 1698ms | Verify: 114ms) 
+Mar 16:38:27 | Block #24628308 Timing: TotalTime=2138ms | Max (DL=1698ms, Verify=114ms) 
+Mar 16:38:27 | Valid. Block 24628308 (2138 ms, retries 0) 
+Mar 16:38:28 | Received ForkChoice: 0xc0222c...999846, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:38:28 | Synced Chain Head to 24628308 (0xc0222c...999846) 
+Mar 16:38:37 | Received New Block:  24628309 (0x00dc88...272cf3)      | limit    60,000,000    
+Mar 16:38:38 |    Proof 5216971 - Zisk            : ✅ Valid (DL: 627ms | Verify: 21ms) 
+Mar 16:38:38 |    Proof 5216969 - Zisk            : ✅ Valid (DL: 759ms | Verify: 12ms) 
+Mar 16:38:38 |    Proof 5216974 - OpenVM          : ✅ Valid (DL: 1239ms | Verify: 116ms) 
+Mar 16:38:38 |    Proof 5216978 - Airbender       : ✅ Valid (DL: 1416ms | Verify: 38ms) 
+Mar 16:38:39 |    Proof 5216975 - Pico            : ✅ Valid (DL: 1382ms | Verify: 95ms) 
+Mar 16:38:39 | Block #24628309 Timing: TotalTime=1912ms | Max (DL=1416ms, Verify=116ms) 
+Mar 16:38:39 | Valid. Block 24628309 (1912 ms, retries 0) 
+Mar 16:38:39 | Received ForkChoice: 0x00dc88...272cf3, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:38:39 | Synced Chain Head to 24628309 (0x00dc88...272cf3) 
+Mar 16:38:49 | Received New Block:  24628310 (0x13d9b0...04fa6e)      | limit    60,000,000    
+Mar 16:38:50 |    Proof 5216996 - Zisk            : ✅ Valid (DL: 566ms | Verify: 23ms) 
+Mar 16:38:50 |    Proof 5216994 - Zisk            : ✅ Valid (DL: 1179ms | Verify: 14ms) 
+Mar 16:38:50 |    Proof 5216998 - OpenVM          : ✅ Valid (DL: 1082ms | Verify: 124ms) 
+Mar 16:38:50 |    Proof 5217002 - Airbender       : ✅ Valid (DL: 1209ms | Verify: 19ms) 
+Mar 16:38:50 |    Proof 5216997 - Pico            : ✅ Valid (DL: 1260ms | Verify: 104ms) 
+Mar 16:38:50 | Block #24628310 Timing: TotalTime=1738ms | Max (DL=1260ms, Verify=124ms) 
+Mar 16:38:50 | Valid. Block 24628310 (1738 ms, retries 0) 
+Mar 16:38:51 | Received ForkChoice: 0x13d9b0...04fa6e, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:38:51 | Synced Chain Head to 24628310 (0x13d9b0...04fa6e) 
+Mar 16:39:02 | Received New Block:  24628311 (0x951737...b9bd45)      | limit    60,000,000    
+Mar 16:39:03 |    Proof 5217013 - Zisk            : ✅ Valid (DL: 512ms | Verify: 7ms) 
+Mar 16:39:03 |    Proof 5217014 - Zisk            : ✅ Valid (DL: 746ms | Verify: 24ms) 
+Mar 16:39:04 |    Proof 5217021 - Airbender       : ✅ Valid (DL: 970ms | Verify: 16ms) 
+Mar 16:39:04 |    Proof 5217019 - OpenVM          : ✅ Valid (DL: 1191ms | Verify: 99ms) 
+Mar 16:39:04 |    Proof 5217018 - Pico            : ✅ Valid (DL: 1277ms | Verify: 100ms) 
+Mar 16:39:04 | Block #24628311 Timing: TotalTime=1672ms | Max (DL=1277ms, Verify=100ms) 
+Mar 16:39:04 | Valid. Block 24628311 (1672 ms, retries 0) 
+Mar 16:39:04 | Received ForkChoice: 0x951737...b9bd45, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:39:04 | Synced Chain Head to 24628311 (0x951737...b9bd45) 
+Mar 16:39:12 | Received New Block:  24628312 (0xdc15b1...13b50d)      | limit    59,941,408 👇 
+Mar 16:39:14 |    Proof 5217033 - Zisk            : ✅ Valid (DL: 990ms | Verify: 15ms) 
+Mar 16:39:14 |    Proof 5217041 - Airbender       : ✅ Valid (DL: 1265ms | Verify: 14ms) 
+Mar 16:39:14 |    Proof 5217035 - Zisk            : ✅ Valid (DL: 1261ms | Verify: 22ms) 
+Mar 16:39:14 |    Proof 5217039 - OpenVM          : ✅ Valid (DL: 1482ms | Verify: 108ms) 
+Mar 16:39:14 |    Proof 5217038 - Pico            : ✅ Valid (DL: 1535ms | Verify: 107ms) 
+Mar 16:39:14 | Block #24628312 Timing: TotalTime=2012ms | Max (DL=1535ms, Verify=108ms) 
+Mar 16:39:14 | Valid. Block 24628312 (2013 ms, retries 0) 
+Mar 16:39:15 | Received ForkChoice: 0xdc15b1...13b50d, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:39:15 | Synced Chain Head to 24628312 (0xdc15b1...13b50d) 
+Mar 16:39:24 | Received New Block:  24628313 (0x209bdc...b0b127)      | limit    59,999,943 👆 
+Mar 16:39:26 |    Proof 5217053 - Zisk            : ✅ Valid (DL: 906ms | Verify: 26ms) 
+Mar 16:39:26 |    Proof 5217052 - Zisk            : ✅ Valid (DL: 972ms | Verify: 12ms) 
+Mar 16:39:26 |    Proof 5217058 - OpenVM          : ✅ Valid (DL: 1000ms | Verify: 105ms) 
+Mar 16:39:26 |    Proof 5217064 - Airbender       : ✅ Valid (DL: 1249ms | Verify: 23ms) 
+Mar 16:39:26 |    Proof 5217056 - Pico            : ✅ Valid (DL: 1173ms | Verify: 102ms) 
+Mar 16:39:26 | Block #24628313 Timing: TotalTime=1570ms | Max (DL=1249ms, Verify=105ms) 
+Mar 16:39:26 | Valid. Block 24628313 (1571 ms, retries 0) 
+Mar 16:39:26 | Received ForkChoice: 0x209bdc...b0b127, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:39:26 | Synced Chain Head to 24628313 (0x209bdc...b0b127) 
+Mar 16:39:36 | Received New Block:  24628314 (0x030e5d...b39b28)      | limit    60,000,000 👆 
+Mar 16:39:37 |    Proof 5217081 - Zisk            : ✅ Valid (DL: 613ms | Verify: 11ms) 
+Mar 16:39:37 |    Proof 5217080 - Zisk            : ✅ Valid (DL: 676ms | Verify: 23ms) 
+Mar 16:39:38 |    Proof 5217085 - OpenVM          : ✅ Valid (DL: 956ms | Verify: 103ms) 
+Mar 16:39:38 |    Proof 5217088 - Airbender       : ✅ Valid (DL: 1343ms | Verify: 20ms) 
+Mar 16:39:38 |    Proof 5217083 - Pico            : ✅ Valid (DL: 1243ms | Verify: 123ms) 
+Mar 16:39:38 | Block #24628314 Timing: TotalTime=1669ms | Max (DL=1343ms, Verify=123ms) 
+Mar 16:39:38 | Valid. Block 24628314 (1670 ms, retries 0) 
+Mar 16:39:38 | Received ForkChoice: 0x030e5d...b39b28, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:39:38 | Synced Chain Head to 24628314 (0x030e5d...b39b28) 
+Mar 16:39:49 | Received New Block:  24628315 (0xcd7582...db20fe)      | limit    60,000,000    
+Mar 16:39:50 |    Proof 5217094 - Zisk            : ✅ Valid (DL: 588ms | Verify: 10ms) 
+Mar 16:39:50 |    Proof 5217096 - Zisk            : ✅ Valid (DL: 781ms | Verify: 25ms) 
+Mar 16:39:51 |    Proof 5217102 - OpenVM          : ✅ Valid (DL: 1006ms | Verify: 108ms) 
+Mar 16:39:51 |    Proof 5217105 - Airbender       : ✅ Valid (DL: 1198ms | Verify: 38ms) 
+Mar 16:39:51 |    Proof 5217099 - Pico            : ✅ Valid (DL: 1253ms | Verify: 106ms) 
+Mar 16:39:51 | Block #24628315 Timing: TotalTime=1721ms | Max (DL=1253ms, Verify=108ms) 
+Mar 16:39:51 | Valid. Block 24628315 (1722 ms, retries 0) 
+Mar 16:39:51 | Received ForkChoice: 0xcd7582...db20fe, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:39:51 | Synced Chain Head to 24628315 (0xcd7582...db20fe) 
+Mar 16:40:00 | Received New Block:  24628316 (0xd18c1c...707eb7)      | limit    60,000,000    
+Mar 16:40:02 |    Proof 5217116 - Zisk            : ✅ Valid (DL: 641ms | Verify: 22ms) 
+Mar 16:40:02 |    Proof 5217115 - Zisk            : ✅ Valid (DL: 1014ms | Verify: 34ms) 
+Mar 16:40:02 |    Proof 5217120 - OpenVM          : ✅ Valid (DL: 1001ms | Verify: 122ms) 
+Mar 16:40:02 |    Proof 5217126 - Airbender       : ✅ Valid (DL: 1245ms | Verify: 15ms) 
+Mar 16:40:02 |    Proof 5217121 - Pico            : ✅ Valid (DL: 1305ms | Verify: 107ms) 
+Mar 16:40:02 | Block #24628316 Timing: TotalTime=2041ms | Max (DL=1305ms, Verify=122ms) 
+Mar 16:40:02 | Valid. Block 24628316 (2041 ms, retries 0) 
+Mar 16:40:03 | Received ForkChoice: 0xd18c1c...707eb7, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:40:03 | Synced Chain Head to 24628316 (0xd18c1c...707eb7) 
+Mar 16:40:12 | Received New Block:  24628317 (0xd353c2...10fa51)      | limit    60,000,000    
+Mar 16:40:14 |    Proof 5217142 - Zisk            : ✅ Valid (DL: 666ms | Verify: 24ms) 
+Mar 16:40:14 |    Proof 5217140 - Zisk            : ✅ Valid (DL: 1068ms | Verify: 8ms) 
+Mar 16:40:14 |    Proof 5217148 - Airbender       : ✅ Valid (DL: 1213ms | Verify: 17ms) 
+Mar 16:40:14 |    Proof 5217145 - OpenVM          : ✅ Valid (DL: 1128ms | Verify: 121ms) 
+Mar 16:40:14 |    Proof 5217144 - Pico            : ✅ Valid (DL: 1307ms | Verify: 99ms) 
+Mar 16:40:14 | Block #24628317 Timing: TotalTime=1950ms | Max (DL=1307ms, Verify=121ms) 
+Mar 16:40:14 | Valid. Block 24628317 (1950 ms, retries 0) 
+Mar 16:40:14 | Received ForkChoice: 0xd353c2...10fa51, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:40:14 | Synced Chain Head to 24628317 (0xd353c2...10fa51) 
+Mar 16:40:25 | Received New Block:  24628318 (0x0d9c32...efac95)      | limit    60,058,592 👆 
+Mar 16:40:26 |    Proof 5217161 - Zisk            : ✅ Valid (DL: 590ms | Verify: 13ms) 
+Mar 16:40:26 |    Proof 5217163 - Zisk            : ✅ Valid (DL: 666ms | Verify: 28ms) 
+Mar 16:40:27 |    Proof 5217167 - OpenVM          : ✅ Valid (DL: 983ms | Verify: 98ms) 
+Mar 16:40:27 |    Proof 5217170 - Airbender       : ✅ Valid (DL: 1267ms | Verify: 14ms) 
+Mar 16:40:27 |    Proof 5217166 - Pico            : ✅ Valid (DL: 1316ms | Verify: 101ms) 
+Mar 16:40:27 | Block #24628318 Timing: TotalTime=1737ms | Max (DL=1316ms, Verify=101ms) 
+Mar 16:40:27 | Valid. Block 24628318 (1738 ms, retries 0) 
+Mar 16:40:27 | Received ForkChoice: 0x0d9c32...efac95, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:40:27 | Synced Chain Head to 24628318 (0x0d9c32...efac95) 
+Mar 16:40:36 | Received New Block:  24628319 (0x973e5b...5e161c)      | limit    60,000,000 👇 
+Mar 16:40:38 |    Proof 5217184 - Zisk            : ✅ Valid (DL: 1085ms | Verify: 7ms) 
+Mar 16:40:38 |    Proof 5217187 - Zisk            : ✅ Valid (DL: 1201ms | Verify: 25ms) 
+Mar 16:40:38 |    Proof 5217190 - OpenVM          : ✅ Valid (DL: 1383ms | Verify: 101ms) 
+Mar 16:40:38 |    Proof 5217192 - Airbender       : ✅ Valid (DL: 1493ms | Verify: 20ms) 
+Mar 16:40:38 |    Proof 5217189 - Pico            : ✅ Valid (DL: 1534ms | Verify: 155ms) 
+Mar 16:40:38 | Block #24628319 Timing: TotalTime=2006ms | Max (DL=1534ms, Verify=155ms) 
+Mar 16:40:38 | Valid. Block 24628319 (2006 ms, retries 0) 
+Mar 16:40:39 | Received ForkChoice: 0x973e5b...5e161c, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:40:39 | Synced Chain Head to 24628319 (0x973e5b...5e161c) 
+Mar 16:40:48 | Received New Block:  24628320 (0xddc7f1...cf89e8)      | limit    59,941,408 👇 
+Mar 16:40:49 |    Proof 5217208 - Zisk            : ✅ Valid (DL: 645ms | Verify: 23ms) 
+Mar 16:40:49 |    Proof 5217206 - Zisk            : ✅ Valid (DL: 753ms | Verify: 7ms) 
+Mar 16:40:50 |    Proof 5217211 - OpenVM          : ✅ Valid (DL: 1017ms | Verify: 119ms) 
+Mar 16:40:50 |    Proof 5217216 - Airbender       : ✅ Valid (DL: 1208ms | Verify: 29ms) 
+Mar 16:40:50 |    Proof 5217210 - Pico            : ✅ Valid (DL: 1340ms | Verify: 125ms) 
+Mar 16:40:50 | Block #24628320 Timing: TotalTime=1794ms | Max (DL=1340ms, Verify=125ms) 
+Mar 16:40:50 | Valid. Block 24628320 (1794 ms, retries 0) 
+Mar 16:40:50 | Received ForkChoice: 0xddc7f1...cf89e8, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:40:50 | Synced Chain Head to 24628320 (0xddc7f1...cf89e8) 
+Mar 16:41:01 | Received New Block:  24628321 (0x322561...842973)      | limit    59,999,943 👆 
+Mar 16:41:02 |    Proof 5217231 - Zisk            : ✅ Valid (DL: 585ms | Verify: 22ms) 
+Mar 16:41:02 |    Proof 5217229 - Zisk            : ✅ Valid (DL: 655ms | Verify: 11ms) 
+Mar 16:41:03 |    Proof 5217233 - Pico            : ✅ Valid (DL: 1033ms | Verify: 110ms) 
+Mar 16:41:03 |    Proof 5217237 - Airbender       : ✅ Valid (DL: 1256ms | Verify: 16ms) 
+Mar 16:41:03 |    Proof 5217235 - OpenVM          : ✅ Valid (DL: 1317ms | Verify: 113ms) 
+Mar 16:41:03 | Block #24628321 Timing: TotalTime=1982ms | Max (DL=1317ms, Verify=113ms) 
+Mar 16:41:03 | Valid. Block 24628321 (1982 ms, retries 0) 
+Mar 16:41:03 | Received ForkChoice: 0x322561...842973, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:41:03 | Synced Chain Head to 24628321 (0x322561...842973) 
+Mar 16:41:12 | Received New Block:  24628322 (0x5f2c24...a4ee19)      | limit    60,000,000 👆 
+Mar 16:41:14 |    Proof 5217249 - Zisk            : ✅ Valid (DL: 1136ms | Verify: 12ms) 
+Mar 16:41:14 |    Proof 5217252 - Zisk            : ✅ Valid (DL: 1130ms | Verify: 29ms) 
+Mar 16:41:14 |    Proof 5217261 - Airbender       : ✅ Valid (DL: 1244ms | Verify: 16ms) 
+Mar 16:41:14 |    Proof 5217254 - OpenVM          : ✅ Valid (DL: 1259ms | Verify: 145ms) 
+Mar 16:41:14 |    Proof 5217255 - Pico            : ✅ Valid (DL: 1360ms | Verify: 108ms) 
+Mar 16:41:14 | Block #24628322 Timing: TotalTime=1818ms | Max (DL=1360ms, Verify=145ms) 
+Mar 16:41:14 | Valid. Block 24628322 (1819 ms, retries 0) 
+Mar 16:41:14 | Received ForkChoice: 0x5f2c24...a4ee19, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:41:14 | Synced Chain Head to 24628322 (0x5f2c24...a4ee19) 
+Mar 16:41:25 | ***** JSON RPC report *****
+-----------------------------------------------------------------------------------------------------------------------------------------------
+method                                  | successes |   avg (ms) |   max (ms) |    errors |   avg (ms) |   max (ms) | avg size B | total (kB) |
+-----------------------------------------------------------------------------------------------------------------------------------------------
+engine_forkchoiceUpdatedV3              |        30 |     75.929 |   1682.642 |         0 |      0.000 |      0.000 |        189 |       5.53 | 
+engine_getBlobsV2                       |        16 |      0.766 |      6.882 |         0 |      0.000 |      0.000 |         38 |       0.59 | 
+engine_newPayloadV4                     |        34 |   1786.587 |   3551.643 |         0 |      0.000 |      0.000 |        162 |       5.38 | 
+eth_syncing                             |        25 |      0.093 |      1.011 |         0 |      0.000 |      0.000 |         39 |       0.95 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                   |       105 |    600.347 |   3551.643 |         0 |      0.000 |      0.000 |        121 |      12.45 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 
+Mar 16:41:25 | Received New Block:  24628323 (0xd1cd8d...eb53ce)      | limit    60,000,000    
+Mar 16:41:26 |    Proof 5217274 - Zisk            : ✅ Valid (DL: 769ms | Verify: 25ms) 
+Mar 16:41:26 |    Proof 5217272 - Zisk            : ✅ Valid (DL: 994ms | Verify: 10ms) 
+Mar 16:41:27 |    Proof 5217275 - Pico            : ✅ Valid (DL: 1395ms | Verify: 123ms) 
+Mar 16:41:27 |    Proof 5217281 - Airbender       : ✅ Valid (DL: 1502ms | Verify: 23ms) 
+Mar 16:41:27 |    Proof 5217277 - OpenVM          : ✅ Valid (DL: 1405ms | Verify: 124ms) 
+Mar 16:41:27 | Block #24628323 Timing: TotalTime=1977ms | Max (DL=1502ms, Verify=124ms) 
+Mar 16:41:27 | Valid. Block 24628323 (1978 ms, retries 0) 
+Mar 16:41:27 | Received ForkChoice: 0xd1cd8d...eb53ce, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:41:27 | Synced Chain Head to 24628323 (0xd1cd8d...eb53ce) 
+Mar 16:41:36 | Received New Block:  24628324 (0x468787...c67cdc)      | limit    60,000,000    
+Mar 16:41:37 |    Proof 5217287 - Zisk            : ✅ Valid (DL: 571ms | Verify: 8ms) 
+Mar 16:41:38 |    Proof 5217290 - Zisk            : ✅ Valid (DL: 1028ms | Verify: 21ms) 
+Mar 16:41:38 |    Proof 5217291 - Pico            : ✅ Valid (DL: 1140ms | Verify: 108ms) 
+Mar 16:41:38 |    Proof 5217297 - Airbender       : ✅ Valid (DL: 1331ms | Verify: 18ms) 
+Mar 16:41:38 |    Proof 5217293 - OpenVM          : ✅ Valid (DL: 1295ms | Verify: 121ms) 
+Mar 16:41:38 | Block #24628324 Timing: TotalTime=1725ms | Max (DL=1331ms, Verify=121ms) 
+Mar 16:41:38 | Valid. Block 24628324 (1725 ms, retries 0) 
+Mar 16:41:38 | Received ForkChoice: 0x468787...c67cdc, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:41:38 | Synced Chain Head to 24628324 (0x468787...c67cdc) 
+Mar 16:41:49 | Received New Block:  24628325 (0x637b91...b649f7)      | limit    60,000,000    
+Mar 16:41:50 |    Proof 5217316 - Zisk            : ✅ Valid (DL: 746ms | Verify: 24ms) 
+Mar 16:41:50 |    Proof 5217315 - Zisk            : ✅ Valid (DL: 927ms | Verify: 13ms) 
+Mar 16:41:50 |    Proof 5217321 - OpenVM          : ✅ Valid (DL: 871ms | Verify: 108ms) 
+Mar 16:41:51 |    Proof 5217320 - Pico            : ✅ Valid (DL: 1438ms | Verify: 151ms) 
+Mar 16:41:51 |    Proof 5217326 - Airbender       : ✅ Valid (DL: 1626ms | Verify: 17ms) 
+Mar 16:41:51 | Block #24628325 Timing: TotalTime=1983ms | Max (DL=1626ms, Verify=151ms) 
+Mar 16:41:51 | Valid. Block 24628325 (1983 ms, retries 0) 
+Mar 16:41:51 | Received ForkChoice: 0x637b91...b649f7, Safe: 0x907c3d...454bca, Finalized: 0x73b42b...bb5267 
+Mar 16:41:51 | Synced Chain Head to 24628325 (0x637b91...b649f7) 
+Mar 16:41:58 | Received ForkChoice: 0x637b91...b649f7, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:42:01 | Received New Block:  24628326 (0xb7227a...32b8f0)      | limit    60,000,000    
+Mar 16:42:02 |    Proof 5217333 - Zisk            : ✅ Valid (DL: 571ms | Verify: 21ms) 
+Mar 16:42:02 |    Proof 5217331 - Zisk            : ✅ Valid (DL: 717ms | Verify: 12ms) 
+Mar 16:42:02 |    Proof 5217339 - OpenVM          : ✅ Valid (DL: 945ms | Verify: 98ms) 
+Mar 16:42:02 |    Proof 5217344 - Airbender       : ✅ Valid (DL: 1043ms | Verify: 17ms) 
+Mar 16:42:03 |    Proof 5217336 - Pico            : ✅ Valid (DL: 1212ms | Verify: 97ms) 
+Mar 16:42:03 | Block #24628326 Timing: TotalTime=1655ms | Max (DL=1212ms, Verify=98ms) 
+Mar 16:42:03 | Valid. Block 24628326 (1655 ms, retries 0) 
+Mar 16:42:05 | Received ForkChoice: 0xb7227a...32b8f0, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:42:05 | Synced Chain Head to 24628326 (0xb7227a...32b8f0) 
+Mar 16:42:14 | Received New Block:  24628327 (0xb75e6b...3671b1)      | limit    60,000,000    
+Mar 16:42:15 |    Proof 5217358 - Zisk            : ✅ Valid (DL: 629ms | Verify: 22ms) 
+Mar 16:42:15 |    Proof 5217354 - Zisk            : ✅ Valid (DL: 764ms | Verify: 12ms) 
+Mar 16:42:15 |    Proof 5217366 - Airbender       : ✅ Valid (DL: 1257ms | Verify: 17ms) 
+Mar 16:42:15 |    Proof 5217359 - OpenVM          : ✅ Valid (DL: 1261ms | Verify: 102ms) 
+Mar 16:42:15 |    Proof 5217360 - Pico            : ✅ Valid (DL: 1264ms | Verify: 118ms) 
+Mar 16:42:15 | Block #24628327 Timing: TotalTime=1772ms | Max (DL=1264ms, Verify=118ms) 
+Mar 16:42:15 | Valid. Block 24628327 (1772 ms, retries 0) 
+Mar 16:42:16 | Received ForkChoice: 0xb75e6b...3671b1, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:42:16 | Synced Chain Head to 24628327 (0xb75e6b...3671b1) 
+Mar 16:42:24 | Received New Block:  24628328 (0x26fbaf...f88877)      | limit    59,941,408 👇 
+Mar 16:42:25 |    Proof 5217378 - Zisk            : ✅ Valid (DL: 643ms | Verify: 11ms) 
+Mar 16:42:25 |    Proof 5217380 - Zisk            : ✅ Valid (DL: 728ms | Verify: 22ms) 
+Mar 16:42:26 |    Proof 5217383 - OpenVM          : ✅ Valid (DL: 874ms | Verify: 126ms) 
+Mar 16:42:26 |    Proof 5217387 - Airbender       : ✅ Valid (DL: 1372ms | Verify: 16ms) 
+Mar 16:42:26 |    Proof 5217382 - Pico            : ✅ Valid (DL: 1414ms | Verify: 108ms) 
+Mar 16:42:26 | Block #24628328 Timing: TotalTime=1902ms | Max (DL=1414ms, Verify=126ms) 
+Mar 16:42:26 | Valid. Block 24628328 (1902 ms, retries 0) 
+Mar 16:42:26 | Received ForkChoice: 0x26fbaf...f88877, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:42:26 | Synced Chain Head to 24628328 (0x26fbaf...f88877) 
+Mar 16:42:36 | Received New Block:  24628329 (0xd6dbb3...295325)      | limit    59,999,943 👆 
+Mar 16:42:37 |    Proof 5217393 - Zisk            : ✅ Valid (DL: 526ms | Verify: 7ms) 
+Mar 16:42:37 |    Proof 5217395 - Zisk            : ✅ Valid (DL: 776ms | Verify: 28ms) 
+Mar 16:42:38 |    Proof 5217399 - OpenVM          : ✅ Valid (DL: 1138ms | Verify: 119ms) 
+Mar 16:42:38 |    Proof 5217396 - Pico            : ✅ Valid (DL: 1264ms | Verify: 128ms) 
+Mar 16:42:38 |    Proof 5217405 - Airbender       : ✅ Valid (DL: 1396ms | Verify: 40ms) 
+Mar 16:42:38 | Block #24628329 Timing: TotalTime=1737ms | Max (DL=1396ms, Verify=128ms) 
+Mar 16:42:38 | Valid. Block 24628329 (1738 ms, retries 0) 
+Mar 16:42:38 | Received ForkChoice: 0xd6dbb3...295325, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:42:38 | Synced Chain Head to 24628329 (0xd6dbb3...295325) 
+Mar 16:42:48 | Received New Block:  24628330 (0x11ed91...b53c3d)      | limit    60,000,000 👆 
+Mar 16:42:49 |    Proof 5217421 - Zisk            : ✅ Valid (DL: 526ms | Verify: 25ms) 
+Mar 16:42:50 |    Proof 5217425 - OpenVM          : ✅ Valid (DL: 1120ms | Verify: 106ms) 
+Mar 16:42:50 |    Proof 5217419 - Zisk            : ✅ Valid (DL: 1234ms | Verify: 8ms) 
+Mar 16:42:50 |    Proof 5217428 - Airbender       : ✅ Valid (DL: 1504ms | Verify: 17ms) 
+Mar 16:42:51 |    Proof 5217424 - Pico            : ✅ Valid (DL: 1605ms | Verify: 111ms) 
+Mar 16:42:51 | Block #24628330 Timing: TotalTime=2125ms | Max (DL=1605ms, Verify=111ms) 
+Mar 16:42:51 | Valid. Block 24628330 (2125 ms, retries 0) 
+Mar 16:42:51 | Received ForkChoice: 0x11ed91...b53c3d, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:42:51 | Synced Chain Head to 24628330 (0x11ed91...b53c3d) 
+Mar 16:43:01 | Received New Block:  24628331 (0x2337b7...706f87)      | limit    60,000,000    
+Mar 16:43:02 |    Proof 5217436 - Zisk            : ✅ Valid (DL: 556ms | Verify: 11ms) 
+Mar 16:43:02 |    Proof 5217438 - Zisk            : ✅ Valid (DL: 1031ms | Verify: 23ms) 
+Mar 16:43:03 |    Proof 5217446 - Airbender       : ✅ Valid (DL: 1215ms | Verify: 15ms) 
+Mar 16:43:03 |    Proof 5217443 - OpenVM          : ✅ Valid (DL: 1273ms | Verify: 119ms) 
+Mar 16:43:03 |    Proof 5217441 - Pico            : ✅ Valid (DL: 1348ms | Verify: 107ms) 
+Mar 16:43:03 | Block #24628331 Timing: TotalTime=1847ms | Max (DL=1348ms, Verify=119ms) 
+Mar 16:43:03 | Valid. Block 24628331 (1847 ms, retries 0) 
+Mar 16:43:03 | Received ForkChoice: 0x2337b7...706f87, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:43:03 | Synced Chain Head to 24628331 (0x2337b7...706f87) 
+Mar 16:43:13 | Received New Block:  24628332 (0xfa5680...33c081)      | limit    59,941,408 👇 
+Mar 16:43:14 |    Proof 5217460 - Zisk            : ✅ Valid (DL: 550ms | Verify: 22ms) 
+Mar 16:43:15 |    Proof 5217458 - Zisk            : ✅ Valid (DL: 907ms | Verify: 11ms) 
+Mar 16:43:15 |    Proof 5217471 - Airbender       : ✅ Valid (DL: 965ms | Verify: 21ms) 
+Mar 16:43:15 |    Proof 5217461 - OpenVM          : ✅ Valid (DL: 1197ms | Verify: 101ms) 
+Mar 16:43:15 |    Proof 5217463 - Pico            : ✅ Valid (DL: 1305ms | Verify: 102ms) 
+Mar 16:43:15 | Block #24628332 Timing: TotalTime=1958ms | Max (DL=1305ms, Verify=102ms) 
+Mar 16:43:15 | Valid. Block 24628332 (1958 ms, retries 0) 
+Mar 16:43:15 | Received ForkChoice: 0xfa5680...33c081, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:43:15 | Synced Chain Head to 24628332 (0xfa5680...33c081) 
+Mar 16:43:24 | Received New Block:  24628333 (0xc4d50e...28eacf)      | limit    59,999,943 👆 
+Mar 16:43:25 |    Proof 5217492 - Airbender       : ✅ Valid (DL: 875ms | Verify: 15ms) 
+Mar 16:43:26 |    Proof 5217484 - Zisk            : ✅ Valid (DL: 1339ms | Verify: 41ms) 
+Mar 16:43:26 |    Proof 5217482 - Zisk            : ✅ Valid (DL: 1533ms | Verify: 13ms) 
+Mar 16:43:26 |    Proof 5217487 - Pico            : ✅ Valid (DL: 1491ms | Verify: 128ms) 
+Mar 16:43:26 |    Proof 5217488 - OpenVM          : ✅ Valid (DL: 1648ms | Verify: 138ms) 
+Mar 16:43:26 | Block #24628333 Timing: TotalTime=2114ms | Max (DL=1648ms, Verify=138ms) 
+Mar 16:43:26 | Valid. Block 24628333 (2114 ms, retries 0) 
+Mar 16:43:26 | Received ForkChoice: 0xc4d50e...28eacf, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:43:26 | Synced Chain Head to 24628333 (0xc4d50e...28eacf) 
+Mar 16:43:38 | Received New Block:  24628334 (0x7b76f6...aa0b25)      | limit    60,000,000 👆 
+Mar 16:43:39 |    Proof 5217506 - Zisk            : ✅ Valid (DL: 579ms | Verify: 26ms) 
+Mar 16:43:39 |    Proof 5217504 - Zisk            : ✅ Valid (DL: 770ms | Verify: 10ms) 
+Mar 16:43:40 |    Proof 5217513 - Airbender       : ✅ Valid (DL: 1195ms | Verify: 16ms) 
+Mar 16:43:40 |    Proof 5217509 - Pico            : ✅ Valid (DL: 1097ms | Verify: 121ms) 
+Mar 16:43:40 |    Proof 5217508 - OpenVM          : ✅ Valid (DL: 1280ms | Verify: 120ms) 
+Mar 16:43:40 | Block #24628334 Timing: TotalTime=1852ms | Max (DL=1280ms, Verify=121ms) 
+Mar 16:43:40 | Valid. Block 24628334 (1855 ms, retries 0) 
+Mar 16:43:40 | Received ForkChoice: 0x7b76f6...aa0b25, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:43:40 | Synced Chain Head to 24628334 (0x7b76f6...aa0b25) 
+Mar 16:43:49 | Received New Block:  24628335 (0x70bd6c...1546c9)      | limit    60,000,000    
+Mar 16:43:50 |    Proof 5217526 - Zisk            : ✅ Valid (DL: 690ms | Verify: 22ms) 
+Mar 16:43:50 |    Proof 5217524 - Zisk            : ✅ Valid (DL: 828ms | Verify: 9ms) 
+Mar 16:43:50 |    Proof 5217530 - Pico            : ✅ Valid (DL: 1046ms | Verify: 107ms) 
+Mar 16:43:50 |    Proof 5217534 - Airbender       : ✅ Valid (DL: 1290ms | Verify: 15ms) 
+Mar 16:43:51 |    Proof 5217531 - OpenVM          : ✅ Valid (DL: 1292ms | Verify: 103ms) 
+Mar 16:43:51 | Block #24628335 Timing: TotalTime=1725ms | Max (DL=1292ms, Verify=107ms) 
+Mar 16:43:51 | Valid. Block 24628335 (1725 ms, retries 0) 
+Mar 16:43:51 | Received ForkChoice: 0x70bd6c...1546c9, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:43:51 | Synced Chain Head to 24628335 (0x70bd6c...1546c9) 
+Mar 16:44:02 | Received New Block:  24628336 (0xe07418...a47926)      | limit    60,000,000    
+Mar 16:44:03 |    Proof 5217545 - Zisk            : ✅ Valid (DL: 581ms | Verify: 42ms) 
+Mar 16:44:03 |    Proof 5217542 - Zisk            : ✅ Valid (DL: 684ms | Verify: 12ms) 
+Mar 16:44:03 |    Proof 5217550 - OpenVM          : ✅ Valid (DL: 950ms | Verify: 130ms) 
+Mar 16:44:03 |    Proof 5217546 - Pico            : ✅ Valid (DL: 1105ms | Verify: 188ms) 
+Mar 16:44:03 |    Proof 5217554 - Airbender       : ✅ Valid (DL: 1427ms | Verify: 65ms) 
+Mar 16:44:03 | Block #24628336 Timing: TotalTime=1785ms | Max (DL=1427ms, Verify=188ms) 
+Mar 16:44:03 | Valid. Block 24628336 (1785 ms, retries 0) 
+Mar 16:44:04 | Received ForkChoice: 0xe07418...a47926, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:44:04 | Synced Chain Head to 24628336 (0xe07418...a47926) 
+Mar 16:44:12 | Received New Block:  24628337 (0xe2f3a4...651751)      | limit    60,000,000    
+Mar 16:44:12 |    Proof 5217565 - Zisk            : ✅ Valid (DL: 597ms | Verify: 15ms) 
+Mar 16:44:13 |    Proof 5217567 - Zisk            : ✅ Valid (DL: 800ms | Verify: 26ms) 
+Mar 16:44:13 |    Proof 5217570 - Pico            : ✅ Valid (DL: 1100ms | Verify: 102ms) 
+Mar 16:44:13 |    Proof 5217571 - OpenVM          : ✅ Valid (DL: 1142ms | Verify: 129ms) 
+Mar 16:44:14 |    Proof 5217575 - Airbender       : ✅ Valid (DL: 1802ms | Verify: 16ms) 
+Mar 16:44:14 | Block #24628337 Timing: TotalTime=2144ms | Max (DL=1802ms, Verify=129ms) 
+Mar 16:44:14 | Valid. Block 24628337 (2145 ms, retries 0) 
+Mar 16:44:14 | Received ForkChoice: 0xe2f3a4...651751, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:44:14 | Synced Chain Head to 24628337 (0xe2f3a4...651751) 
+Mar 16:44:24 | Received New Block:  24628338 (0x9e7885...924027)      | limit    59,941,408 👇 
+Mar 16:44:25 |    Proof 5217584 - Zisk            : ✅ Valid (DL: 531ms | Verify: 23ms) 
+Mar 16:44:26 |    Proof 5217583 - Zisk            : ✅ Valid (DL: 1179ms | Verify: 8ms) 
+Mar 16:44:26 |    Proof 5217589 - Pico            : ✅ Valid (DL: 1091ms | Verify: 116ms) 
+Mar 16:44:26 |    Proof 5217592 - Airbender       : ✅ Valid (DL: 1306ms | Verify: 17ms) 
+Mar 16:44:26 |    Proof 5217588 - OpenVM          : ✅ Valid (DL: 1387ms | Verify: 99ms) 
+Mar 16:44:26 | Block #24628338 Timing: TotalTime=1869ms | Max (DL=1387ms, Verify=116ms) 
+Mar 16:44:26 | Valid. Block 24628338 (1869 ms, retries 0) 
+Mar 16:44:26 | Received ForkChoice: 0x9e7885...924027, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:44:26 | Synced Chain Head to 24628338 (0x9e7885...924027) 
+Mar 16:44:36 | Received New Block:  24628339 (0xd2eb31...e416b2)      | limit    59,999,943 👆 
+Mar 16:44:37 |    Proof 5217606 - Zisk            : ✅ Valid (DL: 896ms | Verify: 13ms) 
+Mar 16:44:38 |    Proof 5217610 - OpenVM          : ✅ Valid (DL: 835ms | Verify: 101ms) 
+Mar 16:44:38 |    Proof 5217609 - Zisk            : ✅ Valid (DL: 942ms | Verify: 27ms) 
+Mar 16:44:38 |    Proof 5217611 - Pico            : ✅ Valid (DL: 1207ms | Verify: 110ms) 
+Mar 16:44:38 |    Proof 5217615 - Airbender       : ✅ Valid (DL: 1395ms | Verify: 16ms) 
+Mar 16:44:38 | Block #24628339 Timing: TotalTime=1852ms | Max (DL=1395ms, Verify=110ms) 
+Mar 16:44:38 | Valid. Block 24628339 (1852 ms, retries 0) 
+Mar 16:44:38 | Received ForkChoice: 0xd2eb31...e416b2, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:44:38 | Synced Chain Head to 24628339 (0xd2eb31...e416b2) 
+Mar 16:44:48 | Received New Block:  24628340 (0x33391f...047d27)      | limit    60,000,000 👆 
+Mar 16:44:50 |    Proof 5217630 - Zisk            : ✅ Valid (DL: 980ms | Verify: 11ms) 
+Mar 16:44:50 |    Proof 5217632 - Zisk            : ✅ Valid (DL: 978ms | Verify: 24ms) 
+Mar 16:44:50 |    Proof 5217634 - OpenVM          : ✅ Valid (DL: 1354ms | Verify: 119ms) 
+Mar 16:44:50 |    Proof 5217638 - Airbender       : ✅ Valid (DL: 1538ms | Verify: 14ms) 
+Mar 16:44:50 |    Proof 5217635 - Pico            : ✅ Valid (DL: 1484ms | Verify: 102ms) 
+Mar 16:44:50 | Block #24628340 Timing: TotalTime=1920ms | Max (DL=1538ms, Verify=119ms) 
+Mar 16:44:50 | Valid. Block 24628340 (1920 ms, retries 0) 
+Mar 16:44:51 | Received ForkChoice: 0x33391f...047d27, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:44:51 | Synced Chain Head to 24628340 (0x33391f...047d27) 
+Mar 16:45:00 | Received New Block:  24628341 (0x3ededf...9fb3d1)      | limit    59,941,408 👇 
+Mar 16:45:01 |    Proof 5217651 - Zisk            : ✅ Valid (DL: 537ms | Verify: 11ms) 
+Mar 16:45:01 |    Proof 5217652 - Zisk            : ✅ Valid (DL: 582ms | Verify: 21ms) 
+Mar 16:45:02 |    Proof 5217656 - OpenVM          : ✅ Valid (DL: 1213ms | Verify: 98ms) 
+Mar 16:45:02 |    Proof 5217659 - Airbender       : ✅ Valid (DL: 1303ms | Verify: 18ms) 
+Mar 16:45:02 |    Proof 5217655 - Pico            : ✅ Valid (DL: 1249ms | Verify: 98ms) 
+Mar 16:45:02 | Block #24628341 Timing: TotalTime=1660ms | Max (DL=1303ms, Verify=98ms) 
+Mar 16:45:02 | Valid. Block 24628341 (1660 ms, retries 0) 
+Mar 16:45:02 | Received ForkChoice: 0x3ededf...9fb3d1, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:45:02 | Synced Chain Head to 24628341 (0x3ededf...9fb3d1) 
+Mar 16:45:13 | Received New Block:  24628342 (0x345289...2b5aa9)      | limit    59,999,943 👆 
+Mar 16:45:14 |    Proof 5217669 - Zisk            : ✅ Valid (DL: 515ms | Verify: 23ms) 
+Mar 16:45:14 |    Proof 5217667 - Zisk            : ✅ Valid (DL: 659ms | Verify: 12ms) 
+Mar 16:45:15 |    Proof 5217678 - OpenVM          : ✅ Valid (DL: 1089ms | Verify: 94ms) 
+Mar 16:45:15 |    Proof 5217676 - Airbender       : ✅ Valid (DL: 1281ms | Verify: 17ms) 
+Mar 16:45:15 |    Proof 5217670 - Pico            : ✅ Valid (DL: 1222ms | Verify: 99ms) 
+Mar 16:45:15 | Block #24628342 Timing: TotalTime=1632ms | Max (DL=1281ms, Verify=99ms) 
+Mar 16:45:15 | Valid. Block 24628342 (1632 ms, retries 0) 
+Mar 16:45:15 | Received ForkChoice: 0x345289...2b5aa9, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:45:15 | Synced Chain Head to 24628342 (0x345289...2b5aa9) 
+Mar 16:45:25 | Received New Block:  24628343 (0x1575cd...2b652a)      | limit    60,000,000 👆 
+Mar 16:45:26 |    Proof 5217691 - Zisk            : ✅ Valid (DL: 477ms | Verify: 28ms) 
+Mar 16:45:26 |    Proof 5217690 - Zisk            : ✅ Valid (DL: 711ms | Verify: 7ms) 
+Mar 16:45:26 |    Proof 5217695 - OpenVM          : ✅ Valid (DL: 1001ms | Verify: 101ms) 
+Mar 16:45:26 |    Proof 5217698 - Airbender       : ✅ Valid (DL: 1192ms | Verify: 15ms) 
+Mar 16:45:26 |    Proof 5217694 - Pico            : ✅ Valid (DL: 1276ms | Verify: 108ms) 
+Mar 16:45:26 | Block #24628343 Timing: TotalTime=1719ms | Max (DL=1276ms, Verify=108ms) 
+Mar 16:45:26 | Valid. Block 24628343 (1719 ms, retries 0) 
+Mar 16:45:27 | Received ForkChoice: 0x1575cd...2b652a, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:45:27 | Synced Chain Head to 24628343 (0x1575cd...2b652a) 
+Mar 16:45:39 | Received New Block:  24628344 (0x6ebfe7...517f94)      | limit    60,000,000    
+Mar 16:45:40 |    Proof 5217712 - Zisk            : ✅ Valid (DL: 772ms | Verify: 26ms) 
+Mar 16:45:40 |    Proof 5217723 - OpenVM          : ✅ Valid (DL: 786ms | Verify: 102ms) 
+Mar 16:45:40 |    Proof 5217711 - Zisk            : ✅ Valid (DL: 1009ms | Verify: 7ms) 
+Mar 16:45:40 |    Proof 5217719 - Airbender       : ✅ Valid (DL: 1190ms | Verify: 16ms) 
+Mar 16:45:40 |    Proof 5217715 - Pico            : ✅ Valid (DL: 1243ms | Verify: 100ms) 
+Mar 16:45:40 | Block #24628344 Timing: TotalTime=1896ms | Max (DL=1243ms, Verify=102ms) 
+Mar 16:45:40 | Valid. Block 24628344 (1896 ms, retries 0) 
+Mar 16:45:41 | Received ForkChoice: 0x6ebfe7...517f94, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:45:41 | Synced Chain Head to 24628344 (0x6ebfe7...517f94) 
+Mar 16:45:48 | Received New Block:  24628345 (0x2a1380...389f34)      | limit    60,000,000    
+Mar 16:45:49 |    Proof 5217735 - Zisk            : ✅ Valid (DL: 571ms | Verify: 21ms) 
+Mar 16:45:50 |    Proof 5217734 - Zisk            : ✅ Valid (DL: 923ms | Verify: 7ms) 
+Mar 16:45:50 |    Proof 5217739 - OpenVM          : ✅ Valid (DL: 1129ms | Verify: 111ms) 
+Mar 16:45:50 |    Proof 5217738 - Pico            : ✅ Valid (DL: 1235ms | Verify: 111ms) 
+Mar 16:45:50 |    Proof 5217743 - Airbender       : ✅ Valid (DL: 1377ms | Verify: 15ms) 
+Mar 16:45:50 | Block #24628345 Timing: TotalTime=1709ms | Max (DL=1377ms, Verify=111ms) 
+Mar 16:45:50 | Valid. Block 24628345 (1710 ms, retries 0) 
+Mar 16:45:50 | Received ForkChoice: 0x2a1380...389f34, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:45:50 | Synced Chain Head to 24628345 (0x2a1380...389f34) 
+Mar 16:46:00 | Received New Block:  24628346 (0x304874...627968)      | limit    59,941,408 👇 
+Mar 16:46:02 |    Proof 5217755 - Zisk            : ✅ Valid (DL: 897ms | Verify: 21ms) 
+Mar 16:46:02 |    Proof 5217754 - Zisk            : ✅ Valid (DL: 1168ms | Verify: 7ms) 
+Mar 16:46:02 |    Proof 5217761 - Airbender       : ✅ Valid (DL: 1355ms | Verify: 21ms) 
+Mar 16:46:02 |    Proof 5217758 - Pico            : ✅ Valid (DL: 1313ms | Verify: 99ms) 
+Mar 16:46:02 |    Proof 5217760 - OpenVM          : ✅ Valid (DL: 1387ms | Verify: 97ms) 
+Mar 16:46:02 | Block #24628346 Timing: TotalTime=1950ms | Max (DL=1387ms, Verify=99ms) 
+Mar 16:46:02 | Valid. Block 24628346 (1950 ms, retries 0) 
+Mar 16:46:02 | Received ForkChoice: 0x304874...627968, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:46:02 | Synced Chain Head to 24628346 (0x304874...627968) 
+Mar 16:46:12 | Received New Block:  24628347 (0x707296...178476)      | limit    59,999,943 👆 
+Mar 16:46:13 |    Proof 5217776 - Zisk            : ✅ Valid (DL: 542ms | Verify: 21ms) 
+Mar 16:46:14 |    Proof 5217775 - Zisk            : ✅ Valid (DL: 1054ms | Verify: 11ms) 
+Mar 16:46:14 |    Proof 5217782 - OpenVM          : ✅ Valid (DL: 1074ms | Verify: 162ms) 
+Mar 16:46:14 |    Proof 5217785 - Airbender       : ✅ Valid (DL: 1276ms | Verify: 20ms) 
+Mar 16:46:14 |    Proof 5217781 - Pico            : ✅ Valid (DL: 1224ms | Verify: 139ms) 
+Mar 16:46:14 | Block #24628347 Timing: TotalTime=1736ms | Max (DL=1276ms, Verify=162ms) 
+Mar 16:46:14 | Valid. Block 24628347 (1736 ms, retries 0) 
+Mar 16:46:14 | Received ForkChoice: 0x707296...178476, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:46:14 | Synced Chain Head to 24628347 (0x707296...178476) 
+Mar 16:46:25 | ***** JSON RPC report *****
+-----------------------------------------------------------------------------------------------------------------------------------------------
+method                                  | successes |   avg (ms) |   max (ms) |    errors |   avg (ms) |   max (ms) | avg size B | total (kB) |
+-----------------------------------------------------------------------------------------------------------------------------------------------
+engine_forkchoiceUpdatedV3              |        26 |      2.201 |      8.181 |         0 |      0.000 |      0.000 |        197 |       5.00 | 
+engine_getBlobsV2                       |        21 |      0.074 |      0.234 |         0 |      0.000 |      0.000 |         38 |       0.78 | 
+engine_getPayloadBodiesByRangeV1        |         3 |      9.783 |     27.110 |         0 |      0.000 |      0.000 |        190 |       0.56 | 
+engine_newPayloadV4                     |        25 |   1854.080 |   2147.257 |         0 |      0.000 |      0.000 |        162 |       3.96 | 
+eth_syncing                             |        25 |      0.045 |      0.063 |         0 |      0.000 |      0.000 |         39 |       0.95 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                   |       100 |    464.413 |   2147.257 |         0 |      0.000 |      0.000 |        115 |      11.25 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 
+Mar 16:46:25 | Received New Block:  24628348 (0xc8ea21...491f57)      | limit    60,000,000 👆 
+Mar 16:46:26 |    Proof 5217799 - Zisk            : ✅ Valid (DL: 519ms | Verify: 34ms) 
+Mar 16:46:26 |    Proof 5217797 - Zisk            : ✅ Valid (DL: 690ms | Verify: 9ms) 
+Mar 16:46:27 |    Proof 5217806 - Airbender       : ✅ Valid (DL: 1466ms | Verify: 19ms) 
+Mar 16:46:27 |    Proof 5217801 - Pico            : ✅ Valid (DL: 1769ms | Verify: 123ms) 
+Mar 16:46:27 |    Proof 5217803 - OpenVM          : ✅ Valid (DL: 1961ms | Verify: 109ms) 
+Mar 16:46:27 | Block #24628348 Timing: TotalTime=2374ms | Max (DL=1961ms, Verify=123ms) 
+Mar 16:46:27 | Valid. Block 24628348 (2374 ms, retries 0) 
+Mar 16:46:27 | Received ForkChoice: 0xc8ea21...491f57, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:46:27 | Synced Chain Head to 24628348 (0xc8ea21...491f57) 
+Mar 16:46:36 | Received New Block:  24628349 (0x48fd30...d9c0c6)      | limit    59,941,408 👇 
+Mar 16:46:37 |    Proof 5217819 - Zisk            : ✅ Valid (DL: 571ms | Verify: 25ms) 
+Mar 16:46:37 |    Proof 5217817 - Zisk            : ✅ Valid (DL: 582ms | Verify: 31ms) 
+Mar 16:46:38 |    Proof 5217821 - Pico            : ✅ Valid (DL: 841ms | Verify: 186ms) 
+Mar 16:46:38 |    Proof 5217822 - OpenVM          : ✅ Valid (DL: 1100ms | Verify: 103ms) 
+Mar 16:46:38 |    Proof 5217827 - Airbender       : ✅ Valid (DL: 1258ms | Verify: 15ms) 
+Mar 16:46:38 | Block #24628349 Timing: TotalTime=1617ms | Max (DL=1258ms, Verify=186ms) 
+Mar 16:46:38 | Valid. Block 24628349 (1617 ms, retries 0) 
+Mar 16:46:38 | Received ForkChoice: 0x48fd30...d9c0c6, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:46:38 | Synced Chain Head to 24628349 (0x48fd30...d9c0c6) 
+Mar 16:46:48 | Received New Block:  24628350 (0xc9d9a5...ed9aac)      | limit    59,999,943 👆 
+Mar 16:46:49 |    Proof 5217837 - Zisk            : ✅ Valid (DL: 586ms | Verify: 9ms) 
+Mar 16:46:49 |    Proof 5217839 - Zisk            : ✅ Valid (DL: 613ms | Verify: 22ms) 
+Mar 16:46:50 |    Proof 5217844 - OpenVM          : ✅ Valid (DL: 1126ms | Verify: 110ms) 
+Mar 16:46:50 |    Proof 5217842 - Pico            : ✅ Valid (DL: 1151ms | Verify: 124ms) 
+Mar 16:46:50 |    Proof 5217847 - Airbender       : ✅ Valid (DL: 1292ms | Verify: 16ms) 
+Mar 16:46:50 | Block #24628350 Timing: TotalTime=1617ms | Max (DL=1292ms, Verify=124ms) 
+Mar 16:46:50 | Valid. Block 24628350 (1617 ms, retries 0) 
+Mar 16:46:50 | Received ForkChoice: 0xc9d9a5...ed9aac, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:46:50 | Synced Chain Head to 24628350 (0xc9d9a5...ed9aac) 
+Mar 16:47:00 | Received New Block:  24628351 (0xb7c930...4ab5f5)      | limit    60,000,000 👆 
+Mar 16:47:01 |    Proof 5217858 - Zisk            : ✅ Valid (DL: 648ms | Verify: 11ms) 
+Mar 16:47:02 |    Proof 5217861 - Zisk            : ✅ Valid (DL: 878ms | Verify: 21ms) 
+Mar 16:47:02 |    Proof 5217865 - OpenVM          : ✅ Valid (DL: 946ms | Verify: 96ms) 
+Mar 16:47:02 |    Proof 5217868 - Airbender       : ✅ Valid (DL: 1100ms | Verify: 15ms) 
+Mar 16:47:02 |    Proof 5217863 - Pico            : ✅ Valid (DL: 1346ms | Verify: 95ms) 
+Mar 16:47:02 | Block #24628351 Timing: TotalTime=1755ms | Max (DL=1346ms, Verify=96ms) 
+Mar 16:47:02 | Valid. Block 24628351 (1755 ms, retries 0) 
+Mar 16:47:02 | Received ForkChoice: 0xb7c930...4ab5f5, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:47:02 | Synced Chain Head to 24628351 (0xb7c930...4ab5f5) 
+Mar 16:47:13 | Received New Block:  24628352 (0xdd2016...6779c7)      | limit    60,000,000    
+Mar 16:47:14 |    Proof 5217881 - Zisk            : ✅ Valid (DL: 710ms | Verify: 22ms) 
+Mar 16:47:14 |    Proof 5217879 - Zisk            : ✅ Valid (DL: 769ms | Verify: 10ms) 
+Mar 16:47:14 |    Proof 5217888 - Airbender       : ✅ Valid (DL: 1069ms | Verify: 19ms) 
+Mar 16:47:14 |    Proof 5217884 - OpenVM          : ✅ Valid (DL: 999ms | Verify: 94ms) 
+Mar 16:47:14 |    Proof 5217883 - Pico            : ✅ Valid (DL: 1260ms | Verify: 109ms) 
+Mar 16:47:14 | Block #24628352 Timing: TotalTime=1718ms | Max (DL=1260ms, Verify=109ms) 
+Mar 16:47:14 | Valid. Block 24628352 (1718 ms, retries 0) 
+Mar 16:47:15 | Received ForkChoice: 0xdd2016...6779c7, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:47:15 | Synced Chain Head to 24628352 (0xdd2016...6779c7) 
+Mar 16:47:24 | Received New Block:  24628353 (0x346b8a...de9223)      | limit    60,000,000    
+Mar 16:47:25 |    Proof 5217902 - Zisk            : ✅ Valid (DL: 651ms | Verify: 7ms) 
+Mar 16:47:25 |    Proof 5217904 - Zisk            : ✅ Valid (DL: 921ms | Verify: 28ms) 
+Mar 16:47:25 |    Proof 5217906 - Pico            : ✅ Valid (DL: 870ms | Verify: 96ms) 
+Mar 16:47:25 |    Proof 5217907 - OpenVM          : ✅ Valid (DL: 960ms | Verify: 121ms) 
+Mar 16:47:26 |    Proof 5217910 - Airbender       : ✅ Valid (DL: 1272ms | Verify: 14ms) 
+Mar 16:47:26 | Block #24628353 Timing: TotalTime=1591ms | Max (DL=1272ms, Verify=121ms) 
+Mar 16:47:26 | Valid. Block 24628353 (1591 ms, retries 0) 
+Mar 16:47:26 | Received ForkChoice: 0x346b8a...de9223, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:47:26 | Synced Chain Head to 24628353 (0x346b8a...de9223) 
+Mar 16:47:37 | Received New Block:  24628354 (0xd2163a...3d0ae8)      | limit    60,000,000    
+Mar 16:47:38 |    Proof 5217923 - Zisk            : ✅ Valid (DL: 518ms | Verify: 23ms) 
+Mar 16:47:39 |    Proof 5217920 - Zisk            : ✅ Valid (DL: 824ms | Verify: 7ms) 
+Mar 16:47:39 |    Proof 5217926 - OpenVM          : ✅ Valid (DL: 842ms | Verify: 105ms) 
+Mar 16:47:39 |    Proof 5217931 - Airbender       : ✅ Valid (DL: 997ms | Verify: 15ms) 
+Mar 16:47:39 |    Proof 5217925 - Pico            : ✅ Valid (DL: 1499ms | Verify: 97ms) 
+Mar 16:47:39 | Block #24628354 Timing: TotalTime=1937ms | Max (DL=1499ms, Verify=105ms) 
+Mar 16:47:39 | Valid. Block 24628354 (1938 ms, retries 0) 
+Mar 16:47:40 | Received ForkChoice: 0xd2163a...3d0ae8, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:47:40 | Synced Chain Head to 24628354 (0xd2163a...3d0ae8) 
+Mar 16:47:49 | Received New Block:  24628355 (0x0c29cd...9f199a)      | limit    60,000,000    
+Mar 16:47:50 |    Proof 5217943 - Zisk            : ✅ Valid (DL: 642ms | Verify: 24ms) 
+Mar 16:47:51 |    Proof 5217944 - Zisk            : ✅ Valid (DL: 1099ms | Verify: 10ms) 
+Mar 16:47:51 |    Proof 5217946 - Pico            : ✅ Valid (DL: 1099ms | Verify: 110ms) 
+Mar 16:47:51 |    Proof 5217951 - Airbender       : ✅ Valid (DL: 1260ms | Verify: 18ms) 
+Mar 16:47:51 |    Proof 5217947 - OpenVM          : ✅ Valid (DL: 1281ms | Verify: 108ms) 
+Mar 16:47:51 | Block #24628355 Timing: TotalTime=1786ms | Max (DL=1281ms, Verify=110ms) 
+Mar 16:47:51 | Valid. Block 24628355 (1786 ms, retries 0) 
+Mar 16:47:51 | Received ForkChoice: 0x0c29cd...9f199a, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:47:51 | Synced Chain Head to 24628355 (0x0c29cd...9f199a) 
+Mar 16:48:00 | Received New Block:  24628356 (0x76feb1...2203f4)      | limit    60,000,000    
+Mar 16:48:02 |    Proof 5217962 - Zisk            : ✅ Valid (DL: 762ms | Verify: 6ms) 
+Mar 16:48:02 |    Proof 5217964 - Zisk            : ✅ Valid (DL: 951ms | Verify: 21ms) 
+Mar 16:48:02 |    Proof 5217972 - Airbender       : ✅ Valid (DL: 1142ms | Verify: 18ms) 
+Mar 16:48:02 |    Proof 5217966 - Pico            : ✅ Valid (DL: 1450ms | Verify: 101ms) 
+Mar 16:48:02 |    Proof 5217969 - OpenVM          : ✅ Valid (DL: 1519ms | Verify: 120ms) 
+Mar 16:48:02 | Block #24628356 Timing: TotalTime=1961ms | Max (DL=1519ms, Verify=120ms) 
+Mar 16:48:02 | Valid. Block 24628356 (1961 ms, retries 0) 
+Mar 16:48:03 | Received ForkChoice: 0x76feb1...2203f4, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:48:03 | Synced Chain Head to 24628356 (0x76feb1...2203f4) 
+Mar 16:48:13 | Received New Block:  24628357 (0x1bd359...7616a4)      | limit    60,000,000    
+Mar 16:48:14 |    Proof 5217986 - Zisk            : ✅ Valid (DL: 784ms | Verify: 21ms) 
+Mar 16:48:14 |    Proof 5217985 - Zisk            : ✅ Valid (DL: 890ms | Verify: 7ms) 
+Mar 16:48:14 |    Proof 5217996 - Airbender       : ✅ Valid (DL: 1095ms | Verify: 21ms) 
+Mar 16:48:14 |    Proof 5217990 - Pico            : ✅ Valid (DL: 1362ms | Verify: 98ms) 
+Mar 16:48:15 |    Proof 5217991 - OpenVM          : ✅ Valid (DL: 1471ms | Verify: 100ms) 
+Mar 16:48:15 | Block #24628357 Timing: TotalTime=2007ms | Max (DL=1471ms, Verify=100ms) 
+Mar 16:48:15 | Valid. Block 24628357 (2007 ms, retries 0) 
+Mar 16:48:15 | Received ForkChoice: 0x1bd359...7616a4, Safe: 0xaf854a...9055a3, Finalized: 0x907c3d...454bca 
+Mar 16:48:15 | Synced Chain Head to 24628357 (0x1bd359...7616a4) 
+Mar 16:48:22 | Received ForkChoice: 24628357 (0x1bd359...7616a4), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:48:25 | Received New Block:  24628358 (0x787ca7...f2bac4)      | limit    60,000,000    
+Mar 16:48:26 |    Proof 5218003 - Zisk            : ✅ Valid (DL: 627ms | Verify: 21ms) 
+Mar 16:48:26 |    Proof 5218004 - Zisk            : ✅ Valid (DL: 1126ms | Verify: 27ms) 
+Mar 16:48:27 |    Proof 5218009 - Pico            : ✅ Valid (DL: 1397ms | Verify: 108ms) 
+Mar 16:48:27 |    Proof 5218010 - OpenVM          : ✅ Valid (DL: 1551ms | Verify: 108ms) 
+Mar 16:48:27 |    Proof 5218014 - Airbender       : ✅ Valid (DL: 1720ms | Verify: 14ms) 
+Mar 16:48:27 | Block #24628358 Timing: TotalTime=2038ms | Max (DL=1720ms, Verify=108ms) 
+Mar 16:48:27 | Valid. Block 24628358 (2038 ms, retries 0) 
+Mar 16:48:29 | Received ForkChoice: 24628358 (0x787ca7...f2bac4), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:48:29 | Synced Chain Head to 24628358 (0x787ca7...f2bac4) 
+Mar 16:48:36 | Received New Block:  24628359 (0x76d645...46eb43)      | limit    60,000,000    
+Mar 16:48:37 |    Proof 5218026 - Zisk            : ✅ Valid (DL: 860ms | Verify: 7ms) 
+Mar 16:48:37 |    Proof 5218028 - Zisk            : ✅ Valid (DL: 877ms | Verify: 21ms) 
+Mar 16:48:38 |    Proof 5218035 - Airbender       : ✅ Valid (DL: 1293ms | Verify: 17ms) 
+Mar 16:48:38 |    Proof 5218030 - Pico            : ✅ Valid (DL: 1216ms | Verify: 103ms) 
+Mar 16:48:38 |    Proof 5218032 - OpenVM          : ✅ Valid (DL: 1431ms | Verify: 114ms) 
+Mar 16:48:38 | Block #24628359 Timing: TotalTime=1841ms | Max (DL=1431ms, Verify=114ms) 
+Mar 16:48:38 | Valid. Block 24628359 (1841 ms, retries 0) 
+Mar 16:48:38 | Received ForkChoice: 24628359 (0x76d645...46eb43), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:48:38 | Synced Chain Head to 24628359 (0x76d645...46eb43) 
+Mar 16:48:49 | Received New Block:  24628360 (0xc0feb4...675b09)      | limit    60,000,000    
+Mar 16:48:51 |    Proof 5218046 - Zisk            : ✅ Valid (DL: 735ms | Verify: 16ms) 
+Mar 16:48:51 |    Proof 5218048 - Zisk            : ✅ Valid (DL: 1078ms | Verify: 25ms) 
+Mar 16:48:51 |    Proof 5218050 - Pico            : ✅ Valid (DL: 1461ms | Verify: 119ms) 
+Mar 16:48:52 |    Proof 5218052 - OpenVM          : ✅ Valid (DL: 1504ms | Verify: 107ms) 
+Mar 16:48:52 |    Proof 5218056 - Airbender       : ✅ Valid (DL: 1746ms | Verify: 29ms) 
+Mar 16:48:52 | Block #24628360 Timing: TotalTime=2332ms | Max (DL=1746ms, Verify=119ms) 
+Mar 16:48:52 | Valid. Block 24628360 (2332 ms, retries 0) 
+Mar 16:48:52 | Received ForkChoice: 24628360 (0xc0feb4...675b09), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:48:52 | Synced Chain Head to 24628360 (0xc0feb4...675b09) 
+Mar 16:49:00 | Received New Block:  24628361 (0x24830a...b48ac8)      | limit    60,000,000    
+Mar 16:49:02 |    Proof 5218070 - Zisk            : ✅ Valid (DL: 1337ms | Verify: 39ms) 
+Mar 16:49:02 |    Proof 5218068 - Zisk            : ✅ Valid (DL: 1527ms | Verify: 22ms) 
+Mar 16:49:02 |    Proof 5218078 - Airbender       : ✅ Valid (DL: 1687ms | Verify: 14ms) 
+Mar 16:49:02 |    Proof 5218074 - OpenVM          : ✅ Valid (DL: 1768ms | Verify: 97ms) 
+Mar 16:49:02 |    Proof 5218073 - Pico            : ✅ Valid (DL: 1830ms | Verify: 114ms) 
+Mar 16:49:02 | Block #24628361 Timing: TotalTime=2289ms | Max (DL=1830ms, Verify=114ms) 
+Mar 16:49:02 | Valid. Block 24628361 (2289 ms, retries 0) 
+Mar 16:49:03 | Received ForkChoice: 24628361 (0x24830a...b48ac8), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:49:03 | Synced Chain Head to 24628361 (0x24830a...b48ac8) 
+Mar 16:49:12 | Received New Block:  24628362 (0x9e7c51...2c3a29)      | limit    59,941,408 👇 
+Mar 16:49:13 |    Proof 5218087 - Zisk            : ✅ Valid (DL: 720ms | Verify: 13ms) 
+Mar 16:49:14 |    Proof 5218089 - Zisk            : ✅ Valid (DL: 942ms | Verify: 30ms) 
+Mar 16:49:14 |    Proof 5218091 - Pico            : ✅ Valid (DL: 1451ms | Verify: 100ms) 
+Mar 16:49:14 |    Proof 5218097 - Airbender       : ✅ Valid (DL: 1579ms | Verify: 18ms) 
+Mar 16:49:14 |    Proof 5218093 - OpenVM          : ✅ Valid (DL: 1599ms | Verify: 102ms) 
+Mar 16:49:14 | Block #24628362 Timing: TotalTime=2045ms | Max (DL=1599ms, Verify=102ms) 
+Mar 16:49:14 | Valid. Block 24628362 (2046 ms, retries 0) 
+Mar 16:49:15 | Received ForkChoice: 24628362 (0x9e7c51...2c3a29), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:49:15 | Synced Chain Head to 24628362 (0x9e7c51...2c3a29) 
+Mar 16:49:25 | Received New Block:  24628363 (0x3b8299...0847c5)      | limit    59,999,943 👆 
+Mar 16:49:26 |    Proof 5218111 - Zisk            : ✅ Valid (DL: 1025ms | Verify: 31ms) 
+Mar 16:49:26 |    Proof 5218109 - Zisk            : ✅ Valid (DL: 1039ms | Verify: 17ms) 
+Mar 16:49:27 |    Proof 5218118 - Airbender       : ✅ Valid (DL: 1586ms | Verify: 16ms) 
+Mar 16:49:27 |    Proof 5218113 - Pico            : ✅ Valid (DL: 1647ms | Verify: 97ms) 
+Mar 16:49:27 |    Proof 5218114 - OpenVM          : ✅ Valid (DL: 1661ms | Verify: 123ms) 
+Mar 16:49:27 | Block #24628363 Timing: TotalTime=2140ms | Max (DL=1661ms, Verify=123ms) 
+Mar 16:49:27 | Valid. Block 24628363 (2140 ms, retries 0) 
+Mar 16:49:27 | Received ForkChoice: 24628363 (0x3b8299...0847c5), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:49:27 | Synced Chain Head to 24628363 (0x3b8299...0847c5) 
+Mar 16:49:36 | Received New Block:  24628364 (0x269ee4...3c1f54)      | limit    60,000,000 👆 
+Mar 16:49:37 |    Proof 5218130 - Zisk            : ✅ Valid (DL: 628ms | Verify: 11ms) 
+Mar 16:49:37 |    Proof 5218131 - Zisk            : ✅ Valid (DL: 666ms | Verify: 39ms) 
+Mar 16:49:38 |    Proof 5218135 - OpenVM          : ✅ Valid (DL: 836ms | Verify: 128ms) 
+Mar 16:49:38 |    Proof 5218133 - Pico            : ✅ Valid (DL: 1273ms | Verify: 101ms) 
+Mar 16:49:38 |    Proof 5218138 - Airbender       : ✅ Valid (DL: 1447ms | Verify: 15ms) 
+Mar 16:49:38 | Block #24628364 Timing: TotalTime=1776ms | Max (DL=1447ms, Verify=128ms) 
+Mar 16:49:38 | Valid. Block 24628364 (1776 ms, retries 0) 
+Mar 16:49:38 | Received ForkChoice: 24628364 (0x269ee4...3c1f54), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:49:38 | Synced Chain Head to 24628364 (0x269ee4...3c1f54) 
+Mar 16:49:49 | Received New Block:  24628365 (0x3a58b5...bd7e90)      | limit    60,000,000    
+Mar 16:49:50 |    Proof 5218152 - Zisk            : ✅ Valid (DL: 602ms | Verify: 21ms) 
+Mar 16:49:50 |    Proof 5218159 - Airbender       : ✅ Valid (DL: 1308ms | Verify: 17ms) 
+Mar 16:49:50 |    Proof 5218151 - Zisk            : ✅ Valid (DL: 1405ms | Verify: 11ms) 
+Mar 16:49:51 |    Proof 5218156 - OpenVM          : ✅ Valid (DL: 1507ms | Verify: 97ms) 
+Mar 16:49:51 |    Proof 5218155 - Pico            : ✅ Valid (DL: 1625ms | Verify: 106ms) 
+Mar 16:49:51 | Block #24628365 Timing: TotalTime=2102ms | Max (DL=1625ms, Verify=106ms) 
+Mar 16:49:51 | Valid. Block 24628365 (2102 ms, retries 0) 
+Mar 16:49:51 | Received ForkChoice: 24628365 (0x3a58b5...bd7e90), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:49:51 | Synced Chain Head to 24628365 (0x3a58b5...bd7e90) 
+Mar 16:50:00 | Received New Block:  24628366 (0x123726...24147d)      | limit    59,941,408 👇 
+Mar 16:50:01 |    Proof 5218173 - Zisk            : ✅ Valid (DL: 750ms | Verify: 24ms) 
+Mar 16:50:01 |    Proof 5218174 - OpenVM          : ✅ Valid (DL: 791ms | Verify: 105ms) 
+Mar 16:50:01 |    Proof 5218170 - Zisk            : ✅ Valid (DL: 989ms | Verify: 11ms) 
+Mar 16:50:02 |    Proof 5218175 - Pico            : ✅ Valid (DL: 1230ms | Verify: 95ms) 
+Mar 16:50:02 |    Proof 5218179 - Airbender       : ✅ Valid (DL: 1346ms | Verify: 15ms) 
+Mar 16:50:02 | Block #24628366 Timing: TotalTime=1720ms | Max (DL=1346ms, Verify=105ms) 
+Mar 16:50:02 | Valid. Block 24628366 (1720 ms, retries 0) 
+Mar 16:50:02 | Received ForkChoice: 24628366 (0x123726...24147d), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:50:02 | Synced Chain Head to 24628366 (0x123726...24147d) 
+Mar 16:50:13 | Received New Block:  24628367 (0x1d6310...4edee5)      | limit    59,999,943 👆 
+Mar 16:50:13 |    Proof 5218195 - Zisk            : ✅ Valid (DL: 580ms | Verify: 27ms) 
+Mar 16:50:14 |    Proof 5218193 - Zisk            : ✅ Valid (DL: 672ms | Verify: 11ms) 
+Mar 16:50:14 |    Proof 5218202 - Airbender       : ✅ Valid (DL: 1283ms | Verify: 16ms) 
+Mar 16:50:14 |    Proof 5218198 - OpenVM          : ✅ Valid (DL: 1276ms | Verify: 119ms) 
+Mar 16:50:14 |    Proof 5218196 - Pico            : ✅ Valid (DL: 1322ms | Verify: 121ms) 
+Mar 16:50:14 | Block #24628367 Timing: TotalTime=1750ms | Max (DL=1322ms, Verify=121ms) 
+Mar 16:50:14 | Valid. Block 24628367 (1750 ms, retries 0) 
+Mar 16:50:14 | Received ForkChoice: 24628367 (0x1d6310...4edee5), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:50:14 | Synced Chain Head to 24628367 (0x1d6310...4edee5) 
+Mar 16:50:24 | Received New Block:  24628368 (0x42e30e...b17c1a)      | limit    60,000,000 👆 
+Mar 16:50:25 |    Proof 5218212 - Zisk            : ✅ Valid (DL: 471ms | Verify: 22ms) 
+Mar 16:50:25 |    Proof 5218211 - Zisk            : ✅ Valid (DL: 831ms | Verify: 13ms) 
+Mar 16:50:26 |    Proof 5218215 - Pico            : ✅ Valid (DL: 1098ms | Verify: 103ms) 
+Mar 16:50:26 |    Proof 5218221 - Airbender       : ✅ Valid (DL: 1237ms | Verify: 19ms) 
+Mar 16:50:26 |    Proof 5218217 - OpenVM          : ✅ Valid (DL: 1208ms | Verify: 103ms) 
+Mar 16:50:26 | Block #24628368 Timing: TotalTime=1619ms | Max (DL=1237ms, Verify=103ms) 
+Mar 16:50:26 | Valid. Block 24628368 (1621 ms, retries 0) 
+Mar 16:50:26 | Received ForkChoice: 24628368 (0x42e30e...b17c1a), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:50:26 | Synced Chain Head to 24628368 (0x42e30e...b17c1a) 
+Mar 16:50:37 | Received New Block:  24628369 (0x4f5d7d...2c433a)      | limit    60,000,000    
+Mar 16:50:38 |    Proof 5218236 - Zisk            : ✅ Valid (DL: 760ms | Verify: 23ms) 
+Mar 16:50:39 |    Proof 5218234 - Zisk            : ✅ Valid (DL: 934ms | Verify: 8ms) 
+Mar 16:50:39 |    Proof 5218240 - OpenVM          : ✅ Valid (DL: 1114ms | Verify: 99ms) 
+Mar 16:50:39 |    Proof 5218239 - Pico            : ✅ Valid (DL: 1156ms | Verify: 101ms) 
+Mar 16:50:39 |    Proof 5218243 - Airbender       : ✅ Valid (DL: 1538ms | Verify: 16ms) 
+Mar 16:50:39 | Block #24628369 Timing: TotalTime=1896ms | Max (DL=1538ms, Verify=101ms) 
+Mar 16:50:39 | Valid. Block 24628369 (1896 ms, retries 0) 
+Mar 16:50:39 | Received ForkChoice: 24628369 (0x4f5d7d...2c433a), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:50:39 | Synced Chain Head to 24628369 (0x4f5d7d...2c433a) 
+Mar 16:50:48 | Received New Block:  24628370 (0x3ab6bc...8e839d)      | limit    60,000,000    
+Mar 16:50:49 |    Proof 5218255 - Zisk            : ✅ Valid (DL: 672ms | Verify: 14ms) 
+Mar 16:50:49 |    Proof 5218256 - Zisk            : ✅ Valid (DL: 961ms | Verify: 22ms) 
+Mar 16:50:50 |    Proof 5218264 - Airbender       : ✅ Valid (DL: 1392ms | Verify: 20ms) 
+Mar 16:50:50 |    Proof 5218260 - Pico            : ✅ Valid (DL: 1339ms | Verify: 112ms) 
+Mar 16:50:50 |    Proof 5218261 - OpenVM          : ✅ Valid (DL: 1394ms | Verify: 118ms) 
+Mar 16:50:50 | Block #24628370 Timing: TotalTime=1808ms | Max (DL=1394ms, Verify=118ms) 
+Mar 16:50:50 | Valid. Block 24628370 (1808 ms, retries 0) 
+Mar 16:50:50 | Received ForkChoice: 24628370 (0x3ab6bc...8e839d), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:50:50 | Synced Chain Head to 24628370 (0x3ab6bc...8e839d) 
+Mar 16:51:01 | Received New Block:  24628371 (0x0a44f9...0b5cef)      | limit    60,000,000    
+Mar 16:51:02 |    Proof 5218279 - Zisk            : ✅ Valid (DL: 684ms | Verify: 34ms) 
+Mar 16:51:02 |    Proof 5218275 - Zisk            : ✅ Valid (DL: 980ms | Verify: 7ms) 
+Mar 16:51:02 |    Proof 5218281 - Pico            : ✅ Valid (DL: 1182ms | Verify: 99ms) 
+Mar 16:51:02 |    Proof 5218284 - Airbender       : ✅ Valid (DL: 1299ms | Verify: 14ms) 
+Mar 16:51:03 |    Proof 5218278 - OpenVM          : ✅ Valid (DL: 1355ms | Verify: 96ms) 
+Mar 16:51:03 | Block #24628371 Timing: TotalTime=1748ms | Max (DL=1355ms, Verify=99ms) 
+Mar 16:51:03 | Valid. Block 24628371 (1748 ms, retries 0) 
+Mar 16:51:03 | Received ForkChoice: 24628371 (0x0a44f9...0b5cef), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:51:03 | Synced Chain Head to 24628371 (0x0a44f9...0b5cef) 
+Mar 16:51:13 | Received New Block:  24628372 (0xb1cad6...1be9d9)      | limit    59,941,408 👇 
+Mar 16:51:14 |    Proof 5218298 - Zisk            : ✅ Valid (DL: 564ms | Verify: 10ms) 
+Mar 16:51:14 |    Proof 5218300 - Zisk            : ✅ Valid (DL: 740ms | Verify: 21ms) 
+Mar 16:51:14 |    Proof 5218303 - OpenVM          : ✅ Valid (DL: 952ms | Verify: 99ms) 
+Mar 16:51:14 |    Proof 5218306 - Airbender       : ✅ Valid (DL: 1129ms | Verify: 15ms) 
+Mar 16:51:15 |    Proof 5218301 - Pico            : ✅ Valid (DL: 1281ms | Verify: 102ms) 
+Mar 16:51:15 | Block #24628372 Timing: TotalTime=1898ms | Max (DL=1281ms, Verify=102ms) 
+Mar 16:51:15 | Valid. Block 24628372 (1898 ms, retries 0) 
+Mar 16:51:15 | Received ForkChoice: 24628372 (0xb1cad6...1be9d9), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:51:15 | Synced Chain Head to 24628372 (0xb1cad6...1be9d9) 
+Mar 16:51:25 | ***** JSON RPC report *****
+-----------------------------------------------------------------------------------------------------------------------------------------------
+method                                  | successes |   avg (ms) |   max (ms) |    errors |   avg (ms) |   max (ms) | avg size B | total (kB) |
+-----------------------------------------------------------------------------------------------------------------------------------------------
+engine_exchangeCapabilities             |         1 |      1.094 |      1.094 |         0 |      0.000 |      0.000 |        520 |       0.51 | 
+engine_forkchoiceUpdatedV3              |        26 |      2.402 |     20.081 |         0 |      0.000 |      0.000 |        197 |       5.00 | 
+engine_getBlobsV2                       |        16 |      0.059 |      0.074 |         0 |      0.000 |      0.000 |         38 |       0.59 | 
+engine_getClientVersionV1               |         1 |      1.785 |      1.785 |         0 |      0.000 |      0.000 |        117 |       0.11 | 
+engine_newPayloadV4                     |        25 |   1898.189 |   2375.723 |         0 |      0.000 |      0.000 |        162 |       3.96 | 
+eth_syncing                             |        25 |      0.076 |      0.848 |         0 |      0.000 |      0.000 |         39 |       0.95 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                   |        94 |    505.563 |   2375.723 |         0 |      0.000 |      0.000 |        121 |      11.13 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 
+Mar 16:51:25 | Received New Block:  24628373 (0x454b15...82cc2f)      | limit    59,999,943 👆 
+Mar 16:51:26 |    Proof 5218316 - Zisk            : ✅ Valid (DL: 783ms | Verify: 22ms) 
+Mar 16:51:26 |    Proof 5218315 - Zisk            : ✅ Valid (DL: 803ms | Verify: 11ms) 
+Mar 16:51:26 |    Proof 5218322 - OpenVM          : ✅ Valid (DL: 1028ms | Verify: 105ms) 
+Mar 16:51:26 |    Proof 5218319 - Pico            : ✅ Valid (DL: 1205ms | Verify: 93ms) 
+Mar 16:51:27 |    Proof 5218326 - Airbender       : ✅ Valid (DL: 1465ms | Verify: 14ms) 
+Mar 16:51:27 | Block #24628373 Timing: TotalTime=1826ms | Max (DL=1465ms, Verify=105ms) 
+Mar 16:51:27 | Valid. Block 24628373 (1827 ms, retries 0) 
+Mar 16:51:27 | Received ForkChoice: 24628373 (0x454b15...82cc2f), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:51:27 | Synced Chain Head to 24628373 (0x454b15...82cc2f) 
+Mar 16:51:36 | Received New Block:  24628374 (0xe2e71d...befbfd)      | limit    60,000,000 👆 
+Mar 16:51:37 |    Proof 5218337 - Zisk            : ✅ Valid (DL: 630ms | Verify: 25ms) 
+Mar 16:51:37 |    Proof 5218335 - Zisk            : ✅ Valid (DL: 736ms | Verify: 6ms) 
+Mar 16:51:38 |    Proof 5218340 - OpenVM          : ✅ Valid (DL: 917ms | Verify: 137ms) 
+Mar 16:51:38 |    Proof 5218346 - Airbender       : ✅ Valid (DL: 1274ms | Verify: 59ms) 
+Mar 16:51:38 |    Proof 5218339 - Pico            : ✅ Valid (DL: 1265ms | Verify: 166ms) 
+Mar 16:51:38 | Block #24628374 Timing: TotalTime=1776ms | Max (DL=1274ms, Verify=166ms) 
+Mar 16:51:38 | Valid. Block 24628374 (1776 ms, retries 0) 
+Mar 16:51:38 | Received ForkChoice: 24628374 (0xe2e71d...befbfd), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:51:38 | Synced Chain Head to 24628374 (0xe2e71d...befbfd) 
+Mar 16:51:48 | Received New Block:  24628375 (0x847c1f...700646)      | limit    60,000,000    
+Mar 16:51:50 |    Proof 5218359 - Zisk            : ✅ Valid (DL: 685ms | Verify: 8ms) 
+Mar 16:51:50 |    Proof 5218361 - Zisk            : ✅ Valid (DL: 947ms | Verify: 21ms) 
+Mar 16:51:50 |    Proof 5218365 - OpenVM          : ✅ Valid (DL: 1267ms | Verify: 105ms) 
+Mar 16:51:50 |    Proof 5218368 - Airbender       : ✅ Valid (DL: 1353ms | Verify: 20ms) 
+Mar 16:51:50 |    Proof 5218364 - Pico            : ✅ Valid (DL: 1451ms | Verify: 113ms) 
+Mar 16:51:50 | Block #24628375 Timing: TotalTime=2097ms | Max (DL=1451ms, Verify=113ms) 
+Mar 16:51:50 | Valid. Block 24628375 (2097 ms, retries 0) 
+Mar 16:51:51 | Received ForkChoice: 24628375 (0x847c1f...700646), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:51:51 | Synced Chain Head to 24628375 (0x847c1f...700646) 
+Mar 16:52:01 | Received New Block:  24628376 (0xa3ce80...67b90c)      | limit    60,000,000    
+Mar 16:52:01 |    Proof 5218392 - ziren           : ⚠️  Skipped (No verifier for cluster 84a01f4b-8078-44cf-b463-90ddcd124960) 
+Mar 16:52:02 |    Proof 5218386 - sp1-turbo       : ⚠️  Skipped (No verifier for cluster 2e198954-0a2c-453a-af6b-53afa4e055cd) 
+Mar 16:52:02 |    Proof 5218389 - OpenVM          : ✅ Valid (DL: 764ms | Verify: 98ms) 
+Mar 16:52:02 |    Proof 5218384 - Pico            : ✅ Valid (DL: 1109ms | Verify: 96ms) 
+Mar 16:52:02 |    Proof 5218419 - openvm          : ⚠️  Skipped (No verifier for cluster cb35c722-4456-4f98-8efb-7e773c67ead8) 
+Mar 16:52:02 |    Proof 5218399 - Airbender       : ✅ Valid (DL: 1233ms | Verify: 15ms) 
+Mar 16:52:04 |    Proof 5218396 - Airbender       : ✅ Valid (DL: 960ms | Verify: 13ms) 
+Mar 16:52:07 |    Proof 5218381 - Zisk            : ✅ Valid (DL: 5550ms | Verify: 22ms) 
+Mar 16:52:08 |    Proof 5218379 - Zisk            : ✅ Valid (DL: 703ms | Verify: 8ms) 
+Mar 16:52:08 |    Proof 5218378 - Zisk            : ✅ Valid (DL: 6705ms | Verify: 8ms) 
+Mar 16:52:08 |    Proof 5218507 - OpenVM          : ⛔ Error (DL: 698ms | Verify: 95ms) 
+Mar 16:52:09 |    Proof 5218402 - sp1-hypercube   : ⚠️  Skipped (No verifier for cluster 62a74df2-59e5-4501-8aca-75843fcde234) 
+Mar 16:52:09 |    Proof 5218385 - Sp1Hypercube    : ⛔ Error (DL: 854ms | Verify: 3ms) 
+Mar 16:52:10 |    Proof 5218388 - sp1-turbo       : ⚠️  Skipped (No verifier for cluster 312aeedf-3214-4f84-90b3-46e217d2d4e4) 
+Mar 16:52:10 | Block #24628376 Timing: TotalTime=9400ms | Max (DL=6705ms, Verify=98ms) 
+Mar 16:52:10 | Valid. Block 24628376 (9400 ms, retries 0) 
+Mar 16:52:10 | Received New Block:  24628376 (0xa3ce80...67b90c)      | limit    60,000,000    
+Mar 16:52:10 | Valid. Block 24628376 already validated. 
+Mar 16:52:12 | Received ForkChoice: 24628376 (0xa3ce80...67b90c), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:52:12 | Synced Chain Head to 24628376 (0xa3ce80...67b90c) 
+Mar 16:52:12 | Received New Block:  24628377 (0xaf0ab1...ade269)      | limit    59,941,408 👇 
+Mar 16:52:13 |    Proof 5218416 - Zisk            : ✅ Valid (DL: 729ms | Verify: 26ms) 
+Mar 16:52:14 |    Proof 5218417 - Zisk            : ✅ Valid (DL: 966ms | Verify: 47ms) 
+Mar 16:52:14 |    Proof 5218425 - Airbender       : ✅ Valid (DL: 1333ms | Verify: 29ms) 
+Mar 16:52:14 |    Proof 5218422 - OpenVM          : ✅ Valid (DL: 1519ms | Verify: 118ms) 
+Mar 16:52:15 |    Proof 5218420 - Pico            : ✅ Valid (DL: 1753ms | Verify: 103ms) 
+Mar 16:52:15 | Block #24628377 Timing: TotalTime=2149ms | Max (DL=1753ms, Verify=118ms) 
+Mar 16:52:15 | Valid. Block 24628377 (2149 ms, retries 0) 
+Mar 16:52:15 | Received ForkChoice: 24628377 (0xaf0ab1...ade269), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:52:15 | Synced Chain Head to 24628377 (0xaf0ab1...ade269) 
+Mar 16:52:25 | Received New Block:  24628378 (0x82b4ff...5debe1)      | limit    59,999,943 👆 
+Mar 16:52:26 |    Proof 5218441 - Zisk            : ✅ Valid (DL: 1012ms | Verify: 23ms) 
+Mar 16:52:26 |    Proof 5218444 - OpenVM          : ✅ Valid (DL: 965ms | Verify: 130ms) 
+Mar 16:52:26 |    Proof 5218448 - Airbender       : ✅ Valid (DL: 1266ms | Verify: 18ms) 
+Mar 16:52:27 |    Proof 5218443 - Pico            : ✅ Valid (DL: 1751ms | Verify: 104ms) 
+Mar 16:52:27 |    Proof 5218437 - Zisk            : ✅ Valid (DL: 2137ms | Verify: 13ms) 
+Mar 16:52:27 | Block #24628378 Timing: TotalTime=2442ms | Max (DL=2137ms, Verify=130ms) 
+Mar 16:52:27 | Valid. Block 24628378 (2442 ms, retries 0) 
+Mar 16:52:27 | Received ForkChoice: 24628378 (0x82b4ff...5debe1), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:52:27 | Synced Chain Head to 24628378 (0x82b4ff...5debe1) 
+Mar 16:52:37 | Received New Block:  24628379 (0xd25377...23efd4)      | limit    60,000,000 👆 
+Mar 16:52:39 |    Proof 5218460 - Zisk            : ✅ Valid (DL: 1132ms | Verify: 30ms) 
+Mar 16:52:39 |    Proof 5218461 - Zisk            : ✅ Valid (DL: 1227ms | Verify: 31ms) 
+Mar 16:52:39 |    Proof 5218467 - Airbender       : ✅ Valid (DL: 1346ms | Verify: 43ms) 
+Mar 16:52:39 |    Proof 5218465 - OpenVM          : ✅ Valid (DL: 1279ms | Verify: 173ms) 
+Mar 16:52:41 |    Proof 5218464 - Pico            : ✅ Valid (DL: 3046ms | Verify: 118ms) 
+Mar 16:52:41 | Block #24628379 Timing: TotalTime=3474ms | Max (DL=3046ms, Verify=173ms) 
+Mar 16:52:41 | Valid. Block 24628379 (3474 ms, retries 0) 
+Mar 16:52:41 | Received ForkChoice: 24628379 (0xd25377...23efd4), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:52:41 | Synced Chain Head to 24628379 (0xd25377...23efd4) 
+Mar 16:52:49 | Received New Block:  24628380 (0x45c943...0cb79d)      | limit    60,000,000    
+Mar 16:52:51 |    Proof 5218481 - Zisk            : ✅ Valid (DL: 955ms | Verify: 14ms) 
+Mar 16:52:51 |    Proof 5218483 - Zisk            : ✅ Valid (DL: 1328ms | Verify: 21ms) 
+Mar 16:52:51 |    Proof 5218489 - Airbender       : ✅ Valid (DL: 1739ms | Verify: 30ms) 
+Mar 16:52:52 |    Proof 5218486 - OpenVM          : ✅ Valid (DL: 2136ms | Verify: 301ms) 
+Mar 16:52:52 |    Proof 5218485 - Pico            : ✅ Valid (DL: 2445ms | Verify: 223ms) 
+Mar 16:52:52 | Block #24628380 Timing: TotalTime=3016ms | Max (DL=2445ms, Verify=301ms) 
+Mar 16:52:52 | Valid. Block 24628380 (3022 ms, retries 0) 
+Mar 16:52:52 | Received ForkChoice: 24628380 (0x45c943...0cb79d), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:52:52 | Synced Chain Head to 24628380 (0x45c943...0cb79d) 
+Mar 16:53:01 | Received New Block:  24628381 (0xebade0...3bbed7)      | limit    60,000,000    
+Mar 16:53:03 |    Proof 5218516 - Zisk            : ✅ Valid (DL: 1489ms | Verify: 24ms) 
+Mar 16:53:03 |    Proof 5218505 - OpenVM          : ✅ Valid (DL: 1705ms | Verify: 125ms) 
+Mar 16:53:03 |    Proof 5218504 - Pico            : ✅ Valid (DL: 1768ms | Verify: 130ms) 
+Mar 16:53:03 |    Proof 5218500 - Zisk            : ✅ Valid (DL: 1894ms | Verify: 35ms) 
+Mar 16:53:04 |    Proof 5218510 - Airbender       : ✅ Valid (DL: 2934ms | Verify: 16ms) 
+Mar 16:53:04 | Block #24628381 Timing: TotalTime=3220ms | Max (DL=2934ms, Verify=130ms) 
+Mar 16:53:04 | Valid. Block 24628381 (3220 ms, retries 0) 
+Mar 16:53:05 | Received ForkChoice: 24628381 (0xebade0...3bbed7), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:53:05 | Synced Chain Head to 24628381 (0xebade0...3bbed7) 
+Mar 16:53:13 | Received New Block:  24628382 (0x651bb3...45e09f)      | limit    59,941,408 👇 
+Mar 16:53:14 |    Proof 5218537 - Zisk            : ✅ Valid (DL: 997ms | Verify: 21ms) 
+Mar 16:53:15 |    Proof 5218532 - Airbender       : ✅ Valid (DL: 1561ms | Verify: 14ms) 
+Mar 16:53:16 |    Proof 5218526 - Pico            : ✅ Valid (DL: 3173ms | Verify: 109ms) 
+Mar 16:53:17 |    Proof 5218527 - OpenVM          : ✅ Valid (DL: 3392ms | Verify: 110ms) 
+Mar 16:53:18 |    Proof 5218523 - Zisk            : ✅ Valid (DL: 4491ms | Verify: 10ms) 
+Mar 16:53:18 | Block #24628382 Timing: TotalTime=4972ms | Max (DL=4491ms, Verify=110ms) 
+Mar 16:53:18 | Valid. Block 24628382 (4972 ms, retries 0) 
+Mar 16:53:18 | Received ForkChoice: 24628382 (0x651bb3...45e09f), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:53:18 | Synced Chain Head to 24628382 (0x651bb3...45e09f) 
+Mar 16:53:24 | Received New Block:  24628383 (0x24f462...4f42f8)      | limit    59,999,943 👆 
+Mar 16:53:26 |    Proof 5218543 - Zisk            : ✅ Valid (DL: 1294ms | Verify: 11ms) 
+Mar 16:53:26 |    Proof 5218547 - OpenVM          : ✅ Valid (DL: 1358ms | Verify: 95ms) 
+Mar 16:53:26 |    Proof 5218550 - Zisk            : ✅ Valid (DL: 1762ms | Verify: 24ms) 
+Mar 16:53:26 |    Proof 5218552 - Airbender       : ✅ Valid (DL: 1934ms | Verify: 18ms) 
+Mar 16:53:27 |    Proof 5218546 - Pico            : ✅ Valid (DL: 1908ms | Verify: 106ms) 
+Mar 16:53:27 | Block #24628383 Timing: TotalTime=2291ms | Max (DL=1934ms, Verify=106ms) 
+Mar 16:53:27 | Valid. Block 24628383 (2291 ms, retries 0) 
+Mar 16:53:27 | Received ForkChoice: 24628383 (0x24f462...4f42f8), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:53:27 | Synced Chain Head to 24628383 (0x24f462...4f42f8) 
+Mar 16:53:36 | Received New Block:  24628384 (0x2bd5b9...a666c4)      | limit    59,941,351 👇 
+Mar 16:53:37 |    Proof 5218567 - Zisk            : ✅ Valid (DL: 900ms | Verify: 21ms) 
+Mar 16:53:38 |    Proof 5218571 - OpenVM          : ✅ Valid (DL: 1294ms | Verify: 94ms) 
+Mar 16:53:38 |    Proof 5218574 - Airbender       : ✅ Valid (DL: 1791ms | Verify: 18ms) 
+Mar 16:53:38 |    Proof 5218565 - Zisk            : ✅ Valid (DL: 1974ms | Verify: 11ms) 
+Mar 16:53:38 |    Proof 5218569 - Pico            : ✅ Valid (DL: 1924ms | Verify: 113ms) 
+Mar 16:53:38 | Block #24628384 Timing: TotalTime=2311ms | Max (DL=1974ms, Verify=113ms) 
+Mar 16:53:38 | Valid. Block 24628384 (2311 ms, retries 0) 
+Mar 16:53:39 | Received ForkChoice: 24628384 (0x2bd5b9...a666c4), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:53:39 | Synced Chain Head to 24628384 (0x2bd5b9...a666c4) 
+Mar 16:53:50 | Received New Block:  24628385 (0x4f0f04...55e3ed)      | limit    59,999,886 👆 
+Mar 16:53:51 |    Proof 5218587 - Zisk            : ✅ Valid (DL: 899ms | Verify: 31ms) 
+Mar 16:53:51 |    Proof 5218585 - Zisk            : ✅ Valid (DL: 998ms | Verify: 12ms) 
+Mar 16:53:52 |    Proof 5218590 - OpenVM          : ✅ Valid (DL: 1127ms | Verify: 102ms) 
+Mar 16:53:54 |    Proof 5218592 - Pico            : ✅ Valid (DL: 3157ms | Verify: 116ms) 
+Mar 16:53:56 |    Proof 5218594 - Airbender       : ✅ Valid (DL: 5860ms | Verify: 27ms) 
+Mar 16:53:56 | Block #24628385 Timing: TotalTime=6184ms | Max (DL=5860ms, Verify=116ms) 
+Mar 16:53:56 | Valid. Block 24628385 (6184 ms, retries 0) 
+Mar 16:53:57 | Received ForkChoice: 24628385 (0x4f0f04...55e3ed), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:53:57 | Synced Chain Head to 24628385 (0x4f0f04...55e3ed) 
+Mar 16:54:01 | Received New Block:  24628386 (0x843279...470139)      | limit    59,941,294 👇 
+Mar 16:54:03 |    Proof 5218608 - Zisk            : ✅ Valid (DL: 1156ms | Verify: 82ms) 
+Mar 16:54:03 |    Proof 5218616 - Airbender       : ✅ Valid (DL: 1726ms | Verify: 44ms) 
+Mar 16:54:03 |    Proof 5218607 - Zisk            : ✅ Valid (DL: 1801ms | Verify: 25ms) 
+Mar 16:54:03 |    Proof 5218612 - OpenVM          : ✅ Valid (DL: 2005ms | Verify: 127ms) 
+Mar 16:54:04 |    Proof 5218611 - Pico            : ✅ Valid (DL: 2054ms | Verify: 109ms) 
+Mar 16:54:04 | Block #24628386 Timing: TotalTime=2513ms | Max (DL=2054ms, Verify=127ms) 
+Mar 16:54:04 | Valid. Block 24628386 (2513 ms, retries 0) 
+Mar 16:54:04 | Received ForkChoice: 24628386 (0x843279...470139), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:54:04 | Synced Chain Head to 24628386 (0x843279...470139) 
+Mar 16:54:13 | Received New Block:  24628387 (0x51ac86...23b187)      | limit    59,999,829 👆 
+Mar 16:54:14 |    Proof 5218630 - Zisk            : ✅ Valid (DL: 883ms | Verify: 11ms) 
+Mar 16:54:14 |    Proof 5218632 - Zisk            : ✅ Valid (DL: 1317ms | Verify: 22ms) 
+Mar 16:54:15 |    Proof 5218638 - Airbender       : ✅ Valid (DL: 1614ms | Verify: 15ms) 
+Mar 16:54:15 |    Proof 5218634 - Pico            : ✅ Valid (DL: 1744ms | Verify: 117ms) 
+Mar 16:54:16 |    Proof 5218635 - OpenVM          : ✅ Valid (DL: 2552ms | Verify: 108ms) 
+Mar 16:54:16 | Block #24628387 Timing: TotalTime=2927ms | Max (DL=2552ms, Verify=117ms) 
+Mar 16:54:16 | Valid. Block 24628387 (2927 ms, retries 0) 
+Mar 16:54:16 | Received ForkChoice: 24628387 (0x51ac86...23b187), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:54:16 | Synced Chain Head to 24628387 (0x51ac86...23b187) 
+Mar 16:54:25 | Received New Block:  24628388 (0x5316ab...4505e1)      | limit    60,000,000 👆 
+Mar 16:54:27 |    Proof 5218652 - Zisk            : ✅ Valid (DL: 822ms | Verify: 10ms) 
+Mar 16:54:27 |    Proof 5218653 - Zisk            : ✅ Valid (DL: 1251ms | Verify: 24ms) 
+Mar 16:54:27 |    Proof 5218655 - Pico            : ✅ Valid (DL: 1308ms | Verify: 106ms) 
+Mar 16:54:27 |    Proof 5218660 - Airbender       : ✅ Valid (DL: 1540ms | Verify: 15ms) 
+Mar 16:54:27 |    Proof 5218657 - OpenVM          : ✅ Valid (DL: 1589ms | Verify: 103ms) 
+Mar 16:54:27 | Block #24628388 Timing: TotalTime=1956ms | Max (DL=1589ms, Verify=106ms) 
+Mar 16:54:27 | Valid. Block 24628388 (1956 ms, retries 0) 
+Mar 16:54:28 | Received ForkChoice: 24628388 (0x5316ab...4505e1), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:54:28 | Synced Chain Head to 24628388 (0x5316ab...4505e1) 
+Mar 16:54:37 | Received New Block:  24628389 (0x0c51a2...955a68)      | limit    60,000,000    
+Mar 16:54:38 |    Proof 5218684 - Airbender       : ✅ Valid (DL: 1256ms | Verify: 14ms) 
+Mar 16:54:38 |    Proof 5218679 - Pico            : ✅ Valid (DL: 1353ms | Verify: 100ms) 
+Mar 16:54:39 |    Proof 5218674 - Zisk            : ✅ Valid (DL: 1650ms | Verify: 11ms) 
+Mar 16:54:39 |    Proof 5218675 - Zisk            : ✅ Valid (DL: 1986ms | Verify: 28ms) 
+Mar 16:54:39 |    Proof 5218680 - OpenVM          : ✅ Valid (DL: 2119ms | Verify: 112ms) 
+Mar 16:54:39 | Block #24628389 Timing: TotalTime=2505ms | Max (DL=2119ms, Verify=112ms) 
+Mar 16:54:39 | Valid. Block 24628389 (2505 ms, retries 0) 
+Mar 16:54:39 | Received ForkChoice: 24628389 (0x0c51a2...955a68), Safe: 24628326 (0xb7227a...32b8f0), Finalized: 24628295 (0xaf854a...9055a3) 
+Mar 16:54:39 | Synced Chain Head to 24628389 (0x0c51a2...955a68) 
+Mar 16:54:46 | Received ForkChoice: 24628389 (0x0c51a2...955a68), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:54:50 | Received New Block:  24628390 (0x241942...cf0363)      | limit    60,000,000    
+Mar 16:54:51 |    Proof 5218693 - Zisk            : ✅ Valid (DL: 840ms | Verify: 15ms) 
+Mar 16:54:51 |    Proof 5218696 - Zisk            : ✅ Valid (DL: 901ms | Verify: 49ms) 
+Mar 16:54:52 |    Proof 5218697 - Pico            : ✅ Valid (DL: 1143ms | Verify: 128ms) 
+Mar 16:54:52 |    Proof 5218703 - Airbender       : ✅ Valid (DL: 1583ms | Verify: 15ms) 
+Mar 16:54:52 |    Proof 5218699 - OpenVM          : ✅ Valid (DL: 1488ms | Verify: 126ms) 
+Mar 16:54:52 | Block #24628390 Timing: TotalTime=1920ms | Max (DL=1583ms, Verify=128ms) 
+Mar 16:54:52 | Valid. Block 24628390 (1920 ms, retries 0) 
+Mar 16:54:55 | Received ForkChoice: 24628390 (0x241942...cf0363), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:54:55 | Synced Chain Head to 24628390 (0x241942...cf0363) 
+Mar 16:54:59 | Received New Block:  24628391 (0x4db28b...440e73)      | limit    60,000,000    
+Mar 16:55:01 |    Proof 5218712 - Zisk            : ✅ Valid (DL: 897ms | Verify: 11ms) 
+Mar 16:55:01 |    Proof 5218723 - Airbender       : ✅ Valid (DL: 1283ms | Verify: 33ms) 
+Mar 16:55:01 |    Proof 5218718 - OpenVM          : ✅ Valid (DL: 1340ms | Verify: 94ms) 
+Mar 16:55:02 |    Proof 5218713 - Zisk            : ✅ Valid (DL: 1766ms | Verify: 39ms) 
+Mar 16:55:02 |    Proof 5218717 - Pico            : ✅ Valid (DL: 2285ms | Verify: 97ms) 
+Mar 16:55:02 | Block #24628391 Timing: TotalTime=2813ms | Max (DL=2285ms, Verify=97ms) 
+Mar 16:55:02 | Valid. Block 24628391 (2813 ms, retries 0) 
+Mar 16:55:02 | Received ForkChoice: 24628391 (0x4db28b...440e73), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:55:02 | Synced Chain Head to 24628391 (0x4db28b...440e73) 
+Mar 16:55:12 | Received New Block:  24628392 (0x682b29...c84156)      | limit    60,000,000    
+Mar 16:55:14 |    Proof 5218738 - Zisk            : ✅ Valid (DL: 856ms | Verify: 21ms) 
+Mar 16:55:14 |    Proof 5218740 - OpenVM          : ✅ Valid (DL: 1219ms | Verify: 95ms) 
+Mar 16:55:14 |    Proof 5218743 - Airbender       : ✅ Valid (DL: 1331ms | Verify: 15ms) 
+Mar 16:55:15 |    Proof 5218735 - Zisk            : ✅ Valid (DL: 2701ms | Verify: 24ms) 
+Mar 16:55:16 |    Proof 5218739 - Pico            : ✅ Valid (DL: 2726ms | Verify: 120ms) 
+Mar 16:55:16 | Block #24628392 Timing: TotalTime=3124ms | Max (DL=2726ms, Verify=120ms) 
+Mar 16:55:16 | Valid. Block 24628392 (3124 ms, retries 0) 
+Mar 16:55:16 | Received ForkChoice: 24628392 (0x682b29...c84156), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:55:16 | Synced Chain Head to 24628392 (0x682b29...c84156) 
+Mar 16:55:24 | Received New Block:  24628393 (0xb50c45...3780ae)      | limit    60,000,000    
+Mar 16:55:26 |    Proof 5218763 - Airbender       : ✅ Valid (DL: 1582ms | Verify: 20ms) 
+Mar 16:55:26 |    Proof 5218758 - OpenVM          : ✅ Valid (DL: 1621ms | Verify: 105ms) 
+Mar 16:55:27 |    Proof 5218761 - Zisk            : ✅ Valid (DL: 1850ms | Verify: 21ms) 
+Mar 16:55:27 |    Proof 5218757 - Pico            : ✅ Valid (DL: 1856ms | Verify: 116ms) 
+Mar 16:55:27 |    Proof 5218754 - Zisk            : ✅ Valid (DL: 2460ms | Verify: 11ms) 
+Mar 16:55:27 | Block #24628393 Timing: TotalTime=2907ms | Max (DL=2460ms, Verify=116ms) 
+Mar 16:55:27 | Valid. Block 24628393 (2907 ms, retries 0) 
+Mar 16:55:27 | Received ForkChoice: 24628393 (0xb50c45...3780ae), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:55:27 | Synced Chain Head to 24628393 (0xb50c45...3780ae) 
+Mar 16:55:38 | Received New Block:  24628394 (0xede8d9...f09a08)      | limit    60,000,000    
+Mar 16:55:39 |    Proof 5218777 - Zisk            : ✅ Valid (DL: 946ms | Verify: 14ms) 
+Mar 16:55:40 |    Proof 5218786 - Airbender       : ✅ Valid (DL: 1664ms | Verify: 16ms) 
+Mar 16:55:40 |    Proof 5218778 - Zisk            : ✅ Valid (DL: 1681ms | Verify: 26ms) 
+Mar 16:55:40 |    Proof 5218782 - OpenVM          : ✅ Valid (DL: 1747ms | Verify: 109ms) 
+Mar 16:55:40 |    Proof 5218781 - Pico            : ✅ Valid (DL: 2056ms | Verify: 103ms) 
+Mar 16:55:40 | Block #24628394 Timing: TotalTime=2440ms | Max (DL=2056ms, Verify=109ms) 
+Mar 16:55:40 | Valid. Block 24628394 (2440 ms, retries 0) 
+Mar 16:55:40 | Received ForkChoice: 24628394 (0xede8d9...f09a08), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:55:40 | Synced Chain Head to 24628394 (0xede8d9...f09a08) 
+Mar 16:55:50 | Received New Block:  24628395 (0x11c0c6...1be308)      | limit    60,000,000    
+Mar 16:55:51 |    Proof 5218797 - Zisk            : ✅ Valid (DL: 713ms | Verify: 7ms) 
+Mar 16:55:52 |    Proof 5218800 - Zisk            : ✅ Valid (DL: 1452ms | Verify: 23ms) 
+Mar 16:55:52 |    Proof 5218803 - OpenVM          : ✅ Valid (DL: 1425ms | Verify: 102ms) 
+Mar 16:55:52 |    Proof 5218807 - Airbender       : ✅ Valid (DL: 1578ms | Verify: 14ms) 
+Mar 16:55:52 |    Proof 5218801 - Pico            : ✅ Valid (DL: 1722ms | Verify: 99ms) 
+Mar 16:55:52 | Block #24628395 Timing: TotalTime=2217ms | Max (DL=1722ms, Verify=102ms) 
+Mar 16:55:52 | Valid. Block 24628395 (2217 ms, retries 0) 
+Mar 16:55:53 | Received ForkChoice: 24628395 (0x11c0c6...1be308), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:55:53 | Synced Chain Head to 24628395 (0x11c0c6...1be308) 
+Mar 16:56:00 | Received New Block:  24628396 (0x7d32fa...cf3b1c)      | limit    59,941,408 👇 
+Mar 16:56:02 |    Proof 5218819 - Zisk            : ✅ Valid (DL: 1076ms | Verify: 13ms) 
+Mar 16:56:02 |    Proof 5218824 - OpenVM          : ✅ Valid (DL: 1313ms | Verify: 97ms) 
+Mar 16:56:02 |    Proof 5218823 - Pico            : ✅ Valid (DL: 1348ms | Verify: 101ms) 
+Mar 16:56:02 |    Proof 5218822 - Zisk            : ✅ Valid (DL: 1857ms | Verify: 21ms) 
+Mar 16:56:09 |    Proof 5218828 - Airbender       : ✅ Valid (DL: 8755ms | Verify: 33ms) 
+Mar 16:56:09 | Block #24628396 Timing: TotalTime=9051ms | Max (DL=8755ms, Verify=101ms) 
+Mar 16:56:09 | Valid. Block 24628396 (9051 ms, retries 0) 
+Mar 16:56:09 | Received New Block:  24628396 (0x7d32fa...cf3b1c)      | limit    59,941,408    
+Mar 16:56:09 | Valid. Block 24628396 already validated. 
+Mar 16:56:10 | Received ForkChoice: 24628396 (0x7d32fa...cf3b1c), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:56:10 | Synced Chain Head to 24628396 (0x7d32fa...cf3b1c) 
+Mar 16:56:14 | Received New Block:  24628397 (0xb3842d...21cd5b)      | limit    59,999,943 👆 
+Mar 16:56:16 |    Proof 5218845 - OpenVM          : ✅ Valid (DL: 1402ms | Verify: 97ms) 
+Mar 16:56:16 |    Proof 5218848 - Airbender       : ✅ Valid (DL: 1719ms | Verify: 18ms) 
+Mar 16:56:16 |    Proof 5218841 - Zisk            : ✅ Valid (DL: 1850ms | Verify: 11ms) 
+Mar 16:56:16 |    Proof 5218843 - Pico            : ✅ Valid (DL: 1877ms | Verify: 114ms) 
+Mar 16:56:16 |    Proof 5218842 - Zisk            : ✅ Valid (DL: 2027ms | Verify: 25ms) 
+Mar 16:56:16 | Block #24628397 Timing: TotalTime=2681ms | Max (DL=2027ms, Verify=114ms) 
+Mar 16:56:16 | Valid. Block 24628397 (2681 ms, retries 0) 
+Mar 16:56:17 | Received ForkChoice: 24628397 (0xb3842d...21cd5b), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:56:17 | Synced Chain Head to 24628397 (0xb3842d...21cd5b) 
+Mar 16:56:25 | ***** JSON RPC report *****
+-----------------------------------------------------------------------------------------------------------------------------------------------
+method                                  | successes |   avg (ms) |   max (ms) |    errors |   avg (ms) |   max (ms) | avg size B | total (kB) |
+-----------------------------------------------------------------------------------------------------------------------------------------------
+engine_forkchoiceUpdatedV3              |        26 |      2.373 |      8.730 |         0 |      0.000 |      0.000 |        197 |       5.00 | 
+engine_getBlobsV2                       |        17 |      0.209 |      1.354 |         0 |      0.000 |      0.000 |         38 |       0.63 | 
+engine_newPayloadV4                     |        27 |   3074.059 |   9402.306 |         0 |      0.000 |      0.000 |        162 |       4.27 | 
+eth_syncing                             |        27 |      0.051 |      0.078 |         0 |      0.000 |      0.000 |         39 |       1.03 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                   |        97 |    856.353 |   9402.306 |         0 |      0.000 |      0.000 |        115 |      10.93 | 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 
+Mar 16:56:25 | Received New Block:  24628398 (0x8707ae...730f01)      | limit    60,000,000 👆 
+Mar 16:56:27 |    Proof 5218861 - Zisk            : ✅ Valid (DL: 941ms | Verify: 11ms) 
+Mar 16:56:27 |    Proof 5218864 - Pico            : ✅ Valid (DL: 1206ms | Verify: 110ms) 
+Mar 16:56:27 |    Proof 5218866 - OpenVM          : ✅ Valid (DL: 1437ms | Verify: 100ms) 
+Mar 16:56:27 |    Proof 5218870 - Airbender       : ✅ Valid (DL: 1610ms | Verify: 15ms) 
+Mar 16:56:29 |    Proof 5218863 - Zisk            : ✅ Valid (DL: 3673ms | Verify: 22ms) 
+Mar 16:56:29 | Block #24628398 Timing: TotalTime=3970ms | Max (DL=3673ms, Verify=110ms) 
+Mar 16:56:29 | Valid. Block 24628398 (3970 ms, retries 0) 
+Mar 16:56:30 | Received ForkChoice: 24628398 (0x8707ae...730f01), Safe: 24628358 (0x787ca7...f2bac4), Finalized: 24628326 (0xb7227a...32b8f0) 
+Mar 16:56:30 | Synced Chain Head to 24628398 (0x8707ae...730f01) 

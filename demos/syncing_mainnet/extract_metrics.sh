@@ -2,8 +2,8 @@
 
 # 1. Inserisci qui l'orario di inizio e fine del tuo test in formato UTC
 # Puoi ricavare questi orari dai log del terminale di quando hai lanciato la demo
-START_TIME="2026-03-10T15:40:00.000Z"
-END_TIME="2026-03-10T15:41:00.000Z"
+START_TIME="2026-03-10T16:35:00.000Z"
+END_TIME="2026-03-10T16:52:00.000Z"
 
 # 2. Frequenza di campionamento (1 punto dati ogni 15 secondi)
 STEP="15s"
@@ -30,5 +30,3 @@ for KEY in "${!QUERIES[@]}"; do
     jq -r '.data.result[0].values[]? | @csv' > "test-1/${KEY}.csv"
     
 done
-
-echo "Tutti i file CSV sono stati generati con successo!"
