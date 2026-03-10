@@ -1,0 +1,56 @@
+services:
+  zeronethermind:
+    image: zeronethermind-demo-1:latest
+    container_name: zeronethermind_node
+    ports:
+      - "8545:8545"
+      - "8551:8551"
+      - "30303:30303"
+    volumes:
+      - /home/manuel/Work/Nethermind/Projects/Thesis/ZeroNethermind/nethermind/src/Nethermind/Nethermind.Runner/keystore:/nethermind/keystore
+    command: [
+      "--config", "zk-mainnet.json",
+      "--JsonRpc.EngineHost=0.0.0.0",
+      "--JsonRpc.Host=0.0.0.0",
+    ]
+
+  lighthouse:
+    image: sigp/lighthouse:latest
+    container_name: lighthouse_beacon
+    ports:
+      - "5052:5052"
+      - "9000:9000/tcp"
+      - "9000:9000/udp"
+    command: [
+      "lighthouse", "bn",
+      "--network", "mainnet",
+      "--execution-endpoint", "http://zeronethermind_node:8551",
+      "--execution-jwt-secret-key", "6d1542c4f9f0b606ce706f885c5ff69b72affec9c60eaa490933e648ababfd18",
+      "--checkpoint-sync-url", "https://mainnet.checkpoint.sigp.io",
+      "--http",
+      "--http-address", "0.0.0.0"
+    ]
+    depends_on:
+      - zeronethermind
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - cadvisor
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    container_name: cadvisor
+    privileged: true
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
