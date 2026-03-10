@@ -3,19 +3,16 @@
 
 # Ethereum network participants
 participants:
-  # Block-producing nodes with validators (regular Nethermind)
   - el_type: nethermind
     cl_type: lighthouse
     count: 2
     el_extra_params:
       - "--HealthChecks.Enabled=true"
 
-  # ZeroNethermind verifier nodes - NO validators, just verifies via ZK
   - el_type: nethermind
     cl_type: lighthouse
     count: 1
     el_image: "zero-nethermind:latest"
-    validator_count: 64
     el_extra_params:
       - "--Init.DiscoveryEnabled=false"
       - "--Init.PeerManagerEnabled=false"
@@ -32,7 +29,7 @@ participants:
       - "--ZkValidation.Enabled=true"
       - "--ZkValidation.ProverUrl=http://zero-prover:5000"
 
-mev_type: flashbots
+mev_type: mock
 
 # Additional services to run
 additional_services:
@@ -43,3 +40,6 @@ additional_services:
 
 # Enable metrics
 ethereum_metrics_exporter_enabled: true
+
+prometheus_config:
+  scrape_interval: 15s

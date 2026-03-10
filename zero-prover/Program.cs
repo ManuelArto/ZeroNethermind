@@ -55,6 +55,66 @@ app.MapGet("/api/blocks/{blockId}/proofs", (long blockId, int? page_size) =>
                         ZkVm = new ZkVm { Type = "airbender" }
                     }
                 }
+            },
+            new ProofMetadata
+            {
+                ProofId = 2,
+                BlockNumber = blockId,
+                Status = "proved",
+                ClusterId = "mock-cluster",
+                Cluster = new Cluster
+                {
+                    ClusterId = "mock-cluster",
+                    ZkvmVersion = new ZkvmVersion
+                    {
+                        ZkVm = new ZkVm { Type = "airbender" }
+                    }
+                }
+            },
+            new ProofMetadata
+            {
+                ProofId = 3,
+                BlockNumber = blockId,
+                Status = "proved",
+                ClusterId = "mock-cluster",
+                Cluster = new Cluster
+                {
+                    ClusterId = "mock-cluster",
+                    ZkvmVersion = new ZkvmVersion
+                    {
+                        ZkVm = new ZkVm { Type = "airbender" }
+                    }
+                }
+            },
+            new ProofMetadata
+            {
+                ProofId = 4,
+                BlockNumber = blockId,
+                Status = "proved",
+                ClusterId = "mock-cluster",
+                Cluster = new Cluster
+                {
+                    ClusterId = "mock-cluster",
+                    ZkvmVersion = new ZkvmVersion
+                    {
+                        ZkVm = new ZkVm { Type = "airbender" }
+                    }
+                }
+            },
+            new ProofMetadata
+            {
+                ProofId = 5,
+                BlockNumber = blockId,
+                Status = "proved",
+                ClusterId = "mock-cluster",
+                Cluster = new Cluster
+                {
+                    ClusterId = "mock-cluster",
+                    ZkvmVersion = new ZkvmVersion
+                    {
+                        ZkVm = new ZkVm { Type = "airbender" }
+                    }
+                }
             }
         ]
     };
