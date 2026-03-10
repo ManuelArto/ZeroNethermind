@@ -27,6 +27,6 @@ for KEY in "${!QUERIES[@]}"; do
               --data-urlencode "end=$END_TIME" \
               --data-urlencode "step=$STEP" \
               "$PROMETHEUS_URL" | \
-    jq -r '.data.result[0].values[]? | @csv' > "test-1/${KEY}.csv"
+    jq -r '.data.result[0].values[]? | @csv' > "${KEY}.csv"
     
 done
