@@ -41,9 +41,9 @@ participants:
 # MEV — all nodes only validate, nobody builds locally
 mev_type: flashbots
 
-# Blockchain params — 120M Gas
+# Blockchain params — 500M Gas
 network_params:
-  genesis_gaslimit: 120000000
+  genesis_gaslimit: 500000000
 
 # Spamoor saturates blocks with transactions
 additional_services:
@@ -54,21 +54,25 @@ additional_services:
 
 spamoor_params:
   spammers:
-    # 1. Stress Test sullo Storage EVM (Il killer dei nodi standard)
+    # 1. Stress Test sullo Storage EVM (Gonfia l'MPT, pesa su RAM e Disco)
     - scenario: storagespam
       config:
-        throughput: 1000
-        max_pending: 2000 
-    
-    # 2. Stress Test sulla CPU dell'EVM (Contratti complessi)
-    - scenario: calltx
+        throughput: 1 # => aumentato gradualmente manualmente fino a 100
+
+    # 2. Stress Test Computazionale (Cicli pesanti per l'EVM, alza la CPU standard)
+    - scenario: gasburnertx
       config:
-        throughput: 500
-        
-    # 3. Aumentiamo esponenzialmente i trasferimenti base
+        throughput: 1 # => aumentato gradualmente manualmente fino a 15
+
+    # 3. Creazione e trasferimento di Token ERC20 (Modifica saldi su MPT)
+    - scenario: erc20tx
+      config:
+        throughput: 1 # => aumentato gradualmente manualmente fino a 80
+
+    # 4. Trasferimenti classici
     - scenario: eoatx
       config:
-        throughput: 2000
+        throughput: 1 # => aumentato gradualmente manualmente fino a 500
 
 # Monitoring
 ethereum_metrics_exporter_enabled: true
