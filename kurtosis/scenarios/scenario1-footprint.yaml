@@ -1,0 +1,74 @@
+# ============================================================
+#  Scenario 1 — Resource Footprint
+# ============================================================
+#  Goal:  Compare CPU, RAM, I/O, storage between a standard
+#         Nethermind node and ZeroNethermind while both validate
+#         the same chain with saturated blocks (30M Gas).
+#
+#  Run:   kurtosis run --enclave s1-footprint ./kurtosis \
+#            --args-file kurtosis/scenarios/scenario1-footprint.yaml
+# ============================================================
+
+participants:
+  # --- Standard Nethermind Nodes (block producers + validators) ---
+  - el_type: nethermind
+    cl_type: lighthouse
+    count: 2
+    el_extra_params:
+      - "--HealthChecks.Enabled=true"
+
+  # --- ZeroNethermind (ZK verifier, no EVM execution) ---
+  - el_type: nethermind
+    cl_type: lighthouse
+    count: 1
+    el_image: "zero-nethermind:latest"
+    el_extra_params:
+      - "--Init.DiscoveryEnabled=false"
+      - "--Init.PeerManagerEnabled=false"
+      - "--Init.ProcessingEnabled=false"
+      - "--Sync.SynchronizationEnabled=false"
+      - "--Sync.NonValidatorNode=true"
+      - "--Sync.DownloadReceiptsInFastSync=false"
+      - "--Sync.DownloadBodiesInFastSync=false"
+      - "--Sync.PivotTotalDifficulty=58750003716598352816469"
+      - "--TxPool.Size=0"
+      - "--TxPool.BlobsSupport=disabled"
+      - "--Merge.Enabled=true"
+      - "--HealthChecks.Enabled=true"
+      - "--ZkValidation.Enabled=true"
+      - "--ZkValidation.ProverUrl=http://zero-prover:5000"
+
+# MEV — all nodes only validate, nobody builds locally
+mev_type: flashbots
+
+# Blockchain params — 120M Gas
+network_params:
+  genesis_gaslimit: 120000000
+
+# Spamoor saturates blocks with transactions
+additional_services:
+  - dora
+  - prometheus
+  - grafana
+  - spamoor
+
+spamoor_params:
+  spammers:
+    # 1. Stress Test sullo Storage EVM (Il killer dei nodi standard)
+    - scenario: storagespam
+      config:
+        throughput: 1000
+        max_pending: 2000 
+    
+    # 2. Stress Test sulla CPU dell'EVM (Contratti complessi)
+    - scenario: calltx
+      config:
+        throughput: 500
+        
+    # 3. Aumentiamo esponenzialmente i trasferimenti base
+    - scenario: eoatx
+      config:
+        throughput: 2000
+
+# Monitoring
+ethereum_metrics_exporter_enabled: true

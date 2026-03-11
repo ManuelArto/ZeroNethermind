@@ -29,7 +29,7 @@ participants:
       - "--ZkValidation.Enabled=true"
       - "--ZkValidation.ProverUrl=http://zero-prover:5000"
 
-mev_type: mock
+mev_type: flashbots
 
 # Additional services to run
 additional_services:
@@ -40,6 +40,3 @@ additional_services:
 
 # Enable metrics
 ethereum_metrics_exporter_enabled: true
-
-prometheus_config:
-  scrape_interval: 15s
