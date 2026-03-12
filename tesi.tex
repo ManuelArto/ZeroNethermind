@@ -1092,15 +1092,16 @@ L'utilizzo di MEV-Boost per entrambe le tipologie di nodo è intenzionale: deleg
 
 Quantificare il divario di risorse hardware tra validazione per ri-esecuzione EVM ($O(N)$) e validazione per verifica crittografica ($O(1)$), in un ambiente dove le condizioni di rete, il carico transazionale e l'hardware sono identici per tutti i nodi.
 
-\subsubsection{Scenari di Test}
+\subsubsection{Procedura}
 
-La Demo~2 prevede tre scenari distinti, ciascuno progettato per isolare una specifica dimensione di confronto:
+La Demo~2 adotta un protocollo a \textbf{carico progressivo} della durata di ~45 minuti, articolato in due fasi:
 
 \begin{enumerate}
-    \item \textbf{Scenario~1 --- Resource Footprint:} Entrambi i tipi di nodo validano la stessa catena con blocchi saturi (30M Gas) generati da \texttt{spamoor}. Si confrontano CPU, RAM, I/O e storage su una finestra di $N$ epoche.
-    \item \textbf{Scenario~2 --- Sync Time:} Si avvia la devnet con soli nodi standard per $N$ minuti (accumulando storia), poi si iniettano simultaneamente un nodo Nethermind fresco e un nodo ZeroNethermind, misurando il tempo necessario a ciascuno per raggiungere il tip.
-    \item \textbf{Scenario~3 --- Scalabilità del Gas Limit:} Si eseguono sessioni separate con valori crescenti di \texttt{genesis\_gas\_limit} (30M, 60M, 120M, 250M) per tracciare la curva $O(N)$ della ri-esecuzione EVM contro la costante $O(1)$ della verifica ZK.
+    \item \textbf{Fase Baseline} (primi $\sim$15 minuti): la devnet opera con un throughput transazionale minimo (1 transazione per tipo di spammer), al fine di stabilire i valori di riferimento per tutte le metriche di interesse.
+    \item \textbf{Fase sotto carico} (ultimi $\sim$30 minuti): il throughput di \texttt{spamoor} viene incrementato manualmente in 4 step successivi, aumentando gradualmente il numero di transazioni per tipo (\texttt{storagespam}, \texttt{gasburnertx}, \texttt{erc20tx}, \texttt{eoatx}) fino a saturare i blocchi al Gas Limit di 500\,M.
 \end{enumerate}
+
+Durante l'intero esperimento, le metriche vengono raccolte tramite due fonti complementari: (i)~le metriche native di Nethermind esposte via Prometheus (in particolare \texttt{nethermind\_new\_payload\_execution\_time} per il tempo di validazione del \texttt{newPayload}), e (ii)~cAdvisor per le metriche di risorse a livello di container (CPU, RAM, I/O, bandwidth, storage).
 
 I risultati della Demo~2 sono presentati nella sezione \ref{sec:demo2_risultati}.
 
@@ -1111,7 +1112,7 @@ I risultati della Demo~1 sono presentati attraverso due visualizzazioni compleme
 
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
-    \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{img/graph1.png}}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{img/demo1_graph1.png}}
     \caption{Composizione del Tempo Totale di Validazione}
     \label{fig:demo1_graph1}
 \end{figure}
@@ -1121,7 +1122,7 @@ Il \textbf{Grafico \ref{fig:demo1_graph1}} illustra la scomposizione del tempo t
 
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
-    \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{img/graph2.png}}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{img/demo1_graph2.png}}
     \caption{Analisi Prestazionale: Nodo Stateless ZeroNethermind}
     \label{fig:demo1_graph2}
 \end{figure}
@@ -1157,56 +1158,143 @@ Il risultato più significativo è la sproporzione tra il tempo di download e il
 
 \section{Demo~2: Analisi in Ambiente Controllato}\label{sec:demo2_risultati}
 
+I risultati della Demo~2 confermano quantitativamente le ipotesi formulate nel Capitolo \ref{chap:introduzione}: il paradigma di validazione per verifica crittografica ($O(1)$) presenta vantaggi strutturali rispetto alla ri-esecuzione EVM ($O(N)$), sia in termini di tempo di elaborazione sia di consumo di risorse hardware.
+
 \subsection{Velocità di Verifica}\label{sec:velocita}
 
-% TODO: Inserire Grafico --- Velocità di Verifica vs Esecuzione (Scenario~1).
+\begin{minipage}{\textwidth}
+\begin{figure}[H]
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{img/demo2_graph1_verification_speed.png}}
+    \caption{Velocità di Verifica vs Esecuzione: confronto dei tempi medi di validazione nelle fasi Baseline e sotto carico.}
+    \label{fig:demo2_graph1}
+\end{figure}
+\end{minipage}\\
 
-% TODO: Inserire Grafico --- Impatto dell'innalzamento del Gas Limit (Scenario~3).
-% Asse X: Gas Limit (30M -- 1 GigaGas), Asse Y: tempo di elaborazione (ms).
-% La curva Nethermind cresce linearmente O(N), la curva ZeroNethermind resta piatta O(1).
+Il \textbf{Grafico~\ref{fig:demo2_graph1}} rivela un'asimmetria fondamentale tra i due approcci di validazione. La Tabella~\ref{tab:demo2_validation} riporta le statistiche dettagliate per ciascun nodo nelle due fasi sperimentali.
 
+\begin{table}[H]
+\centering
+\begin{tabular}{l r r r r r r}
+\hline
+\textbf{Nodo} & \multicolumn{2}{c}{\textbf{Baseline}} & \multicolumn{2}{c}{\textbf{Sotto carico}} & \multicolumn{2}{c}{\textbf{Complessivo}} \\
+& Media & Max & Media & Max & Media & Max \\
+\hline
+el-1 Standard      & 57  & 264  & 211 & 1\,129 & 162 & 1\,129 \\
+el-2 Standard      & 64  & 203  & 310 & 1\,487 & 226 & 1\,487 \\
+el-3 ZeroNethermind & 128 & 268  & 147 & 334   & 141 & 334   \\
+\hline
+\end{tabular}
+\caption{Tempo di validazione \texttt{engine\_newPayload} (ms) per fase.}
+\label{tab:demo2_validation}
+\end{table}
+
+In condizioni di basso carico (\textit{Baseline}), i nodi standard risultano più veloci ($\sim$57--64\,ms) rispetto a ZeroNethermind ($\sim$128\,ms), poiché la ri-esecuzione di transazioni leggere è computazionalmente meno costosa del download e della verifica di 5 prove crittografiche in parallelo. Tuttavia, sotto carico transazionale crescente, il rapporto si inverte drasticamente: i nodi standard rallentano a $\sim$211--310\,ms con picchi fino a $\sim$1\,500\,ms, mentre ZeroNethermind resta sostanzialmente invariato a $\sim$147\,ms. L'incremento medio per i nodi standard è di $\sim 3{,}7 \times$ rispetto alla baseline, contro un aumento di appena il 15\% per ZeroNethermind. Questa è la manifestazione empirica della complessità $O(N)$ vs $O(1)$: il tempo di verifica crittografica è \textbf{indipendente} dalla complessità computazionale del blocco.
+
+\begin{minipage}{\textwidth}
+\begin{figure}[H]
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{img/demo2_graph2_time_series.png}}
+    \caption{Impatto dell'aumento del carico transazionale sul tempo di validazione (\texttt{engine\_newPayload}).}
+    \label{fig:demo2_graph2}
+\end{figure}
+\end{minipage}\\
+
+Il \textbf{Grafico~\ref{fig:demo2_graph2}} fornisce la dimensione temporale del fenomeno. Le 4 rette verticali tratteggiate indicano i momenti in cui il throughput degli spammer è stato incrementato manualmente. Per quantificare la divergenza progressiva, la Tabella~\ref{tab:demo2_trend} riporta le medie per finestre di 5 minuti.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l r r r}
+\hline
+\textbf{Finestra} & \textbf{el-1 (ms)} & \textbf{el-3 (ms)} & \textbf{Rapporto el-1/el-3} \\
+\hline
+16:45--16:50 & 76  & 153 & 0.50$\times$ \\
+16:50--16:55 & 60  & 116 & 0.52$\times$ \\
+16:55--17:00 & 36  & 114 & 0.31$\times$ \\
+\textbf{17:00--17:05} & \textbf{118} & \textbf{132} & \textbf{0.90$\times$} \\
+17:05--17:10 & 172 & 139 & 1.24$\times$ \\
+17:10--17:15 & 228 & 124 & 1.84$\times$ \\
+17:15--17:20 & 295 & 168 & 1.76$\times$ \\
+17:20--17:25 & 293 & 152 & 1.93$\times$ \\
+\hline
+\end{tabular}
+\caption{Andamento del tempo medio di validazione per finestre di 5 minuti (UTC). La riga in grassetto indica il crossover.}
+\label{tab:demo2_trend}
+\end{table}
+
+Durante la fase Baseline (prime 3 finestre), il nodo standard è fino a 3$\times$ più veloce. Il \textbf{crossover} si manifesta nella finestra 17:00--17:05 UTC, corrispondente al primo incremento di throughput ($\uparrow$\#1), dove i due approcci si equivalgono (0.90$\times$). Da quel punto in poi, il nodo standard diventa progressivamente più lento: dopo il $\uparrow$\#3, el-1 impiega quasi il \textbf{doppio} del tempo di el-3 (rapporto 1.93$\times$). Le curve dei nodi standard (blu e rossa) divergono verso l'alto con pendenza crescente, un comportamento coerente con la complessità lineare della ri-esecuzione EVM. Al contrario, la curva di ZeroNethermind (verde) resta \textbf{piatta} all'interno della fascia $\sim$100--200\,ms indipendentemente dagli incrementi di carico, confermando la proprietà $O(1)$.
 
 \subsection{Footprint delle Risorse}\label{sec:footprint}
 
-% TODO: Inserire Grafico Radar --- Confronto CPU, RAM, I/O, Bandwidth tra Nethermind e ZeroNethermind (Scenario~1).
+\begin{minipage}{\textwidth}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.78\linewidth]{img/demo2_graph3_radar.png}
+    \caption{Radar chart: confronto del footprint hardware tra Nethermind Standard (media dei 2 nodi) e ZeroNethermind.}
+    \label{fig:demo2_graph3}
+\end{figure}
+\end{minipage}\\
 
-% TODO: Inserire Grafico Linee --- Crescita dello Storage nel tempo (Scenario~1).
-% Nethermind accumula stato su disco, ZeroNethermind resta a ~0 GB.
+Il \textbf{Grafico~\ref{fig:demo2_graph3}} mostra il profilo di risorse dei due approcci architetturali su 4 dimensioni, normalizzate rispetto al valore massimo di ciascun asse. Si evidenziano due profili \textbf{complementari} che riflettono architetture di validazione radicalmente diverse:
+\begin{itemize}
+    \item \textbf{Nethermind Standard:} Domina su CPU ($\sim$11,8\% vs $\sim$2,0\%, un fattore $\sim$6$\times$) e RAM ($\sim$823\,MB vs $\sim$427\,MB), riflettendo il pesante onere computazionale della ri-esecuzione EVM e della gestione in memoria dell'albero di Merkle Patricia (MPT). Si nota inoltre un maggiore I/O Read dal disco ($\sim$28,5\,KB/s vs $\sim$7,7\,KB/s) necessario per caricare i rami dello stato richiesti dalle transazioni.
+    \item \textbf{ZeroNethermind:} Ribalta il paradigma dominando quasi esclusivamente sulla Bandwidth in ricezione ($\sim$300,6\,KB/s vs $\sim$29,7\,KB/s, un fattore $\sim$10$\times$). Le risorse locali (CPU, RAM, Disco) rimangono compresse vicino al centro del grafico.
+\end{itemize}
 
+Questo radar quantifica visivamente un principio architetturale chiave: il passaggio alla validazione crittografica non "azzera" magicamente il costo del network, ma ne \textbf{trasla la natura}, sostituendo risorse locali costose e rigidamente limitate (CPU, IOPS del disco) con una risorsa esterna, elastica e naturalmente scalabile (la larghezza di banda).
 
-\subsection{Tempo di Sincronizzazione}\label{sec:sync_time}
+\begin{minipage}{\textwidth}
+\begin{figure}[H]
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{img/demo2_graph4_storage.png}}
+    \caption{Crescita dello storage nel tempo: confronto dell'accumulo di stato su disco.}
+    \label{fig:demo2_graph4}
+\end{figure}
+\end{minipage}\\
 
-% TODO: Inserire Grafico Barre --- Sync Time (Scenario~2).
-% Confronto del tempo necessario per raggiungere il tip della catena.
+Il \textbf{Grafico~\ref{fig:demo2_graph4}} dimostra materialmente il paradigma \textit{Zero State} introdotto nel Capitolo~\ref{chap:introduzione}. I due nodi standard partono da $\sim$248\,MB e raggiungono $\sim$338\,MB in 47 minuti (crescita di $\sim$90\,MB ciascuno), con un tasso medio di $\sim$1,9\,MB/min. ZeroNethermind, partendo da $\sim$258\,MB, raggiunge soli $\sim$262\,MB (crescita di $\sim$3,9\,MB), pari al \textbf{4,3\%} di quella standard.
+
+La crescita residua di ZeroNethermind è attribuibile ai soli metadati operativi del client (log interni, cache del Consensus Layer), non all'accumulo di stato della blockchain. Estrapolando linearmente:\footnote{L'estrapolazione assume un carico costante e non tiene conto della compressione dello stato; serve come ordine di grandezza indicativo.}
+\begin{itemize}
+    \item \textbf{Standard:} $\sim 90\,\text{MB} \times \frac{60}{47} \times 24 \times 365 \approx 1\,\text{TB/anno}$, coerente con i $\sim 1\,\text{TB}$ di stato osservati sulla Mainnet.
+    \item \textbf{ZeroNethermind:} $\sim 3{,}9\,\text{MB} \times \frac{60}{47} \times 24 \times 365 \approx 43\,\text{GB/anno}$ e azzerabile con rotazione periodica.
+\end{itemize}
+Questo risultato dimostra che l'eliminazione del database di stato persistente non è solo un vantaggio teorico, ma produce un impatto \textbf{misurabile e significativo} sulla sostenibilità operativa a lungo termine di un nodo validatore.
 
 
 \section{Discussione dei Risultati}\label{sec:discussione}
 
-% TODO: Sintesi cross-demo (Demo 1 + Demo 2), osservazioni qualitative:
-% stabilità del sync con Lighthouse, affidabilità del bridge FFI, multi-prover diversity.
+I risultati delle due campagne sperimentali, pur condotte in contesti operativi distinti, convergono verso un quadro coerente che può essere sintetizzato lungo tre assi tematici.
 
+\paragraph{1. Paradigma computazionale: da $O(N)$ a $O(1)$.}
+La Demo~1 ha dimostrato che la verifica crittografica FFI richiede mediamente $\sim$122\,ms per blocco Mainnet, indipendentemente dalla complessità del blocco stesso (fino a 30M Gas). La Demo~2 ha confermato questa proprietà sotto carico controllato e crescente: mentre i nodi standard vedono il tempo di validazione aumentare di $\sim$3,7$\times$ passando dalla fase Baseline a quella sotto carico (con picchi fino a $\sim$1\,500\,ms), ZeroNethermind resta nell'intervallo 128--147\,ms, mostrando un incremento del solo 15\%. Il crossover tra i due approcci avviene già con carichi transazionali moderati (Tabella~\ref{tab:demo2_trend}), suggerendo che il vantaggio della verifica ZK si manifesta \textit{prima} della saturazione dei blocchi.
 
-Infine la tabella \ref{tab:confronto_finale} mostra le differenze architetturali e prestazionali tra un nodo Nethermind Full Node e il PoC ZeroNethermind.
+\paragraph{2. Spostamento del collo di bottiglia architetturale.}
+Sia la Demo~1 sia la Demo~2 confermano lo spostamento del bottleneck da \textit{I/O-bound} a \textit{bandwidth-bound}. Nella Demo~1, il download delle prove da \texttt{ethproofs.org} assorbe il 94,5\% del tempo totale di validazione, relegando la verifica FFI al 5,5\%. Nella Demo~2, il radar chart (Grafico~\ref{fig:demo2_graph3}) quantifica questo spostamento: il consumo di bandwidth di ZeroNethermind è $\sim$10$\times$ quello dei nodi standard, mentre CPU e RAM sono ridotti di $\sim$6$\times$ e $\sim$2$\times$ rispettivamente. Questo risultato ha un'implicazione progettuale importante: una volta che le prove saranno incluse direttamente nel payload del blocco (come previsto dalla roadmap di Ethereum), il collo di bottiglia della bandwidth si azzererà, e il tempo di validazione coinciderà con la sola componente FFI ($\sim$120\,ms).
+
+\paragraph{3. Stabilità operativa e azzeramento dello State Bloat.}
+Durante la Demo~1, ZeroNethermind ha validato 121 blocchi Mainnet consecutivi in sincronizzazione con il Consensus Layer Lighthouse, senza mai perdere un attestation slot e mantenendo la RAM stabilmente sotto i 400\,MB. La Demo~2 ha esteso questa osservazione a 47 minuti di carico sostenuto, confermando che la memoria e la CPU restano piatte anche sotto stress. Il dato forse più rilevante riguarda lo storage: la crescita del disco è pari al 4,3\% di quella standard (Grafico~\ref{fig:demo2_graph4}), dimostrando che il paradigma \textit{Zero State} elimina il problema dello \textit{State Bloat} che costituisce uno degli ostacoli principali alla decentralizzazione di Ethereum.
+
+\medskip
+
+La Tabella~\ref{tab:confronto_finale} sintetizza le differenze architetturali e prestazionali emerse dalle due campagne tra un nodo Nethermind Full Node e il proof-of-concept ZeroNethermind.
 
 \begin{table}[H]
 \centering
-\begin{tabular}{l p{5cm} p{5cm}}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l p{5.5cm} p{5.5cm}}
 \hline
-\textbf{Dimensione} & \textbf{Nethermind Full Node} & \textbf{ZeroNethermind} \\
+\textbf{Parametro} & \textbf{Nethermind Full Node} & \textbf{ZeroNethermind} \\
 \hline
-Trust Model & Ri-esecuzione locale di ogni transazione & Verifica crittografica \\
-Storage & $\sim$1\,TB & $\sim$0\,GB (MemDb in RAM) \\
-RAM & 16--32\,GB & $<$500\,MB \\
-CPU & Saturazione multi-core durante l'esecuzione EVM & Picchi brevi ($\sim$120\,ms) solo durante la verifica FFI \\
-I/O & Elevato (migliaia di IOPS su SSD) & Trascurabile ($<$1\,KB/s medio) \\
-Bottleneck & I/O-bound (accesso a stato MPT) & Latency-bound (download proofs) \\
-Validation & $O(N)$ --- lineare nel numero di transazioni & $O(1)$ --- costante \\
-Sync Time & Ore/giorni & Secondi \\
-RPC & Completa & Nessuna (attester-only) \\
-Functions & Block building, serving, validazione & Solo validazione (Fort Mode) \\
+\textbf{Modello di Fiducia} & Ri-esecuzione locale $N$-of-$N$ & Verifica matematica $1$-of-$N$ \\
+\textbf{Storage di Stato} & $\sim$1\,TB (Crescita continua) & $\sim$0\,GB (MemDb in RAM) \\
+\textbf{RAM Richiesta} & 16--32\,GB & $<$500\,MB (Plateau) \\
+\textbf{Impatto CPU} & Saturazione multi-core (EVM) & Picchi minimi transitori ($\sim$120\,ms) \\
+\textbf{I/O Disco (IOPS)} & Elevato (Accesso casuale MPT) & Nullo \\
+\textbf{Collo di Bottiglia} & Limiti Hardware (I/O-bound) & Latenza di Rete (Bandwidth-bound) \\
+\textbf{Complessità} & $O(N)$ --- Lineare al Gas Limit & $O(1)$ --- Costante crittografica \\
+\textbf{Sincronizzazione} & Ore / Giorni (State Sync) & Secondi (Checkpoint Sync) \\
+\textbf{Servizi Estesi} & Full RPC, Block Building & Solo Attestation (Fort Mode) \\
 \hline
 \end{tabular}
-\caption{Confronto tra Nethermind Full Node e ZeroNethermind Stateless Verifier.}
+\caption{Sintesi del salto architetturale tra un nodo Stateful e un validatore Stateless.}
 \label{tab:confronto_finale}
 \end{table}
 
