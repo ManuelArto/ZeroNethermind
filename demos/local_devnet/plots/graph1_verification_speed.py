@@ -81,7 +81,6 @@ ax.grid(axis='y', linestyle='--', alpha=0.7)
 ax.set_ylim(0, max(means_loaded) * 1.4)
 
 plt.tight_layout()
-plt.savefig(os.path.join(os.path.dirname(__file__), 'demo2_graph1_verification_speed.pdf'), format='pdf', dpi=500)
 plt.savefig(os.path.join(os.path.dirname(__file__), 'demo2_graph1_verification_speed.png'), format='png', dpi=300)
 plt.show()
 print("Grafico 1.1 salvato.")

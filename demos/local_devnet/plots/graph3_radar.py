@@ -44,6 +44,9 @@ bw_zk  = mean_vals(load_csv('el-3-zeronethermind_net_rx.csv')) / 1e3
 categories = ['CPU (%)', 'RAM (MB)', 'I/O Read (KB/s)', 'Bandwidth RX (KB/s)']
 values_std_abs = [cpu_std, ram_std, io_std, bw_std]
 values_zk_abs  = [cpu_zk, ram_zk, io_zk, bw_zk]
+# categories = ['CPU (%)', 'RAM (MB)', 'Bandwidth RX (KB/s)']
+# values_std_abs = [cpu_std, ram_std, bw_std]
+# values_zk_abs  = [cpu_zk, ram_zk, bw_zk]
 
 # --- Normalizzazione (max di ciascun asse = 1) ---
 maxvals = [max(s, z) for s, z in zip(values_std_abs, values_zk_abs)]
@@ -83,7 +86,6 @@ ax.set_title('Confronto Footprint Hardware — Demo 2', fontsize=15, pad=25)
 ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1), fontsize=11)
 
 plt.tight_layout()
-plt.savefig(os.path.join(os.path.dirname(__file__), 'demo2_graph3_radar.pdf'), format='pdf', dpi=500)
 plt.savefig(os.path.join(os.path.dirname(__file__), 'demo2_graph3_radar.png'), format='png', dpi=300)
 plt.show()
 print("Grafico 2.1 (Radar) salvato.")

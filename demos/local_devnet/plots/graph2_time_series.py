@@ -60,9 +60,9 @@ ax.plot(df_el2_smooth.index, df_el2_smooth['el2'], color='#d62728', label='el-2 
 ax.plot(df_el3_smooth.index, df_el3_smooth['el3'], color='#2ca02c', label='el-3 ZeroNethermind', linewidth=2.5, alpha=0.95)
 
 # Scatter dei punti raw (trasparenza più bassa per mostrare la distribuzione)
-ax.scatter(df_el1.index, df_el1['el1'], color='#1f77b4', alpha=0.15, s=8, zorder=1)
-ax.scatter(df_el2.index, df_el2['el2'], color='#d62728', alpha=0.15, s=8, zorder=1)
-ax.scatter(df_el3.index, df_el3['el3'], color='#2ca02c', alpha=0.15, s=8, zorder=1)
+# ax.scatter(df_el1.index, df_el1['el1'], color='#1f77b4', alpha=0.15, s=8, zorder=1)
+# ax.scatter(df_el2.index, df_el2['el2'], color='#d62728', alpha=0.15, s=8, zorder=1)
+# ax.scatter(df_el3.index, df_el3['el3'], color='#2ca02c', alpha=0.15, s=8, zorder=1)
 
 # Aggiorniamo i limiti Y
 ax.set_ylim(0, 1600)
@@ -73,7 +73,7 @@ for i, t in enumerate(INCREASE_TIMES):
     ax.text(t, 1520, f'↑ #{i+1}', ha='center', va='bottom', fontsize=9, color='#ff7f0e', fontweight='bold')
 
 # --- Annotazione zona ---
-ax.axhspan(0, 350, alpha=0.06, color='green')
+ax.axhspan(0, 250, alpha=0.06, color='green')
 ax.text(df_el3.index[5], 310, 'Zona O(1) — ZeroNethermind', fontsize=9, color='green', fontstyle='italic', alpha=0.7)
 
 # --- Formattazione ---
@@ -87,7 +87,6 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 
 # --- Salvataggio ---
-plt.savefig(os.path.join(os.path.dirname(__file__), 'demo2_graph2_time_series.pdf'), format='pdf', dpi=500)
 plt.savefig(os.path.join(os.path.dirname(__file__), 'demo2_graph2_time_series.png'), format='png', dpi=300)
 plt.show()
 print("Grafico 1.2 salvato.")

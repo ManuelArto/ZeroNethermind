@@ -73,7 +73,6 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 
 # --- Salvataggio ---
-plt.savefig(os.path.join(os.path.dirname(__file__), 'demo2_graph4_storage.pdf'), format='pdf', dpi=500)
 plt.savefig(os.path.join(os.path.dirname(__file__), 'demo2_graph4_storage.png'), format='png', dpi=300)
 plt.show()
 print("Grafico 2.2 (Storage) salvato.")
