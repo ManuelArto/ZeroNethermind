@@ -61,7 +61,8 @@
 \pagenumbering{gobble}
 \chapter*{Abstract}
 
-Nelle reti blockchain decentralizzate la velocità complessiva del sistema è dettata dal suo nodo più lento. Per preservare un ambiente trustless, il protocollo impone a ciascun validatore la ri-esecuzione nativa di ogni transazione e il mantenimento di un database di stato dell'ordine dei terabyte. Questo approccio comporta una complessità asintotica $O(N)$ rispetto al numero di transazioni da processare e innesca il fenomeno dello State Bloat, allontanando progressivamente i dispositivi hardware consumer dalla partecipazione attiva alla rete. Questa tesi presenta ZeroNethermind, un Proof-of-Concept per trasformare il client Execution Layer Nethermind in un validatore Stateless per abbattere la barriera computazionale $O(N)$ attraverso l'adozione di un paradigma di verifica crittografica con complessità $O(1)$. Sfruttando l'efficienza delle Zero-Knowledge Proofs, ZeroNethermind disaccoppia il throughput transazionale dalle capacità hardware del validatore. I nodi cessano di ri-eseguire le transazioni, limitandosi a verificare matematicamente una prova crittografica compatta che certifica l'integrità del blocco. Delegando il massiccio carico di esecuzione a prover specializzati ad alte prestazioni e consentendo la verifica in frazioni di secondo su dispositivi consumer, ZeroNethermind stabilisce le fondamenta per un livello di esecuzione completamente stateless, garantendo una scalabilità massiva pur preservando la natura trustless e decentralizzata del protocollo.
+
+La velocità complessiva della rete Ethereum è vincolata dalle capacità computazionali del suo nodo più lento. Per preservare un ambiente sicuro e decentralizzato, il protocollo impone attualmente a ciascun validatore la ri-esecuzione di ogni transazione e il mantenimento di un database di stato nell'ordine dei terabyte. Questo approccio genera un collo di bottiglia con complessità $O(N_{gas})$ rispetto all'onere computazionale e innesca la criticità architetturale nota come State Bloat, allontanando progressivamente l'hardware consumer dalla partecipazione attiva alla rete. Questa tesi presenta ZeroNethermind, un proof-of-concept che trasforma il client Execution Layer Nethermind in un validatore stateless, introducendo un bridge FFI cross-language tra C\#/.NET e Rust che bypassa l'esecuzione EVM nativa attraverso la verifica di prove crittografiche generate da cinque zkVM indipendenti. Le campagne sperimentali, condotte in tempo reale sulla Mainnet Ethereum e in ambiente devnet controllato, confermano un tempo di verifica quasi costante e indipendente dalla complessità del blocco, con riduzioni significative nell'utilizzo delle risorse. Delegando il carico di esecuzione a prover specializzati e consentendo la verifica su dispositivi consumer, ZeroNethermind dimostra la fattibilità di un nuovo modello di validazione, contribuendo alle fondamenta ingegneristiche per scalare il Layer~1 senza compromettere la decentralizzazione della rete.
 
 \topmargin=-1cm
 \tableofcontents
@@ -86,7 +87,9 @@ Nelle reti blockchain decentralizzate la velocità complessiva del sistema è de
 
 La promessa fondamentale delle reti blockchain decentralizzate risiede nella democratizzazione della fiducia e nella resistenza sistemica alla censura. Questa \textit{libertà} algoritmica, tuttavia, si scontra con rigorose limitazioni fisiche e architetturali. Nell'ecosistema Ethereum, il mantenimento dell'integrità del network in un ambiente trustless richiede attualmente che ogni nodo validatore ri-esegua nativamente ogni singola transazione. Di conseguenza, il throughput complessivo della rete è vincolato dalle capacità computazionali del nodo più lento all'interno del sistema.
 
-Questo collo di bottiglia architetturale impone un costo di ri-esecuzione pari a $O(N)$, proporzionale al volume delle transazioni. Aumentare il Gas Limit per processare un volume maggiore di transazioni comporterebbe l'inevitabile esclusione dell'hardware di livello consumer. A questa problematica si sovrappone la crisi architetturale nota come State Bloat, l' espansione dello stato globale. È fondamentale precisare che il principale collo di bottiglia nell'elaborazione e validazione dei blocchi su Ethereum non è di natura computazionale (CPU-bound), bensì legato all'accesso ai dati (I/O-bound). L'esecuzione di una singola transazione all'interno dell'EVM richiede continue e frammentate operazioni di lettura e scrittura sul database di stato, il quale deve tracciare accuratamente la totalità dei saldi degli account e degli slot di memoria degli smart contract.
+Questo collo di bottiglia architetturale impone un costo di ri-esecuzione pari a $O(N_{gas})$, proporzionale alla complessità aggregata delle transazioni di un blocco. Aumentare il Gas Limit per processare un volume maggiore di transazioni comporterebbe l'inevitabile esclusione dell'hardware di livello consumer. A questa problematica si sovrappone la criticità architetturale nota come State Bloat, l'espansione incontrollata del database di stato globale.
+
+È fondamentale precisare che il principale collo di bottiglia nell'elaborazione e validazione dei blocchi su Ethereum non è di natura computazionale (CPU-bound), bensì legato all'accesso ai dati (I/O-bound). L'esecuzione di una singola transazione all'interno dell'EVM richiede continue e frammentate operazioni di lettura e scrittura sul database di stato, il quale deve tracciare accuratamente la totalità dei saldi degli account e degli slot di memoria degli smart contract.
 
 Attualmente, questo strato dati impone ai nodi il mantenimento locale di archivi nell'ordine dei terabyte. Con la crescita ininterrotta dello stato, i requisiti hardware si inaspriscono: il limite non è più dettato dalla capacità di archiviazione, ma dalla necessità di disporre di memorie con prestazioni elevatissime in termini di IOPS (Input/Output Operations Per Second) per sostenere il ritmo di esecuzione. Tale deriva spingerebbe la validazione verso una rete dominata da data center centralizzati, minacciando il fondamento stesso della decentralizzazione e della resistenza alla censura.
 
@@ -94,11 +97,11 @@ Con la transizione dalla fase architetturale di "The Merge" alla roadmap futura 
 
 Storicamente, l'evoluzione della crittografia ha tracciato la roadmap per la sicurezza delle infrastrutture digitali mondiali: l'introduzione delle funzioni di hash, della crittografia a chiave asimmetrica e delle firme digitali ha posto le fondamenta per l'autenticazione e il trasferimento di valore senza intermediari. L'adozione della crittografia Zero-Knowledge (ZK) rappresenta il passo evolutivo successivo.
 
-Le architetture blockchain tradizionali sono intrinsecamente "simmetriche": ogni nodo è costretto a duplicare lo stesso identico sforzo computazionale del nodo che ha prodotto il blocco. L'applicazione delle ZK-Proofs (ZKP) impone un cambio di paradigma radicale: lo sforzo per generare il blocco e la relativa prova crittografica resta oneroso, ma la successiva verifica diviene computazionalmente irrisoria. In un ecosistema basato su ZKP, la validazione computazionale di un blocco contenente diecimila transazioni richiede il medesimo tempo necessario per verificare un blocco contenente una singola transazione.
+Le architetture blockchain tradizionali sono intrinsecamente "simmetriche": ogni nodo è costretto a duplicare lo stesso identico sforzo computazionale del nodo che ha prodotto il blocco. L'applicazione delle Zero-Knowledge Proofs (ZKPs) impone un cambio di paradigma radicale: lo sforzo per generare il blocco e la relativa prova crittografica resta oneroso, ma la successiva verifica diviene computazionalmente trascurabile. In un ecosistema basato su ZKPs, la validazione computazionale di un blocco contenente diecimila transazioni richiede il medesimo tempo necessario per verificare un blocco contenente una singola transazione.
 
-Questo principio si concretizza nel modello topologico "Beast vs. Fort"\cite{lean_ethereum}. Da un lato, le infrastrutture ``Beast Mode`` (Provers/Builders) centralizzate e dotate di cluster hardware ad altissime prestazioni generano i blocchi e le relative prove crittografiche. Dall'altro lato, i validatori in ``Fort Mode`` operano su hardware di fascia consumer, rimuovendo il peso dell'esecuzione e limitandosi a certificare la validità matematica della prova e degli header dei blocchi, garantendo una sicurezza incompromissibile a difesa della rete.
+Questo principio si concretizza nel modello topologico "Beast vs. Fort"\cite{lean_ethereum}. Da un lato, le infrastrutture ``Beast Mode`` (Provers/Builders) centralizzate e dotate di cluster hardware ad altissime prestazioni generano i blocchi e le relative prove crittografiche. Dall'altro lato, i validatori in ``Fort Mode`` operano su hardware di fascia consumer, rimuovendo il peso dell'esecuzione e limitandosi a certificare la validità matematica della prova e degli header dei blocchi, garantendo una sicurezza crittografica a difesa della rete.
 
-L'obiettivo primario di questo lavoro di tesi è l'ingegnerizzazione di \textbf{ZeroNethermind}: un Proof-of-Concept ideato per trasformare il client Execution Layer Nethermind in un nodo ``Fort Mode``, finalizzato a validare i blocchi della Mainnet (L1) utilizzando ZKP, svincolandosi totalmente dalla necessità di mantenere un database di stato locale.
+L'obiettivo primario di questo lavoro di tesi è l'ingegnerizzazione di ZeroNethermind: un Proof-of-Concept ideato per trasformare il client Execution Layer Nethermind in un nodo ``Fort Mode``, finalizzato a validare i blocchi della Mainnet (L1) utilizzando ZKPs, svincolandosi totalmente dalla necessità di mantenere un database di stato locale.
 
 Il presente elaborato apporta i seguenti contributi al panorama dei client Ethereum:
 \begin{itemize}
@@ -111,7 +114,7 @@ Il presente elaborato apporta i seguenti contributi al panorama dei client Ether
 
 Il perimetro della ricerca si focalizza sull'Execution Layer (EL), sulle dinamiche di intercettazione dell'Engine API e sulla fattibilità architetturale dell'approccio stateless. Non rientra negli scopi di questo lavoro l'ingegnerizzazione dell'infrastruttura di proving (Beast Mode), né la generazione locale delle prove crittografiche. Inoltre, la formulazione teorica estesa dei circuiti aritmetici sottostanti i protocolli ZK viene trattata solo in funzione della loro applicazione pratica per la verifica.
 
-Il documento è strutturato come segue. Il \texttt{capitolo~\ref{chap:stato_arte}} presenta lo Stato dell'Arte, analizzando l'architettura di Ethereum, la dicotomia di scalabilità tra Layer~1 e Layer~2, il paradigma dei client stateless e i fondamenti della crittografia Zero-Knowledge, concludendo con una rassegna dei lavori correlati e delle proposte di aggiornamento del protocollo. Il \texttt{capitolo~\ref{chap:zeronethermind}} descrive la progettazione di ZeroNethermind: il paradigma ``Double Zero'', l'architettura a tre strati e il flusso di dati modificato rispetto alla validazione standard. Il \texttt{capitolo~\ref{chap:implementazione}} documenta l'implementazione condotta attraverso tre distinte fasi incrementali. Il \texttt{capitolo~\ref{chap:validazione}} presenta la validazione sperimentale su due fronti: una Demo live sulla Mainnet Ethereum e un ambiente controllato basato su devnet Kurtosis per l'analisi comparativa. Il \texttt{capitolo~\ref{chap:conclusioni}} chiude l'elaborato con le conclusioni, le limitazioni del PoC e le prospettive di sviluppo futuro nel contesto della roadmap di Ethereum.
+Il documento è strutturato come segue. Il \texttt{capitolo~\ref{chap:stato_arte}} presenta lo Stato dell'Arte, analizzando l'architettura di Ethereum, la dicotomia di scalabilità tra Layer~1 e Layer~2, il paradigma dei client stateless e i fondamenti della crittografia Zero-Knowledge, concludendo con una rassegna dei lavori correlati e delle proposte di aggiornamento del protocollo. Il \texttt{capitolo~\ref{chap:zeronethermind}} descrive la progettazione di ZeroNethermind: il paradigma ``Double Zero'', l'architettura a tre strati e il flusso di dati modificato rispetto alla validazione standard. Il \texttt{capitolo~\ref{chap:implementazione}} documenta l'implementazione condotta attraverso tre distinte fasi incrementali. Il \texttt{capitolo~\ref{chap:validazione}} presenta la validazione sperimentale su due fronti: una Demo live sulla Mainnet Ethereum e un ambiente controllato basato su devnet Kurtosis per l'analisi comparativa. Il \texttt{capitolo~\ref{chap:conclusione}} chiude l'elaborato con le conclusioni, le limitazioni del PoC e le prospettive di sviluppo futuro nel contesto della roadmap di Ethereum.
 
 % ============================================================
 %  CAPITOLO 2: STATO DELL'ARTE
@@ -128,7 +131,7 @@ Ethereum è la piattaforma blockchain \textit{general-purpose} più adottata a l
     \item \textbf{Resistenza alla censura:} Nessuna entità centrale, governo o azienda ha l'autorità o la capacità tecnica di bloccare una transazione valida o impedire l'accesso alla rete.
     \item \textbf{Controllo da parte degli utenti:} Tramite l'uso della crittografia a chiave asimmetrica, gli utenti mantengono la piena e unica sovranità sui propri fondi e sui propri dati (\textit{self-custody}).
 \end{itemize}
-La novità dirompente introdotta da Ethereum è stata la creazione del primo "computer globale decentralizzato". A differenza dei paradigmi informatici tradizionali centralizzati (es. servizi cloud gestiti da entità corporative), l'infrastruttura di Ethereum non è localizzata in un singolo luogo fisico. È una macchina virtuale distribuita inestensibile che non può essere spenta, resettata o distrutta. L'accesso richiede unicamente una connessione a Internet, e l'infrastruttura crittografica garantisce uno spazio di indirizzamento enorme: le chiavi private derivano da uno spazio di probabilità pari a $2^{256}$, da cui vengono estratti indirizzi a 160 bit, garantendo virtualmente spazio inesauribile per l'intera popolazione globale senza alcun rischio pratico di collisioni.
+L'innovazione architetturale introdotta da Ethereum è stata la creazione del primo "computer globale decentralizzato". A differenza dei paradigmi informatici tradizionali centralizzati (es. servizi cloud gestiti da entità corporative), l'infrastruttura di Ethereum non è localizzata in un singolo luogo fisico. È una macchina virtuale distribuita che non può essere spenta, resettata o distrutta. L'accesso richiede unicamente una connessione a Internet, e l'infrastruttura crittografica garantisce uno spazio di indirizzamento enorme: le chiavi private derivano da uno spazio di probabilità pari a $2^{256}$, da cui vengono estratti indirizzi a 160 bit, garantendo virtualmente spazio inesauribile per l'intera popolazione globale senza alcun rischio pratico di collisioni.
 
 \subsection{Blockchain Trilemma}
 Sebbene Ethereum funga da computer globale, esso è intrinsecamente più lento e costoso rispetto all'informatica centralizzata. Questa non è un'inefficienza ingegneristica casuale, ma una precisa scelta architetturale legata al "Blockchain Trilemma". Tale postulato afferma che una rete decentralizzata deve bilanciare tre proprietà — Scalabilità, Sicurezza e Decentralizzazione — potendone storicamente massimizzare solo due simultaneamente. 
@@ -136,15 +139,15 @@ Sebbene Ethereum funga da computer globale, esso è intrinsecamente più lento e
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{img/trilemma.png}
-    \caption{Blockchain Trilemma\cite{Network_2025}}
+    \caption{Blockchain Trilemma\cite{trilemma_img}}
     \label{fig:trilemma}
 \end{figure}
 
 Ethereum ha sistematicamente privilegiato Sicurezza e Decentralizzazione.
-I colli di bottiglia primari derivano da due fattori critici:
+I colli di bottiglia primari sono riconducibili a due fattori:
 \begin{enumerate}
-    \item \textbf{Ri-esecuzione $O(N)$:} Per garantire che il sistema sia \textit{trustless}, ogni singolo nodo validatore della rete deve ri-eseguire in modo indipendente ogni singola transazione per verificarne la validità. Questo lavoro massicciamente ridondante impone un costo asintotico $O(N)$ sull'esecuzione, rendendo l'intero network veloce unicamente quanto il suo "nodo più lento".
-    \item \textbf{Latenza di Rete e Consenso:} Ethereum è una rete P2P distribuita globalmente. Per permettere a migliaia di nodi di ricevere i dati, validare i blocchi e raggiungere un accordo probabilistico o deterministico sullo stato della rete, il protocollo impone la rigida divisione del tempo in \textit{Slot} fissi di 12 secondi.
+    \item \textbf{Ri-esecuzione:} Per garantire che il sistema sia \textit{trustless}, ogni singolo nodo validatore della rete deve ri-eseguire in modo indipendente ogni singola transazione per verificarne la validità. Questo lavoro ridondante impone un costo asintotico $O(N_{gas})$ sull'esecuzione, rendendo l'intero network veloce unicamente quanto il suo "nodo più lento".
+    \item \textbf{Latenza di Rete e Consenso:} Ethereum è una rete P2P distribuita globalmente. Per permettere a migliaia di nodi di ricevere i dati, validare i blocchi e raggiungere un accordo probabilistico o deterministico sullo stato della rete, il protocollo impone una divisione del tempo in \textit{Slot} fissi di 12 secondi.
 \end{enumerate}
 
 \subsection{Lo Stato in Ethereum e la Funzione di Transizione}
@@ -155,10 +158,10 @@ La letteratura distingue tra \textit{World State} (Stato Globale) e \textit{Acco
 
 La transizione da uno stato valido al successivo è governata dalla \textit{State Transition Function} (STF) della Ethereum Virtual Machine (EVM). Come definito formalmente nello Yellow Paper\cite{yellow_paper}, l'applicazione di una transazione $T$ allo stato pre-esistente $\sigma_t$ genera un nuovo stato valido $\sigma_{t+1}$:\begin{equation}\sigma_{t+1} \equiv \Upsilon(\sigma_t, T)\end{equation}
 
-Per garantire l'integrità crittografica di questo immenso database (che oggi pesa svariate centinaia di gigabyte, superando il terabyte per i nodi \textit{Archive}), Ethereum non utilizza un database relazionale standard, bensì un albero crittografico chiamato \textbf{Merkle Patricia Trie} (MPT). L'MPT funge da database autenticato composto da quattro tipologie di nodi: \textit{Branch} (nodi di diramazione a 16 vie), \textit{Extension} (nodi che comprimono percorsi comuni), \textit{Leaf} (nodi foglia contenenti il valore finale) e \textit{Empty} (nodi nulli). I dati grezzi serializzati di questo albero vengono fisicamente persistiti su disco tramite motori di database chiave-valore ad alte prestazioni come LevelDB o RocksDB. Tuttavia, il costo computazionale e di I/O (Input/Output) di questa architettura è estremamente gravoso: per ogni operazione di persistenza e aggiornamento, l'EVM deve ricalcolare crittograficamente gli hash partendo dal nodo foglia modificato e risalendo l'intero albero fino alla radice. Man mano che l'MPT cresce in dimensione e profondità, questo meccanismo di autenticazione genera una severa amplificazione delle operazioni di lettura e scrittura su disco (\textit{read/write amplification}), arrivando a pesare fino a 64 accessi al database per una singola operazione nel caso peggiore. Questo rende la ri-esecuzione $O(N)$ delle transazioni un problema prevalentemente \textit{I/O-bound} (limitato dalla latenza e dall'accesso sequenziale/casuale allo storage) e non puramente \textit{CPU-bound}. L'hash della radice del nuovo albero globale (\textit{State Root}) viene infine calcolato e inserito nell'intestazione di ogni nuovo blocco per sigillarne la validità.
+Per garantire l'integrità crittografica di questo immenso database (che oggi pesa svariate centinaia di gigabyte, superando il terabyte per i nodi \textit{Archive}), Ethereum non utilizza un database relazionale standard, bensì un albero crittografico chiamato Merkle Patricia Trie (MPT). L'MPT funge da database autenticato composto da quattro tipologie di nodi: \textit{Branch} (nodi di diramazione a 16 vie), \textit{Extension} (nodi che comprimono percorsi comuni), \textit{Leaf} (nodi foglia contenenti il valore finale) e \textit{Empty} (nodi nulli). I dati grezzi serializzati di questo albero vengono fisicamente persistiti su disco tramite motori di database chiave-valore ad alte prestazioni come LevelDB o RocksDB. Tuttavia, il costo computazionale e di I/O (Input/Output) di questa architettura è estremamente gravoso: per ogni operazione di persistenza e aggiornamento, l'EVM deve ricalcolare crittograficamente gli hash partendo dal nodo foglia modificato e risalendo l'intero albero fino alla radice. Man mano che l'MPT cresce in dimensione e profondità, questo meccanismo di autenticazione genera una severa amplificazione delle operazioni di lettura e scrittura su disco (\textit{read/write amplification}), arrivando a pesare fino a 64 accessi al database per una singola operazione nel caso peggiore. Questo rende la ri-esecuzione $O(N_{gas})$ delle transazioni un problema prevalentemente \textit{I/O-bound} (limitato dalla latenza e dall'accesso sequenziale/casuale allo storage) e non puramente \textit{CPU-bound}. L'hash della radice del nuovo albero globale (\textit{State Root}) viene infine calcolato e inserito nell'intestazione di ogni nuovo blocco per sigillarne la validità.
 
 \subsection{Gas Limit and Bottlenecks}
-Il \textit{Gas} è l'unità di misura dello sforzo computazionale richiesto per eseguire un'operazione nell'EVM. Poiché Ethereum impone la re-esecuzione $O(N)$ su tutti i nodi, la rete deve autoproteggersi dal problema dell'arresto (Halting Problem) e dal consumo illimitato di risorse. Questo avviene tramite il \textit{Block Gas Limit}, un tetto massimo assoluto alla quantità di calcoli effettuabili in un singolo blocco (attualmente intorno ai 36 milioni di gas, in lenta evoluzione e oggetto di intensi dibattiti per aumenti fino a 60 milioni).
+Il \textit{Gas} è l'unità di misura dello sforzo computazionale richiesto per eseguire un'operazione nell'EVM. Poiché Ethereum impone la ri-esecuzione su tutti i nodi, la rete deve autoproteggersi dal problema dell'arresto (Halting Problem) e dal consumo illimitato di risorse. Questo avviene tramite il \textit{Block Gas Limit}, un tetto massimo assoluto alla quantità di calcoli effettuabili in un singolo blocco (attualmente intorno ai 36 milioni di gas, in lenta evoluzione e oggetto di intensi dibattiti per aumenti fino a 60 milioni).
 
 Aumentare "semplicemente" il Gas Limit comporterebbe un incremento drastico del carico computazionale, della larghezza di banda e dei requisiti di RAM e storage (SSD NVMe). L'aggravarsi dello \textit{State Bloat} — l'accumulo permanente di dati di stato — e l'aumento dell'onere di validazione spingerebbero inevitabilmente l'hardware di livello consumer fuori dalla rete, delegando il consenso a data center professionali e distruggendo la neutralità credibile dell'infrastruttura.
 
@@ -170,7 +173,20 @@ A seguito dell'aggiornamento "The Merge" (transizione al meccanismo Proof-of-Sta
     \item \textbf{Consensus Layer (CL):} Noto anche come \textit{Beacon Node} (es. Lighthouse, Prysm), questo strato è agnostico rispetto all'esecuzione degli \textit{smart contract}. Il suo compito è governare il protocollo di consenso Proof-of-Stake: coordina i turni dei validatori, propaga i blocchi tramite rete gossip, aggrega le firme (\textit{attestations}) e applica la regola di scelta del fork (\textit{Fork Choice Rule}) per stabilire la catena canonica
 \end{itemize}
 
-Questi due livelli comunicano in modo bidirezionale, sicuro e standardizzato tramite una suite di interfacce JSON-RPC nota come \textbf{Engine API}.
+Questi due livelli comunicano in modo bidirezionale, sicuro e standardizzato tramite una suite di interfacce JSON-RPC nota come Engine API.
+
+\subsection{Nethermind Client}
+
+Nethermind è uno dei principali client dell'Execution Layer per Ethereum, sviluppato interamente in C\#/.NET. Il progetto è entrato in produzione nel 2019 e rappresenta, insieme a Geth (Go Ethereum) e Reth (Rust Ethereum), uno dei tre client EL più diffusi nella rete mainnet, contribuendo attivamente alla diversità del protocollo.
+
+I requisiti hardware\cite{nethermind_requirements} per eseguire un nodo Nethermind in piena validazione sono significativi e in costante crescita:
+\begin{itemize}
+    \item \textbf{CPU:} 4 o più core.
+    \item \textbf{RAM:} Almeno 16\,GB (32\,GB consigliati per prestazioni ottimali).
+    \item \textbf{Storage:} Oltre 2\,TB di NVMe SSD ad alte prestazioni (min 10.000 IOPS).
+\end{itemize}
+
+Nethermind impiega RocksDB\cite{nethermind_database}, un motore di database chiave-valore ad alte prestazioni, per la persistenza su disco. I dati sono organizzati in circa sei categorie (State, Receipts, Blocks, Headers, Code, Metadata), con il solo database di stato che supera i 150\,GB. L'intera base dati, comprensiva dello storico dei blocchi e delle ricevute, raggiunge e supera 1\,TB. Questa massiccia impronta di storage, unita alla necessità di IOPS elevati, rappresenta la barriera primaria che rischia di escludere l'hardware di livello consumer dalla partecipazione attiva alla rete in futuro.
 
 \subsection{Flusso di Validazione di un Blocco e l'Engine API}\label{sec:validazione_standard}
 
@@ -198,24 +214,24 @@ Storicamente, in risposta al severo limite intrinseco di transazioni al secondo 
 Esistono due approcci principali per garantire che l'esecuzione avvenuta su L2 sia valida quando viene finalizzata su L1:
 \begin{itemize}
   \item \textbf{Optimistic Rollups:} Assumono per default che tutte le transazioni processate siano corrette. La sicurezza è garantita da un meccanismo di risoluzione delle dispute (\textit{Fraud Proofs}), che introduce tuttavia una latenza significativa (tipicamente di 7 giorni) prima che le transazioni raggiungano la finalità inoppugnabile sul L1.
-  \item \textbf{ZK-Rollups:} Sfruttano le \textit{Validity Proofs} (prove crittografiche come SNARK o STARK) generate \textit{off-chain} per certificare l'integrità matematica di ogni batch di transazioni. Questo approccio garantisce la correttezza a priori e consente un \textit{settlement} sul L1 pressoché immediato senza periodi di contestazione.
+  \item \textbf{ZK-Rollups:} Sfruttano le \textit{Validity Proofs} (prove crittografiche come SNARK o STARK) generate \textit{off-chain} per certificare l'integrità matematica di ogni batch di transazioni. Questo approccio garantisce la correttezza a priori e consente un settlement sul L1 vincolato unicamente dal tempo di generazione della prova crittografica
 \end{itemize}
 
 \subsection{Criticità degli L2 attuali}
 
-Nonostante il proliferare delle soluzioni L2, la loro architettura corrente presenta criticità sistemiche che contraddicono l'etica decentralizzata del L1. L'illusione di ereditare passivamente la sicurezza di Ethereum nasconde spesso l'impiego di \textit{Training Wheels}: meccanismi di salvaguardia centralizzati che conferiscono a pochi attori il potere di alterare il protocollo.
+Nonostante il proliferare delle soluzioni L2, la loro architettura corrente presenta criticità sistemiche che contraddicono l'etica decentralizzata del L1. L'assunto di ereditare passivamente la sicurezza di Ethereum nasconde spesso l'impiego di \textit{Training Wheels}: meccanismi di salvaguardia centralizzati che conferiscono a pochi attori il potere di alterare il protocollo.
 
 Analizzando il framework di classificazione \textit{L2Beat}\cite{l2beat}, si osserva che la quasi totalità degli L2 attuali si trova allo "Stage 0" o "Stage 1" di maturità decentralizzata. Questi network si affidano a \textit{Sequencer} operati da singole entità corporative e a \textit{Security Council} governati da chiavi \textit{multisig} capaci di sovrascrivere l'esecuzione o imporre aggiornamenti forzati degli smart contract di convalida.
 
-Questa situazione ha portato a una profonda ricalibrazione teorica, evidenziata dalle recenti riflessioni di Vitalik Buterin: un L2 che non offre solide garanzie crittografiche \textit{trustless} non sta realmente scalando Ethereum, ma sta operando come un L1 indipendente mascherato da L2 tramite un bridge centralizzato. Per formalizzare questo concetto, è stato introdotto l'\textit{Ethereum Settlement Score} (ESS), una metrica che quantifica il grado in cui un L2 utilizza in modo inoppugnabile il livello di base per finalizzare le transazioni.
+Questa situazione ha portato a una profonda ricalibrazione teorica: un L2 che non offre solide garanzie crittografiche \textit{trustless} non sta realmente scalando Ethereum, ma sta operando come un L1 indipendente mascherato da L2 tramite un bridge centralizzato. Per formalizzare questo concetto, è stato introdotto l'\textit{Ethereum Settlement Score} (ESS), una metrica che quantifica il grado in cui un L2 utilizza in modo inoppugnabile il livello di base per finalizzare le transazioni.
 
 A livello di ecosistema, questa proliferazione orizzontale di Rollup imperfetti ha inoltre frammentato drasticamente la liquidità e distrutto la \textit{Synchronous Composability} — la capacità degli smart contract di interagire atomicamente tra loro all'interno del medesimo blocco, una proprietà fondamentale che aveva alimentato il successo della Finanza Decentralizzata (DeFi) sul Layer 1.
 
 \subsection{Il Cambio di Paradigma: Scalare L1 tramite ZK}
 
-Il superamento delle vulnerabilità degli L2 richiede un ritorno al potenziamento del Layer 1, abbandonando il paradigma in cui "tutti calcolano tutto" in favore di un modello in cui "uno calcola, tutti verificano". Questo rappresenta il salto architetturale dal calcolo ridondante ($N$-of-$N$) alla verifica crittografica ($1$-of-$N$). L'esecuzione di computazioni complesse richiede tempi lineari o polinomiali rispetto all'input ($O(N)$), mentre la verifica di una prova ZK richiede un tempo costante, riducendo l'onere computazionale asintotico a $O(1)$.
+Il superamento delle vulnerabilità degli L2 richiede un ritorno al potenziamento del Layer 1, abbandonando il paradigma in cui "tutti calcolano tutto" in favore di un modello in cui "uno calcola, tutti verificano". Questo rappresenta il salto architetturale dal calcolo ridondante ($N$-of-$N$) alla verifica crittografica ($1$-of-$N$).
 
-Questo principio è stato formalizzato dal ricercatore della Ethereum Foundation Justin Drake \cite{lean_ethereum} attraverso la dicotomia architetturale nota come \textbf{Beast Mode vs. Fort Mode}:
+Questo principio è stato formalizzato dal ricercatore della Ethereum Foundation Justin Drake \cite{lean_ethereum} attraverso la dicotomia architetturale nota come Beast Mode vs. Fort Mode:
 \begin{itemize}
   \item \textbf{Beast Mode:} Prevede l'esternalizzazione dell'esecuzione massiva e della generazione delle prove crittografiche a \textit{Provers} e \textit{Builders} operanti su infrastrutture di livello data-center. L'obiettivo prestazionale è spingere il limite di elaborazione del L1 verso la frontiera del \textit{GigaGas/s} (fino a 10.000 TPS), superando i limiti dei server general-purpose.
   \item \textbf{Fort Mode:} Rappresenta il baluardo della decentralizzazione. I validatori cessano di eseguire l'EVM nativamente per diventare validatori "ultra-leggeri". Grazie alla asimmetria computazionale fornita dalla crittografia ZK, questi nodi possono operare su hardware di consumo (laptop, smartphone o persino smartwatch) limitandosi a certificare matematicamente le prove generate dalle "Beast".
@@ -237,7 +253,7 @@ Questo principio è stato formalizzato dal ricercatore della Ethereum Foundation
         \hline
         \textbf{Storage (Stato L1)} & Terabyte & 0 GB (MemDB) \\
         \hline
-        \textbf{Complessità Computazionale} & $O(N)$ - proporzionale al volume delle transazioni & $O(1)$ \\
+        \textbf{Complessità Computazionale} & $O(N_{gas})$ - proporzionale al volume delle transazioni & $O(1)$ \\
         \hline
         \textbf{Obiettivo di Rete} & Scalare Ethereum a 10k+ TPS (GigaGas). & Resistenza incompromissibile alla censura e sicurezza \\
         \hline
@@ -351,13 +367,13 @@ Per l'integrazione di questi client, stanno emergendo due pattern principali:
 
 \section{Zero Knowledge}
 
-L'evoluzione della crittografia informatica può essere suddivisa in due generazioni distinte. La "Prima Generazione" era caratterizzata da algoritmi \textit{special-purpose}, realizzati artigianalmente per assolvere compiti altamente specifici, come le funzioni di hash per l'integrità o le firme digitali per l'autenticazione delle transazioni. L'avvento della "Seconda Generazione" segna invece il passaggio alla crittografia \textit{general-purpose}. Introdotta formalmente alla fine degli anni Ottanta dai crittografi Goldwasser, Micali e Rackoff, la crittografia Zero-Knowledge (ZK) ne rappresenta la massima espressione, conferendo l'abilità inedita di formulare asserti crittografici su computazioni del tutto arbitrarie e Turing-complete. Una dimostrazione a conoscenza zero (Zero-Knowledge Proof, ZKP) permette a un'entità di provare matematicamente la veridicità di un'affermazione senza rivelare alcuna informazione sottostante o dato segreto. Questa tecnologia detiene il potere di trasferire il modello di fiducia dalle istituzioni centralizzate o dall'hardware specializzato direttamente all'infallibilità della matematica pura. 
+L'evoluzione della crittografia informatica può essere suddivisa in due generazioni distinte. La "Prima Generazione" era caratterizzata da algoritmi \textit{special-purpose}, realizzati artigianalmente per assolvere compiti altamente specifici, come le funzioni di hash per l'integrità o le firme digitali per l'autenticazione delle transazioni. L'avvento della "Seconda Generazione" segna invece il passaggio alla crittografia \textit{general-purpose}. Introdotta formalmente alla fine degli anni Ottanta dai crittografi Goldwasser, Micali e Rackoff, la crittografia Zero-Knowledge\cite{zero-knowledge} (ZK) ne rappresenta un'espressione particolarmente rilevante, conferendo l'abilità inedita di formulare asserti crittografici su computazioni del tutto arbitrarie e Turing-complete. Una dimostrazione a conoscenza zero (Zero-Knowledge Proof, ZKP) permette a un'entità di provare matematicamente la veridicità di un'affermazione senza rivelare alcuna informazione sottostante o dato segreto. Questa tecnologia detiene il potere di trasferire il modello di fiducia dalle istituzioni centralizzate o dall'hardware specializzato direttamente all'infallibilità della matematica pura. 
 
-A livello applicativo, i protocolli ZK abilitano una vasta gamma di casi d'uso trasversali. In ambito di identità digitale (ZK-ID e ZK-KYC), permettono a un utente di dimostrare il superamento di controlli anagrafici (ad esempio, l'essere maggiorenne) o il possesso di fondi sufficienti per una transazione, senza esporre la propria data di nascita o il saldo bancario reale. Nel settore finanziario istituzionale, le ZKP garantiscono la conformità alle normative antiriciclaggio (AML) e alle sanzioni, mantenendo contemporaneamente private le posizioni dei clienti e le strategie di trading. Nel panorama del calcolo distribuito in cloud, consentono inoltre di delegare carichi di lavoro computazionalmente onerosi a server non fidati, i quali restituiscono il risultato accompagnato da un certificato matematico di corretta esecuzione verificabile in tempo reale.  
+A livello applicativo, i protocolli ZK abilitano una vasta gamma di casi d'uso trasversali. In ambito di identità digitale (ZK-ID e ZK-KYC), permettono a un utente di dimostrare il superamento di controlli anagrafici (ad esempio, l'essere maggiorenne) o il possesso di fondi sufficienti per una transazione, senza esporre la propria data di nascita o il saldo bancario reale. Nel settore finanziario istituzionale, le ZKPs garantiscono la conformità alle normative antiriciclaggio (AML) e alle sanzioni, mantenendo contemporaneamente private le posizioni dei clienti e le strategie di trading. Nel panorama del calcolo distribuito in cloud, consentono inoltre di delegare carichi di lavoro computazionalmente onerosi a server non fidati, i quali restituiscono il risultato accompagnato da un certificato matematico di corretta esecuzione verificabile in tempo reale.  
 
 È proprio su quest'ultimo aspetto che si basa la transizione di Ethereum verso la \textit{statelessness} e la scalabilità massiva, attraverso l'adozione di prove crittografiche succinte e non interattive (SNARG/SNARK). Il principio matematico fondante di questi protocolli in ottica di scalabilità risiede nell'introduzione di una netta asimmetria computazionale tra le entità partecipanti: da un lato figura il \textit{Prover}, una macchina dotata di altissima capacità di calcolo incaricata di eseguire la computazione e generare la prova crittografica; dall'altro opera il \textit{Verifier}, un nodo con risorse hardware limitate il cui unico onere è controllare rigorosamente la validità della prova ricevuta.  
 
-In ambito blockchain, e in particolare nell'ecosistema Ethereum, è tuttavia doverosa una precisazione accademica formale: l'utilizzo del termine "Zero-Knowledge" (ZK) rappresenta spesso un \textit{misnomer} (un'inesattezza terminologica). La proprietà fondamentale che le cosiddette "zkEVM" sfruttano per abbattere il collo di bottiglia dell'esecuzione non è la \textit{privacy} (ovvero l'occultamento dei dati transazionali), bensì la \textbf{succintezza} (\textit{succinctness}). Di conseguenza, a livello ingegneristico, architetture come ZeroNethermind andrebbero più correttamente definite come \textit{Succinct EVMs} o \textit{SNARG-EVMs}.
+In ambito blockchain, e in particolare nell'ecosistema Ethereum, è tuttavia doverosa una precisazione accademica formale: l'utilizzo del termine "Zero-Knowledge" (ZK) rappresenta spesso un \textit{misnomer} (un'inesattezza terminologica). La proprietà fondamentale che le cosiddette "zkEVM" sfruttano per abbattere il collo di bottiglia dell'esecuzione non è la \textit{privacy} (ovvero l'occultamento dei dati transazionali), bensì la succintezza (\textit{succinctness}). Di conseguenza, a livello ingegneristico, architetture come ZeroNethermind andrebbero più correttamente definite come \textit{Succinct EVMs} o \textit{SNARG-EVMs}.
 
 \subsection{L'Interfaccia di una zkVM}
 
@@ -374,11 +390,11 @@ Affinché la rete possa delegare in sicurezza l'esecuzione \textit{trustless}, i
 \begin{enumerate}
     \item \textbf{Completeness (Completezza):} Se l'affermazione computazionale è vera e il \textit{Prover} si comporta in modo onesto, il \textit{Verifier} accetterà sempre la prova. Questa proprietà è cruciale per preservare la \textit{liveness} della blockchain, evitando falsi negativi che bloccherebbero il progresso della catena.
     \item \textbf{Soundness (Solidità/Robustezza):} Se l'affermazione è falsa, nessun avversario computazionalmente limitato può generare una prova valida, se non con probabilità trascurabile. Nelle zkVM, si fa ricorso alla \textit{Knowledge Soundness}, la quale impone che il \textit{Prover} non solo calcoli il risultato, ma conosca effettivamente l'intera traccia dell'esecuzione (\textit{witness}) per poter costruire la prova.
-    \item \textbf{Succinctness (Succintezza):} Rappresenta la chiave di volta per risolvere il trilemma della scalabilità. La dimensione della prova e, soprattutto, il tempo di verifica computazionale risultano sublineari rispetto al tempo necessario per la ri-esecuzione nativa $O(N)$ del programma, assestandosi su tempi di risoluzione costanti ($O(1)$) o polilogaritmici.\end{enumerate}
+    \item \textbf{Succinctness (Succintezza):} Rappresenta la chiave di volta per risolvere il trilemma della scalabilità. La dimensione della prova e, soprattutto, il tempo di verifica computazionale risultano sublineari rispetto al tempo necessario per la ri-esecuzione nativa del programma, assestandosi su tempi di risoluzione costanti ($O(1)$) o polilogaritmici.\end{enumerate}
 
 \subsection{Problemi Architetturali Risolti dalle zkEVM}
 
-La scalabilità di qualsiasi architettura blockchain si scontra universalmente con tre vincoli fondamentali: \textit{Compute}, \textit{I/O} e \textit{Bandwidth}. L'introduzione delle zkEVM interviene per mitigare congiuntamente queste limitazioni architetturali. In primo luogo, il vincolo del calcolo viene risolto direttamente dalla natura stessa delle prove ZK, che comprimono l'onere computazionale in una verifica crittografica pressoché istantanea. In secondo luogo, il vincolo dell'I/O viene risolto indirettamente: non dovendo ri-eseguire le transazioni nell'EVM, i nodi sono sollevati dall'obbligo di caricare e aggiornare costantemente l'enorme database di stato locale, abilitando di fatto operazioni parzialmente o totalmente \textit{stateless}. Infine, il problema della larghezza di banda viene affrontato accoppiando il paradigma ZK con meccanismi di Data Availability Sampling (DAS), permettendo alla rete di attestare la disponibilità dei dati e dei blocchi compressi senza forzare i nodi al download integrale di tutte le transazioni storiche.
+La scalabilità di qualsiasi architettura blockchain si scontra universalmente con tre vincoli fondamentali: \textit{Compute}, \textit{I/O} e \textit{Bandwidth}. L'introduzione delle zkEVM, progettata specificamente per dimostrare l'esecuzione corretta della state transition function di Ethereum, interviene per mitigare congiuntamente queste limitazioni architetturali. In primo luogo, il vincolo del calcolo viene risolto direttamente dalla natura stessa delle prove ZK, che comprimono l'onere computazionale in una verifica crittografica pressoché istantanea. In secondo luogo, il vincolo dell'I/O viene risolto indirettamente: non dovendo ri-eseguire le transazioni nell'EVM, i nodi sono sollevati dall'obbligo di caricare e aggiornare costantemente l'enorme database di stato locale, abilitando di fatto operazioni parzialmente o totalmente \textit{stateless}. Infine, il problema della larghezza di banda viene affrontato accoppiando il paradigma ZK con meccanismi di Data Availability Sampling (DAS), permettendo alla rete di attestare la disponibilità dei dati e dei blocchi compressi senza forzare i nodi al download integrale di tutte le transazioni storiche.
 
 Nel protocollo attuale, il throughput è strettamente vincolato dal \textit{Block Gas Limit}. Un suo incremento richiederebbe ai validatori hardware sempre più costoso per sostenere la ri-esecuzione completa, accentrando il consenso. Nelle zkEVM, invece, un singolo \textit{builder} esegue l'intero blocco e un \textit{prover} ne genera la prova crittografica. I validatori si limitano al \textit{proof checking}, un'operazione asintoticamente più economica. Questo paradigma $1$-of-$N$ permette di innalzare il limite di gas in totale sicurezza: espandendo la capacità dei blocchi si spalma l'alta domanda su una maggiore disponibilità di spazio, stabilizzando e abbattendo i prezzi delle commissioni.
 
@@ -386,95 +402,15 @@ Parallelamente, delegare il carico computazionale ai \textit{prover} previene i 
 
 Separando nettamente la fase di esecuzione massiva da quella di validazione, le zkEVM trasformano radicalmente il modello di scalabilità di Ethereum verso un'architettura unificata. Questa dicotomia genera un mercato dell'esecuzione altamente competitivo che incentiva l'ottimizzazione dell'hardware specializzato per i \textit{prover}, garantendo parallelamente una massiccia diversità dei validatori tramite l'empowerment di nodi leggeri. Il risultato finale è un throughput elastico e sicuro, che consente alla capacità del Layer 1 di crescere senza mai compromettere la decentralizzazione e l'accessibilità della rete.
 
-\section{Lavori Correlati}
-
-L'architettura e i principi di design alla base del progetto presentano radici in un filone di ricerca ampio e in rapida evoluzione, che spazia dalla teoria dei sistemi distribuiti fino alle più recenti proposte di aggiornamento del protocollo Ethereum (EIP). Questa sezione analizza la letteratura e i progetti fondamentali che fanno da preludio all'implementazione di un nodo validatore Layer 1 (L1) basato su zkEVM, inserendo il prototipo \textit{ZeroNethermind} nel contesto della roadmap ufficiale.
-
-\subsection{Il Trilemma della Blockchain e i Client Leggeri}
-
-Storicamente, il design dei registri distribuiti è stato dominato dal concetto del \textit{Blockchain Trilemma}, un'euristica che postula l'impossibilità di massimizzare simultaneamente scalabilità, sicurezza e decentralizzazione. Tuttavia, recenti analisi formali \cite{trilemma} hanno confutato la natura assoluta di questo trilemma, dimostrando che esso deriva spesso da un'equivocazione semantica e dall'errata applicazione di teoremi propri dei sistemi distribuiti classici a protocolli basati su prove crittografiche. In reti come Ethereum, la sicurezza non emerge dalla ridondanza simmetrica della computazione di tutti i nodi, ma dalla disseminazione di prove crittografiche. Di conseguenza, la scalabilità non è un compromesso obbligato contro la decentralizzazione, ma un risultato ingegneristico raggiungibile disaccoppiando la produzione delle prove dalla loro verifica.
-
-Questa necessità di disaccoppiamento richiama il concetto storico di \textit{Light Client}. Come sistematizzato nel documento \textit{SoK: Blockchain Light Clients} \cite{blockchain_light_clients}, i client leggeri permettono di interagire con la blockchain senza memorizzarne l'intera cronologia. Mentre i light client tradizionali si affidano ad assunzioni di fiducia, la ricerca moderna si sta orientando sull'utilizzo di accumulatori crittografici e zk-SNARKs per permettere a dispositivi con risorse limitate di verificare matematicamente l'integrità del sistema in modalità pienamente \textit{trustless}.
-
-\subsection{The Verge e la "Statelessness" di Ethereum}
-
-Il superamento dei limiti computazionali dei nodi è il nucleo della fase di sviluppo della roadmap di Ethereum nota come \textit{The Verge} \cite{verge_2024}. L'obiettivo primario è democratizzare la validazione, rendendola così efficiente da poter essere eseguita su dispositivi di largo consumo (smartphone o smartwatch). 
-
-Attualmente, un nodo Ethereum richiede la memorizzazione di un database di stato in continua crescita, creando un collo di bottiglia I/O che innalza le barriere all'ingresso e spinge verso la centralizzazione. Il paradigma \textit{Stateless Ethereum} \cite{stateless_book} risolve questo problema trasformando i blocchi in unità di esecuzione auto-contenute: anziché interrogare un database locale, il nodo stateless riceve un blocco accompagnato da un \textit{witness} (testimone) e da una prova crittografica che ne attesta la validità. 
-
-A supporto di questa profonda transizione strutturale, è stata proposta l'\textbf{EIP-4762} (\textit{Statelessness gas cost changes}) \cite{eip4762}. Questa proposta introduce una rimodulazione dei costi del gas per riflettere accuratamente l'onere crittografico della generazione dei witness, disincentivando operazioni di stato che renderebbero le prove crittografiche troppo pesanti o complesse da generare.
-
-\subsection{Il Panorama dei Layer 2 e l'Analisi dei Rischi}
-
-Fino ad oggi, l'onere della scalabilità è stato delegato ai Layer 2 (L2) tramite la \textit{rollup-centric roadmap}. Piattaforme analitiche come \textbf{L2BEAT} \cite{l2beat} svolgono un ruolo cruciale nel valutare i compromessi di sicurezza di queste architetture, dimostrando come i rollup attuali si collochino su uno "spettro di fiducia". Molte soluzioni operano ancora in \textit{Stage 1}, basandosi su sequencer centralizzati, bridge controllati da multisig e \textit{Security Councils} autorizzati a forzare l'aggiornamento dello stato. 
-
-Per mitigare questi vettori di centralizzazione e i rischi derivanti da un ecosistema frammentato, la ricerca sta virando verso l'integrazione nativa delle prove ZK nel Layer 1 (\textit{Enshrined zkEVM}). Questa mossa mira a unificare le garanzie di sicurezza dell'ecosistema, dimostrando che la tecnologia zkVM, maturata sui Layer 2, è pronta per il livello base del protocollo.
-
-\subsection{Lean Ethereum: Il Cambio di Paradigma}
-
-Il cambio di paradigma di Lean Ethereuem introdotto da Justin Drake, che passa dal modello \textit{"Trust but Verify"} al modello \textit{"Verify the Math"}, è delineato nella \textbf{L1-zkEVM Roadmap 2026} \cite{l1_zkevm_roadmap}. Tale documento definisce il flusso end-to-end che parte da un \textit{Execution Client} (che genera l'\textit{ExecutionWitness}), passa per un programma ospite zkVM e un Prover, per finire al nodo validatore che ne asserisce la validità.
-
-In questa direzione, l'\textbf{EIP-8025} (\textit{Optional Execution Proofs}) \cite{eip8025} rappresenta un passo fondamentale: introduce una modifica opzionale a livello di consenso che permette ai nodi Beacon di verificare la validità dei payload di esecuzione tramite prove ZK, senza dover interrogare un client di esecuzione locale.
-
-\subsection{L'Ecosistema zkVM: Implementazioni e Competizione}
-
-L'implementazione pratica del \textit{real-time proving} poggia su macchine virtuali a conoscenza zero (zkVM) capaci di interpretare set di istruzioni, monitorate attivamente da portali come \textit{zkevm.fyi} \cite{zkevm_book}. Tra i progetti di punta figurano:
-\begin{itemize}
-    \item \textbf{SP1}\cite{sp1} (Succinct Labs): Una zkVM \textit{general-purpose} ad alte prestazioni basata sull'architettura RISC-V, che permette di generare prove per programmi compilati in Rust (o tramite LLVM).
-    \item \textbf{ZisK}\cite{zisk} (Polygon): Un'architettura zkVM altamente specializzata, progettata specificamente per l'esecuzione rapida e la generazione di prove per transazioni compatibili con l'EVM.
-\end{itemize}
-La coesistenza e la competizione tra questi \textit{prover} sono vitali per garantire la \textit{client diversity} anche a livello crittografico, scongiurando singoli punti di fallimento (es. bug in un circuito ZK) richiedendo \textit{multi-proofs} per l'accettazione di un blocco.
-
-\subsection{Prototipi e L1 Strawmap}
-
-La validità di questo approccio è stata dimostrata sul campo durante conferenze di settore come il Devconnect. In tale occasione, è stata presentata \textbf{zkLighthouse} \cite{zkLighthouse_demo}, una versione modificata del client di consenso Lighthouse. Operando su hardware di largo consumo, questo nodo ha bypassato completamente l'uso di un \textit{Execution Client} classico (come Geth o Nethermind), validando i blocchi della Mainnet in tempo reale. Il sistema si limitava ad ascoltare un canale P2P dedicato, verificando in millisecondi le prove prodotte da cluster di prover esterni.
-
-L'intero sforzo architetturale si condensa infine nella \textbf{L1 Strawmap} (\textit{strawmap.org}) \cite{strawmap}, una bozza di roadmap mantenuta dal team della Ethereum Foundation. Questa mappa unifica gli aggiornamenti in tre filoni (Consenso, Dati, Esecuzione) e fissa le pietre miliari del protocollo, tra cui la transizione a un \textit{Gigagas L1} (10.000 TPS) resa possibile proprio dall'integrazione delle prove zkEVM e del \textit{real-time proving}.
-
-Lo sviluppo del presente lavoro di tesi si inserisce esattamente all'incrocio di queste tecnologie, proponendo la re-ingegnerizzazione di un \textit{Execution Layer} \textit{stateless} in grado di agire come puro validatore di prove all'interno del framework \textit{Fort Mode} delineato dal futuro del protocollo Ethereum.
-
-% ============================================================
-%  CAPITOLO 3: ZERONETHERMIND
-% ============================================================
-\chapter{ZeroNethermind}\label{chap:zeronethermind}
-
-Questo capitolo presenta la progettazione ad alto livello di ZeroNethermind, sviluppato per dimostrare la fattibilità di un Execution Layer completamente \textit{stateless} basato sulla verifica di prove crittografiche Zero-Knowledge. L'analisi parte dall'esame del client \texttt{Nethermind} e dell'infrastruttura esterna \texttt{ethproofs.org}, per poi descrivere il modello architetturale del "Validatore Stateless" e la progettazione dei componenti core del sistema. I dettagli implementativi saranno trattati nel \texttt{capitolo \ref{chap:implementazione}}, mentre la validazione sperimentale nel \texttt{capitolo \ref{chap:validazione}}.
-
-\section{Nethermind Client}
-
-Nethermind è uno dei principali client dell'Execution Layer per Ethereum, sviluppato interamente in C\#/.NET. Il progetto è entrato in produzione nel 2019 e rappresenta, insieme a Geth (Go Ethereum) e Reth (Rust Ethereum), uno dei tre client EL più diffusi nella rete mainnet, contribuendo attivamente alla diversità del protocollo.
-
-\subsection{Requisiti di Sistema}
-
-I requisiti hardware\cite{nethermind_requirements} per eseguire un nodo Nethermind in piena validazione sono significativi e in costante crescita:
-\begin{itemize}
-    \item \textbf{CPU:} 4 o più core.
-    \item \textbf{RAM:} Almeno 16\,GB (32\,GB consigliati per prestazioni ottimali).
-    \item \textbf{Storage:} Oltre \textbf{2\,TB di NVMe SSD} ad alte prestazioni (min 10.000 IOPS).
-\end{itemize}
-
-Nethermind impiega \textbf{RocksDB}\cite{nethermind_database}, un motore di database chiave-valore ad alte prestazioni, per la persistenza su disco. I dati sono organizzati in circa sei categorie (State, Receipts, Blocks, Headers, Code, Metadata), con il solo database di stato che supera i 150\,GB. L'intera base dati, comprensiva dello storico dei blocchi e delle ricevute, raggiunge e supera 1\,TB. Questa massiccia impronta di storage, unita alla necessità di IOPS elevati, rappresenta la barriera primaria che rischia di escludere l'hardware di livello consumer dalla partecipazione attiva alla rete in futuro.
-
-\subsection{Il Flusso di Validazione Standard}
-
-Come descritto nel \texttt{capitolo \ref{chap:introduzione}}, la comunicazione tra Consensus Layer (CL) ed Execution Layer (EL) avviene tramite l'\textbf{Engine API}, un insieme di metodi JSON-RPC su canale autenticato. Le due chiamate centrali nel flusso di validazione sono:
-\begin{enumerate}
-    \item \texttt{engine\_newPayload}: il CL invia un \texttt{ExecutionPayload} contenente i dati del blocco. L'EL standard \textbf{ri-esegue tutte le transazioni} nell'EVM, ricalcola lo \texttt{stateRoot} e restituisce uno status \texttt{VALID} o \texttt{INVALID}.
-    \item \texttt{engine\_forkchoiceUpdated}: il CL comunica all'EL gli hash dei blocchi \texttt{head}, \texttt{safe} e \texttt{finalized}. L'EL aggiorna di conseguenza la propria catena canonica.
-\end{enumerate}
-
-Il costo computazionale di questo flusso è dominato dalla prima chiamata: la ri-esecuzione nativa impone una complessità $O(N_{gas})$ per ogni blocco, dove $N_{gas}$ è la quantità totale di gas consumata. Questo costo è prevalentemente I/O-bound, essendo determinato dalle continue operazioni di lettura e scrittura sul database per accedere allo stato pre-esistente e persistere il nuovo stato risultante.
-
-% TODO: spostare in Stato dell'Arte
-\section{Ethproofs.org}
+\subsection{Ethproofs.org}
 
 Ethproofs.org\cite{ethproofs} è un \textit{Block Proof Explorer} per Ethereum: una piattaforma pubblica che aggrega prove crittografiche ZK generate da molteplici team di proving indipendenti per i blocchi della Mainnet. Lanciato da parte dell'Ethereum Foundation, ethproofs.org svolge un ruolo analogo a quello di un block explorer tradizionale, ma specializzato nel tracciamento delle ZK proofs.
 
 La piattaforma oltre a presentare un sito web interattivo, espone un'API REST pubblica che consente di interrogare i metadati delle prove disponibili per ciascun blocco e di scaricare sia le prove binarie sia le relative chiavi di verifica (\textit{Verification Keys}, VK).
 
-\subsection{L'Ecosistema dei Prover}
+\subsubsection{L'Ecosistema dei Prover}
 
-Una delle caratteristiche più significative di ethproofs.org è la sua natura di \textbf{aggregatore multi-prover}. La piattaforma raccoglie prove generate da diversi cluster di proving, ciascuno basato su una zkVM (\textit{Zero-Knowledge Virtual Machine}) distinta. La tabella \ref{tab:provers} riassume i principali prover attualmente operativi sulla piattaforma.
+Una delle caratteristiche più significative di ethproofs.org è la sua natura di aggregatore multi-prover. La piattaforma raccoglie prove generate da diversi cluster di proving, ciascuno basato su una zkVM (\textit{Zero-Knowledge Virtual Machine}) distinta. La tabella \ref{tab:provers} riassume i principali prover attualmente operativi sulla piattaforma.
 
 \begin{table}[H]
 \centering
@@ -495,32 +431,75 @@ Airbender & Matter Labs (zkSync) & Mersenne31 + Unified Recursion \\
 
 Questa client diversity è intenzionale. Molteplici team competono per generare prove valide nel minor tempo possibile, prefigurando la nascita di un vero e proprio \textit{Prover Market}\cite{prover_market}. 
 
-\subsection{Le API e il Modello Dati}
+\section{Lavori Correlati}
 
-L'interazione programmatica con ethproofs.org avviene attraverso tre endpoint REST principali:
-\begin{enumerate}
-    \item \texttt{GET /api/blocks/\{blockId\}/proofs}: restituisce i metadati delle prove disponibili per un dato blocco.
-    \item \texttt{GET /api/proofs/download/\{proofId\}}: restituisce i file binari della prova crittografica.
-    \item \texttt{GET /api/verification-keys/download/\{proofId\}}: restituisce i file binari della chiave di verifica associata.
-\end{enumerate}
+L'architettura e i principi di design alla base del progetto presentano radici in un filone di ricerca ampio e in rapida evoluzione, che spazia dalla teoria dei sistemi distribuiti fino alle più recenti proposte di aggiornamento del protocollo Ethereum (EIP). Questa sezione analizza la letteratura e i progetti fondamentali che fanno da preludio all'implementazione di un nodo validatore Layer 1 (L1) basato su zkEVM, inserendo il prototipo \textit{ZeroNethermind} nel contesto della roadmap ufficiale.
 
-\subsection{Ruolo nel PoC}
+\subsection{Il Trilemma della Blockchain e i Client Leggeri}
 
-Nell'architettura di ZeroNethermind, ethproofs.org riveste il ruolo di \textit{single source of truth} per le ZK proofs, eliminando così la necessità per il PoC di operare una propria infrastruttura di proving, la quale richiederebbe cluster GPU di alto profilo e competenze specialistiche nella generazione delle prove. ZeroNethermind si concentra esclusivamente sulla verifica, delegando interamente la generazione all'ecosistema esterno.
+Storicamente, il design dei registri distribuiti è stato dominato dal concetto del \textit{Blockchain Trilemma}, un'euristica che postula l'impossibilità di massimizzare simultaneamente scalabilità, sicurezza e decentralizzazione. Tuttavia, recenti analisi formali \cite{trilemma_rebuttal} hanno confutato la natura assoluta di questo trilemma, dimostrando che esso deriva spesso da un'equivocazione semantica e dall'errata applicazione di teoremi propri dei sistemi distribuiti classici a protocolli basati su prove crittografiche. In reti come Ethereum, la sicurezza non emerge dalla ridondanza simmetrica della computazione di tutti i nodi, ma dalla disseminazione di prove crittografiche. Di conseguenza, la scalabilità non è un compromesso obbligato contro la decentralizzazione, ma un risultato ingegneristico raggiungibile disaccoppiando la produzione delle prove dalla loro verifica.
 
-\section{Design e Componenti}
+Questa necessità di disaccoppiamento richiama il concetto storico di \textit{Light Client}. Come sistematizzato nel documento \textit{SoK: Blockchain Light Clients} \cite{blockchain_light_clients}, i client leggeri permettono di interagire con la blockchain senza memorizzarne l'intera cronologia. Mentre i light client tradizionali si affidano ad assunzioni di fiducia, la ricerca moderna si sta orientando sull'utilizzo di accumulatori crittografici e zk-SNARKs per permettere a dispositivi con risorse limitate di verificare matematicamente l'integrità del sistema in modalità pienamente \textit{trustless}.
 
-Il concetto fondante di ZeroNethermind è sintetizzato nel paradigma \textbf{``Double Zero''}, che combina due azzeramenti architetturali complementari:
+\subsection{The Verge e la "Statelessness" di Ethereum}
+
+Il superamento dei limiti computazionali dei nodi è il nucleo della fase di sviluppo della roadmap di Ethereum nota come \textit{The Verge} \cite{verge_2024}. L'obiettivo primario è democratizzare la validazione, rendendola così efficiente da poter essere eseguita su dispositivi di largo consumo (smartphone o smartwatch). 
+
+Attualmente, un nodo Ethereum richiede la memorizzazione di un database di stato in continua crescita, creando un collo di bottiglia I/O che innalza le barriere all'ingresso e spinge verso la centralizzazione. Il paradigma \textit{Stateless Ethereum} \cite{stateless_book} risolve questo problema trasformando i blocchi in unità di esecuzione auto-contenute: anziché interrogare un database locale, il nodo stateless riceve un blocco accompagnato da un \textit{witness} (testimone) e da una prova crittografica che ne attesta la validità. 
+
+A supporto di questa profonda transizione strutturale, è stata proposta l'EIP-4762 (\textit{Statelessness gas cost changes}) \cite{eip4762}. Questa proposta introduce una rimodulazione dei costi del gas per riflettere accuratamente l'onere crittografico della generazione dei witness, disincentivando operazioni di stato che renderebbero le prove crittografiche troppo pesanti o complesse da generare.
+
+\subsection{Il Panorama dei Layer 2 e l'Analisi dei Rischi}
+
+Fino ad oggi, l'onere della scalabilità è stato delegato ai Layer 2 (L2) tramite la \textit{rollup-centric roadmap}. Piattaforme analitiche come L2BEAT \cite{l2beat} svolgono un ruolo cruciale nel valutare i compromessi di sicurezza di queste architetture, dimostrando come i rollup attuali si collochino su uno "spettro di fiducia". Molte soluzioni operano ancora in \textit{Stage 1}, basandosi su sequencer centralizzati, bridge controllati da multisig e \textit{Security Councils} autorizzati a forzare l'aggiornamento dello stato. 
+
+Per mitigare questi vettori di centralizzazione e i rischi derivanti da un ecosistema frammentato, la ricerca sta virando verso l'integrazione nativa delle prove ZK nel Layer 1 (\textit{Enshrined zkEVM}). Questa mossa mira a unificare le garanzie di sicurezza dell'ecosistema, dimostrando che la tecnologia zkVM, maturata sui Layer 2, è pronta per il livello base del protocollo.
+
+\subsection{Lean Ethereum: Il Cambio di Paradigma}
+
+Il cambio di paradigma di Lean Ethereuem introdotto da Justin Drake, che passa dal modello \textit{"Trust but Verify"} al modello \textit{"Verify the Math"}, è delineato nella L1-zkEVM Roadmap 2026 \cite{l1_zkevm_roadmap}. Tale documento definisce il flusso end-to-end che parte da un \textit{Execution Client} (che genera l'\textit{ExecutionWitness}), passa per un programma ospite zkVM e un Prover, per finire al nodo validatore che ne asserisce la validità.
+
+In questa direzione, l'EIP-8025 (\textit{Optional Execution Proofs}) \cite{eip8025} rappresenta un passo fondamentale: introduce una modifica opzionale a livello di consenso che permette ai nodi Beacon di verificare la validità dei payload di esecuzione tramite prove ZK, senza dover interrogare un client di esecuzione locale.
+
+\subsection{L'Ecosistema zkVM: Implementazioni e Competizione}
+
+L'implementazione pratica del \textit{real-time proving} poggia su macchine virtuali a conoscenza zero (zkVM) capaci di interpretare set di istruzioni, monitorate attivamente da portali come \textit{zkevm.fyi} \cite{zkevm_book}. Tra i progetti di punta figurano:
 \begin{itemize}
-    \item \textbf{Zero State}: il client non mantiene alcun database di stato locale. Operando in modalità \texttt{MemDb} (memoria volatile), tutta la persistenza è effimera e limitata ai soli header dei blocchi validati. L'impronta su disco è pertanto prossima allo zero.
-    \item \textbf{Zero Knowledge}: la validità dei blocchi non è asserita tramite ri-esecuzione delle transazioni nell'EVM, bensì tramite la verifica crittografica di prove ZK-SNARK/STARK generate da prover esterni.
+    \item \textbf{SP1}\cite{sp1} (Succinct Labs): Una zkVM \textit{general-purpose} ad alte prestazioni basata sull'architettura RISC-V, che permette di generare prove per programmi compilati in Rust (o tramite LLVM).
+    \item \textbf{ZisK}\cite{zisk} (Polygon): Un'architettura zkVM altamente specializzata, progettata specificamente per l'esecuzione rapida e la generazione di prove per transazioni compatibili con l'EVM.
+\end{itemize}
+La coesistenza e la competizione tra questi \textit{prover} sono vitali per garantire la \textit{client diversity} anche a livello crittografico, scongiurando singoli punti di fallimento (es. bug in un circuito ZK) richiedendo \textit{multi-proofs} per l'accettazione di un blocco.
+
+\subsection{Prototipi e L1 Strawmap}
+
+La validità di questo approccio è stata dimostrata sul campo durante conferenze di settore come il Devconnect. In tale occasione, è stata presentata zkLighthouse\cite{zkLighthouse_demo}, una versione modificata del client di consenso Lighthouse. Operando su hardware di largo consumo, questo nodo ha bypassato completamente l'uso di un \textit{Execution Client} classico (come Geth o Nethermind), validando i blocchi della Mainnet in tempo reale. Il sistema si limitava ad ascoltare un canale P2P dedicato, verificando in millisecondi le prove prodotte da cluster di prover esterni.
+
+L'intero sforzo architetturale si condensa infine nella L1 Strawmap (\textit{strawmap.org}) \cite{strawmap}, una bozza di roadmap mantenuta dal team della Ethereum Foundation. Questa mappa unifica gli aggiornamenti in tre filoni (Consenso, Dati, Esecuzione) e fissa le pietre miliari del protocollo, tra cui la transizione a un \textit{Gigagas L1} (10.000 TPS) resa possibile proprio dall'integrazione delle prove zkEVM e del \textit{real-time proving}.
+
+Lo sviluppo del presente lavoro di tesi si inserisce esattamente all'incrocio di queste tecnologie, proponendo la re-ingegnerizzazione di un \textit{Execution Layer} \textit{stateless} in grado di agire come puro validatore di prove all'interno del framework \textit{Fort Mode} delineato dal futuro del protocollo Ethereum.
+
+% ============================================================
+%  CAPITOLO 3: ZERONETHERMIND
+% ============================================================
+\chapter{ZeroNethermind}\label{chap:zeronethermind}
+
+Questo capitolo presenta la progettazione ad alto livello di ZeroNethermind, un Proof-of-Concept sviluppato per dimostrare la fattibilità di un client Execution Layer operante in modalità completamente \textit{stateless} tramite la verifica di prove crittografiche Zero-Knowledge.
+
+L'esposizione è strutturata per illustrare il radicale cambio di approccio rispetto all'esecuzione tradizionale. Inizialmente verrà introdotto il concetto teorico alla base del sistema, definito come paradigma "Double Zero". Successivamente, verrà analizzata l'architettura a tre strati del nuovo validatore, per poi dettagliare il flusso di dati modificato all'interno dell'Engine API. Le logiche di basso livello e l'interoperabilità del codice saranno trattate nel \texttt{capitolo \ref{chap:implementazione}}, mentre la validazione sperimentale delle prestazioni nel \texttt{capitolo \ref{chap:validazione}}.
+
+\section{Il Paradigma "Double Zero"}
+
+Il design di ZeroNethermind si regge su un approccio architetturale sintetizzato nel paradigma \textbf{``Double Zero''}, il quale combina due meccanismi complementari volti a eliminare i colli di bottiglia del nodo:
+\begin{itemize}
+    \item \textbf{Zero State}: il client non mantiene alcun database di stato locale. Operando in modalità \texttt{MemDb}, tutta la persistenza è effimera e limitata ai soli header dei blocchi validati. L'impronta su disco è pertanto prossima allo zero.
+    \item \textbf{Zero Knowledge}: la validità dei blocchi non è asserita tramite ri-esecuzione delle transazioni nell'EVM, bensì tramite la verifica crittografica di ZKPs generate da prover esterni.
 \end{itemize}
 
-Lo spostamento di complessità è radicale: dalla ri-esecuzione con costo $O(N_{gas})$, proporzionale al volume di gas consumato nel blocco, alla verifica crittografica con costo $O(1)$, indipendente dalla complessità del blocco. Un blocco contenente una singola transazione richiede lo stesso tempo di verifica di un blocco contenente migliaia di transazioni.
+L'adozione di questo paradigma comporta uno spostamento di complessità radicale: dalla ri-esecuzione nativa con costo $O(N_{gas})$, proporzionale al volume di gas consumato nel blocco, alla verifica crittografica con costo $O(1)$, indipendente dalla complessità del blocco. In questo modello, un blocco contenente una singola transazione richiede il medesimo tempo di verifica di un blocco contenente migliaia di transazioni complesse.
 
-\subsection{Architettura}
+\section{Architettura a Tre Strati}
 
-L'architettura di ZeroNethermind è organizzata in \textbf{tre strati} con responsabilità distinte, ciascuno isolato e comunicante attraverso interfacce ben definite. Questa stratificazione riflette sia le scelte ingegneristiche sia le necessità tecnologiche (interoperabilità cross-language tra C\# e Rust).
+L'architettura di ZeroNethermind è organizzata in tre strati con responsabilità distinte, ciascuno isolato e comunicante attraverso interfacce ben definite. Questa stratificazione riflette sia le scelte ingegneristiche sia le necessità tecnologiche (interoperabilità cross-language tra C\# e Rust).
 
 \begin{figure}[H]
 \centering
@@ -597,13 +576,46 @@ L'architettura di ZeroNethermind è organizzata in \textbf{tre strati} con respo
 
 La Figura \ref{fig:zeronethermind_arch} illustra l'architettura logica e il flusso di esecuzione del sistema, scomposto in tre macro-livelli:
 
-\begin{itemize}
-    \item \textbf{Strato 1 (Interceptor):} Rappresenta il punto di contatto con l'Engine API. Il gestore custom (\texttt{ZkNewPayloadHandler}) intercetta i payload in ingresso dal Consensus Layer, bypassando integralmente la tradizionale macchina a stati (\texttt{Standard EVM}) e azzerando l'onere computazionale nativo.
-    \item \textbf{Strato 2 (Verifier):} Costituisce il cuore logico scritto in \texttt{C\#}. Il servizio orchestratore coordina il recupero parallelo delle prove tramite chiamate HTTP all'oracolo esterno (\texttt{ethproofs.org}). Inoltre, gestisce la persistenza effimera della catena: gli \textit{header} validati vengono salvati nel \texttt{MemDb}, permettendo al client di operare in uno stato di totale dipendenza dalla memoria RAM (\textit{Zero-State}), senza ricorrere ad alcun database su disco.
-    \item \textbf{Strato 3 (FFI Bridge):} Rappresenta il confine di interoperabilità ad alte prestazioni tra l'ambiente \textit{managed} di .NET e le librerie crittografiche native. Per evitare colli di bottiglia causati dalla serializzazione e dal Garbage Collector, i payload binari (prove e chiavi di verifica) vengono passati allo strato \texttt{Rust} tramite puntatori bloccati in memoria (\textit{Zero-Copy FFI}). Questo strato agisce come dispatcher verso gli algoritmi di verifica specifici delle singole zkVM (Zisk, OpenVM, Pico, SP1, Airbender).
-\end{itemize}
+\subsection{Strato 1 (Interceptor)}
 
-La Tabella \ref{tab:confronto_nethermind} sintetizza le differenze architetturali tra un nodo Nethermind standard e ZeroNethermind. Il confronto evidenzia come il PoC ribalti il profilo delle risorse richieste: dallo storage massivo e dall'I/O intensivo di un full node, si passa a un modello dominato dalla latenza di rete.
+Rappresenta il punto di contatto con l'Engine API. Il gestore custom (\texttt{ZkNewPayloadHandler}) intercetta i payload in ingresso dal Consensus Layer, bypassando integralmente la tradizionale macchina a stati (\texttt{Standard EVM}) e abbattendo radicalmente l'onere computazionale nativo.
+
+\subsection{Strato 2 (Verifier)}
+
+Costituisce il modulo di orchestrazione principale, implementato in \texttt{C\#}. Il servizio orchestratore coordina il recupero parallelo delle prove tramite chiamate HTTP all'oracolo esterno (\texttt{ethproofs.org}). Inoltre, gestisce la persistenza effimera della catena: gli \textit{header} validati vengono salvati nel \texttt{MemDb}, permettendo al client di operare in uno stato di totale dipendenza dalla memoria RAM (\textit{Zero-State}), senza ricorrere ad alcun database su disco.
+
+\subsection{Strato 3 (FFI Bridge)}
+
+Rappresenta il confine di interoperabilità ad alte prestazioni tra l'ambiente \textit{managed} di .NET e le librerie crittografiche native. Per evitare colli di bottiglia causati dalla serializzazione e dal Garbage Collector, i payload binari (prove e chiavi di verifica) vengono passati allo strato \texttt{Rust} tramite puntatori bloccati in memoria (\textit{Zero-Copy FFI}). Questo strato agisce come dispatcher verso gli algoritmi di verifica specifici delle singole zkVM (Zisk, OpenVM, Pico, SP1, Airbender).
+
+\subsection{Ethproofs.org - Oracolo Esterno}
+
+Nell'architettura di ZeroNethermind, ethproofs.org riveste il ruolo di \textit{single source of truth} per le ZK proofs, eliminando così la necessità per il PoC di operare una propria infrastruttura di proving, la quale richiederebbe cluster GPU di alto profilo e competenze specialistiche nella generazione delle prove. ZeroNethermind si concentra esclusivamente sulla verifica, delegando interamente la generazione all'ecosistema esterno.
+
+\section{Il Nuovo Flusso di Validazione}
+
+Il flusso di validazione in ZeroNethermind differisce radicalmente da quello standard descritto nella sezione \ref{sec:validazione_standard}. Il processo segue questi step architetturali:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/zn_validation_flow.png}
+    \caption{Flusso di Validazione di ZeroNethermind}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{Ricezione del blocco:} il CL riceve un blocco dalla rete gossip ed invoca \texttt{engine\_newPayload} verso ZeroNethermind, trasmettendo l'\texttt{ExecutionPayload}.
+    \item \textbf{Pre-processing minimale:} ZeroNethermind decodifica il blocco e ne valida l'hash dell'header. A differenza del flusso standard, non vengono eseguiti i controlli che dipendono dal database di stato locale (verifica parent header, controllo pre-pivot, etc.).
+    \item \textbf{Recupero delle prove:} il sistema interroga l'API di ethproofs.org per ottenere i metadati delle prove disponibili per il numero di blocco corrente.
+    \item \textbf{Verifica crittografica:} per ciascuna prova disponibile, ZeroNethermind scarica i byte binari della prova e della chiave di verifica, quindi invoca il verificatore nativo (Rust) tramite FFI.
+    \item \textbf{Maggioranza multi-prover:} il blocco è considerato valido se almeno il 50\% delle prove verificate risulta valido. Questo approccio mitiga il rischio di bug in un singolo circuito zkVM.
+    \item \textbf{Risposta al CL:} ZeroNethermind restituisce lo status \texttt{VALID}, \texttt{INVALID} o \texttt{SYNCING} al Consensus Layer.
+    \item \textbf{Aggiornamento della catena:} alla ricezione di \newline \texttt{engine\_forkchoiceUpdated}, il sistema aggiorna la testa canonica.
+\end{enumerate}
+
+È importante sottolineare che il nodo opera con un profilo di configurazione dedicato (\texttt{zk-mainnet}) che disabilita esplicitamente le componenti non necessarie — P2P, sincronizzazione, TxPool — e attiva la modalità MemDb. I dettagli di questa ottimizzazione saranno approfonditi nella sezione \ref{sec:config}.
+\\
+
+La Tabella \ref{tab:confronto_nethermind} sintetizza le differenze architetturali tra un nodo Nethermind standard e ZeroNethermind. Il confronto evidenzia come il PoC ribalti il profilo delle risorse richieste: dallo storage massivo e dall'I/O intensivo di un full node, si passa a un modello dominato dalla latenza di rete.\\
 
 \begin{table}[H]
 \centering
@@ -623,30 +635,6 @@ Cold Start & Ore (Snap Sync) & Secondi \\
 \label{tab:confronto_nethermind}
 \end{table}
 
-\subsection{Il Flusso di Dati Modificato}
-
-Il flusso di validazione in ZeroNethermind differisce radicalmente da quello standard descritto nella sezione \ref{sec:validazione_standard}. Il processo segue questi step architetturali:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{img/zn_validation_flow.png}
-    \caption{Flusso di Validazione di ZeroNethermind}
-\end{figure}
-
-\begin{enumerate}
-    \item \textbf{Ricezione del blocco:} il CL riceve un blocco dalla rete gossip ed invoca \texttt{engine\_newPayload} verso ZeroNethermind, trasmettendo l'\texttt{ExecutionPayload}.
-    \item \textbf{Pre-processing minimale:} ZeroNethermind decodifica il blocco e ne valida l'hash dell'header. A differenza del flusso standard, non vengono eseguiti i controlli che dipendono dal database di stato locale (verifica parent header, controllo pre-pivot, etc.).
-    \item \textbf{Recupero delle prove:} il sistema interroga l'API di ethproofs.org per ottenere i metadati delle prove disponibili per il numero di blocco corrente.
-    \item \textbf{Verifica crittografica:} per ciascuna prova disponibile, ZeroNethermind scarica i byte binari della prova e della chiave di verifica, quindi invoca il verificatore nativo (Rust) tramite FFI.
-    \item \textbf{Consenso multi-prover:} il blocco è considerato valido se almeno il 50\% delle prove verificate risulta valido. Questo approccio mitiga il rischio di bug in un singolo circuito zkVM.
-    \item \textbf{Risposta al CL:} ZeroNethermind restituisce lo status \texttt{VALID}, \texttt{INVALID} o \texttt{SYNCING} al Consensus Layer.
-    \item \textbf{Aggiornamento della catena:} alla ricezione di \newline \texttt{engine\_forkchoiceUpdated}, il sistema aggiorna la testa canonica.
-\end{enumerate}
-
-È importante sottolineare che il nodo opera con un profilo di configurazione dedicato (\texttt{zk-mainnet}) che disabilita esplicitamente le componenti non necessarie — P2P, sincronizzazione, TxPool — e attiva la modalità MemDb. I dettagli di questa ottimizzazione saranno approfonditi nella sezione \ref{sec:config}.
-
-Analogamente, la gestione del protocollo \texttt{SYNCING}, che regola l'interazione con il CL quando le prove non sono ancora disponibili e il nodo entra in modalità ``optimistic'', sarà descritta nella sezione \ref{sec:syncing}.
-
 
 % ============================================================
 %  CAPITOLO 4: IMPLEMENTAZIONE
@@ -661,15 +649,15 @@ L'obiettivo della prima fase è stato costruire un verificatore ZK multi-prover 
 
 \subsection{L'Ecosistema dei Verifier ZK}
 
-Come descritto nel Capitolo~\ref{chap:introduzione}, l'ecosistema delle zkEVM è composto da molteplici team indipendenti, ciascuno dei quali ha sviluppato la propria zkVM e il relativo sistema di proving. Per ZeroNethermind, questi verifier sono trattati come \textit{black-box}: il PoC si interfaccia esclusivamente con le loro API di verifica, senza intervenire sulla logica interna.
+Come descritto nel \texttt{capitolo \ref{chap:introduzione}}, l'ecosistema delle zkEVM è composto da molteplici team indipendenti, ciascuno dei quali ha sviluppato la propria zkVM e il relativo sistema di proving. Per ZeroNethermind, questi verifier sono trattati come \textit{black-box}: il PoC si interfaccia esclusivamente con le loro API di verifica, senza intervenire sulla logica interna.
 
-Un aspetto tecnico rilevante è che tutti i principali framework di proving sono implementati in \textbf{Rust}, il linguaggio dominante per la computazione crittografica ad alte prestazioni. Questo crea una sfida d'integrazione significativa con il client Nethermind, che è interamente basato su C\#/.NET: è necessario un bridge affidabile ed efficiente tra i due runtime.
+Un aspetto tecnico rilevante è che tutti i principali framework di proving sono implementati in Rust, il linguaggio dominante per la computazione crittografica ad alte prestazioni. Questo crea una sfida d'integrazione significativa con il client Nethermind, che è interamente basato su C\#/.NET: è necessario un bridge affidabile ed efficiente tra i due runtime.
 
-Le cinque zkVM attualmente integrate nel PoC sono: \textbf{Zisk} (Polygon Hermez), \textbf{OpenVM} (OpenVM.org), \textbf{Pico} (Brevis), \textbf{SP1 Hypercube} (Succinct) e \textbf{Airbender} (zkSync/Matter Labs). Ciascun team espone un'interfaccia di verifica concettualmente analoga — una funzione che accetta una prova e una chiave di verifica, e ritorna un risultato booleano — ma con differenze nei formati di serializzazione e nelle dipendenze interne. Queste differenze rendono necessaria la creazione di un \texttt{crate} Rust unificato (\texttt{native-zk-verifier}) che funge da adattatore comune.
+Le cinque zkVM attualmente integrate nel PoC sono: Zisk (Polygon Hermez), OpenVM (OpenVM.org), Pico (Brevis), SP1 Hypercube (Succinct) e Airbender (zkSync/Matter Labs). Ciascun team espone un'interfaccia di verifica concettualmente analoga — una funzione che accetta una prova e una chiave di verifica, e ritorna un risultato booleano — ma con differenze nei formati di serializzazione e nelle dipendenze interne. Queste differenze rendono necessaria la creazione di un \texttt{crate} Rust unificato (\texttt{native-zk-verifier}) che funge da adattatore comune.
 
 \subsection{WASM vs Native FFI}\label{sec:wasm_vs_ffi}
 
-Per realizzare il bridge C\# $\leftrightarrow$ Rust, sono state valutate due strategie architetturali: il caricamento dei verifier come moduli \textbf{WebAssembly} (WASM), come fatto da ethproofs.org\cite{ethproofs} per l'\textit{in-browser} validation, tramite il runtime \texttt{Wasmtime.NET}, e l'invocazione diretta tramite \textbf{Foreign Function Interface} (FFI) nativa con \texttt{P/Invoke}. La \ref{tab:wasm_vs_ffi} sintetizza il confronto.
+Per realizzare il bridge C\# $\leftrightarrow$ Rust, sono state valutate due strategie architetturali: il caricamento dei verifier come moduli WebAssembly (WASM), come fatto da ethproofs.org per l'\textit{in-browser} validation, tramite il runtime \texttt{Wasmtime.NET}, e l'invocazione diretta tramite Foreign Function Interface (FFI) nativa con \texttt{P/Invoke}. La tabella \ref{tab:wasm_vs_ffi} sintetizza il confronto.
 
 \begin{table}[H]
 \centering
@@ -677,9 +665,9 @@ Per realizzare il bridge C\# $\leftrightarrow$ Rust, sono state valutate due str
 \hline
 \textbf{Aspetto} & \textbf{WASM} & \textbf{Native FFI (P/Invoke)} \\
 \hline
-Prestazioni & Buone (VM overhead). & \textbf{Massime} (esecuzione diretta su CPU). \\
+Prestazioni & Buone (VM overhead). & Massime (esecuzione diretta su CPU). \\
 Portabilità & Cross-platform nativo. & Compilazione per OS specifico. \\
-Sicurezza & Sandboxed. & \texttt{unsafe}: un errore Rust può crashare il processo .NET. \\
+Sicurezza & Sandboxed. & \texttt{unsafe}: un errore Rust può causare il crush del processo .NET. \\
 Complessità & Richiede il pacchetto NuGet \texttt{Wasmtime}. & Nessuna dipendenza esterna. \\
 \hline
 \end{tabular}
@@ -687,7 +675,7 @@ Complessità & Richiede il pacchetto NuGet \texttt{Wasmtime}. & Nessuna dipenden
 \label{tab:wasm_vs_ffi}
 \end{table}
 
-La scelta è ricaduta sull'\textbf{approccio FFI nativo} per la priorità assegnata alle prestazioni massimali. In un contesto dove la verifica delle prove deve avvenire entro la finestra temporale di 12 secondi di uno slot Ethereum, ogni overhead è significativo. L'approccio WASM, pur offrendo un migliore isolamento, introduce un livello di indirezione (la VM WebAssembly) che penalizza il throughput in scenari di verifica intensiva. In cambio della perdita del sandboxing, il bridge nativo offre zero overhead di marshalling ed esecuzione diretta delle istruzioni sulla CPU del nodo.
+La scelta è ricaduta sull'approccio FFI nativo per la priorità assegnata alle prestazioni massimali. In un contesto dove la verifica delle prove deve avvenire entro la finestra temporale di 12 secondi di uno slot Ethereum, ogni overhead è significativo. L'approccio WASM, pur offrendo un migliore isolamento, introduce un livello di indirezione (la VM WebAssembly) che penalizza il throughput in scenari di verifica intensiva. In cambio della perdita del sandboxing, il bridge nativo offre zero overhead di marshalling ed esecuzione diretta delle istruzioni sulla CPU del nodo.
 
 \subsection{Il Bridge FFI: \texttt{native-zk-verifier}}\label{sec:ffi_bridge}
 
@@ -735,9 +723,9 @@ La scelta di \texttt{LibraryImport} rispetto al più tradizionale \texttt{DllImp
 Il modello di ownership della memoria tra i due runtime è un aspetto critico del bridge:
 
 \begin{itemize}
-    \item \textbf{Verification Key (VK):} Allocata in \textbf{memoria unmanaged} tramite \texttt{Marshal.AllocHGlobal}, al di fuori del Garbage Collector .NET. Questo evita che il GC sposti o liberi la VK durante la chiamata FFI. Il wrapper \texttt{ZkProofVerifier} implementa \texttt{IDisposable} per il rilascio deterministico della memoria unmanaged.
-    \item \textbf{Proof data:} Owned dal GC di C\# e passata come array \texttt{byte[]}. Il runtime .NET effettua il pinning automatico durante la chiamata P/Invoke.
-    \item \textbf{Rust:} Agisce come un ``guest'' puramente funzionale: riceve puntatori read-only, esegue la verifica, e ritorna un intero. Nessuna allocazione o liberazione di memoria avviene sul lato Rust.
+    \item \textbf{Verification Key (VK):} Allocata in memoria unmanaged tramite \texttt{Marshal.AllocHGlobal}, al di fuori del Garbage Collector .NET. Questo evita che il GC sposti o liberi la VK durante la chiamata FFI. Il wrapper \texttt{ZkProofVerifier} implementa \texttt{IDisposable} per il rilascio deterministico della memoria unmanaged.
+    \item \textbf{Proof data:} \texttt{Owned} dal GC di C\# e passata come array \texttt{byte[]}. Il runtime .NET effettua il \texttt{pinning} automatico durante la chiamata P/Invoke.
+    \item \textbf{Rust:} Agisce come un \texttt{guest} puramente funzionale: riceve puntatori read-only, esegue la verifica, e ritorna un intero. Nessuna allocazione o liberazione di memoria avviene sul lato Rust.
 \end{itemize}
 
 \subsubsection{Build Automatica}
@@ -760,7 +748,7 @@ Con il bridge FFI operativo, la prima fase culmina nella creazione di \texttt{Et
 L'applicazione è strutturata in quattro componenti:
 
 \begin{itemize}
-    \item \texttt{Program.cs}: Entry point CLI che accetta \texttt{<LatestBlockId> <BlockCount>} e itera sui blocchi invocando il validatore.
+    \item \texttt{Program.cs}: Entry point CLI che accetta \\\texttt{<LatestBlockId> <BlockCount>} e itera sui blocchi invocando il validatore.
     \item \texttt{BlockValidator}: Orchestratore che per ciascun blocco recupera le prove da ethproofs.org, le distribuisce ai verifier in parallelo (\texttt{Task.WhenAll}), e applica la logica di majority voting.
     \item \texttt{VerifierRegistry}: Registry pattern implementato con \\ \texttt{ConcurrentDictionary<clusterId, ZkProofVerifier>}. I verifier vengono creati \textit{lazily} al primo incontro con un nuovo cluster, scaricando la relativa VK dall'API di ethproofs.org.
     \item \texttt{EthProofsApiClient}: Client HTTP per le API REST di ethproofs.org (fetch prove, download binari, download VK).
@@ -834,7 +822,6 @@ Total Time: 1857 ms
 
 Questi risultati dimostrano la fattibilità del modello multi-verifier e confermano che la verifica crittografica è trascurabile rispetto alla latenza di rete, validando empiricamente la scelta del bridge FFI nativo.
 
-% ------------------------------------------------------------------
 \section{Fase 2: Nethermind Integration}\label{sec:integration}
 
 Con il verificatore standalone operativo, la seconda fase affronta l'integrazione della logica di validazione ZK nel ciclo di vita del client Nethermind, senza eseguire un fork del repository upstream.
@@ -856,24 +843,15 @@ Prima di giungere alla soluzione finale, sono state valutate e scartate diverse 
 La soluzione adottata sfrutta il sistema di plugin modulare di Nethermind, basato sul container di Dependency Injection \textbf{Autofac}. L'interfaccia chiave è \texttt{IConsensusWrapperPlugin}, che permette di:
 
 \begin{itemize}
-    \item \textbf{Registrare tipi custom} nel container DI tramite un \texttt{Autofac.Module}.
+    \item \textbf{Registrare tipi custom} nel container DI tramite un\\ \texttt{Autofac.Module}.
     \item \textbf{Sovrascrivere i gestori} dell'Engine API senza modificare il codice core di Nethermind.
 \end{itemize}
 
-Questo approccio è il medesimo utilizzato dal \texttt{MergePlugin} (che gestisce il consenso post-Merge) e dallo \texttt{ShutterPlugin} (che estende la logica di consenso per il protocollo Shutter), garantendo compatibilità architetturale con il design del client\cite{nethermind_plugin}.
+Questo approccio è il medesimo utilizzato dal \texttt{MergePlugin} (che gestisce il consenso post-Merge) e dallo \texttt{ShutterPlugin} (che estende la logica di consenso per il protocollo Shutter), garantendo compatibilità architetturale con il design del client.
 
 \subsection{\texttt{ZkValidationPlugin}: Il Punto di Ingresso}
 
-Il plugin \texttt{ZkValidationPlugin} implementa \texttt{IConsensusWrapperPlugin} ed è il punto di ingresso dell'intero PoC. La sua attivazione è condizionale:
-
-\begin{minipage}{\textwidth}
-\begin{lstlisting}[language={[Sharp]C}, caption={Attivazione condizionale del plugin ZK}, style=listingsStyle]
-public bool Enabled => zkConfig.Enabled && mergeConfig.Enabled;
-\end{lstlisting}
-\end{minipage}
-\\
-
-Il plugin si attiva solo quando entrambe le condizioni sono soddisfatte: la flag \texttt{ZkValidation.Enabled} è impostata a \texttt{true} nel file di configurazione, e il modulo \texttt{Merge} è attivo (requisito per il funzionamento dell'Engine API post-Merge).
+Il plugin \texttt{ZkValidationPlugin} implementa \texttt{IConsensusWrapperPlugin} ed è il punto di ingresso dell'intero PoC. La sua attivazione è condizionale: la flag \texttt{ZkValidation.Enabled} è impostata a \texttt{true} nel file di configurazione, e il modulo \texttt{Merge} è attivo (requisito per il funzionamento dell'Engine API post-Merge).
 
 Il \texttt{ZkValidationPluginModule} (Autofac Module) registra nel container DI tutti i servizi necessari: 
 \begin{itemize}
@@ -925,7 +903,6 @@ Il gestore ZK di \texttt{engine\_forkchoiceUpdated} bypassa il controllo \\\text
     \item Restituzione di \texttt{VALID} con il \texttt{headBlockHash} aggiornato.
 \end{enumerate}
 
-% ------------------------------------------------------------------
 \section{Fase 3: The ZK Validation Service}\label{sec:validation_service}
 
 La terza fase integra la logica di verifica nel contesto operativo completo del client, affrontando le sfide di latenza dei prover, gestione della cache, e interazione con il protocollo di consenso.
@@ -951,12 +928,12 @@ La soluzione implementata è un \textbf{pattern Active-Wait}: il \\\texttt{ZkVal
 \begin{enumerate}
     \item Il \texttt{BlockValidator} interroga ethproofs.org e non trova prove disponibili $\rightarrow$ ritorna \texttt{SYNCING}.
     \item Il servizio attende \texttt{RetryDelayMs} e ritenta la query fino al numero massimo di tentativi.
-    \item Il CL (Lighthouse) riceve \texttt{SYNCING} e passa in modalità ``optimistic'' (\texttt{WARN Head is optimistic}).
+    \item Il CL (Lighthouse) riceve \texttt{SYNCING} e passa in modalità ``optimistic'' (assume provvisoriamente il blocco come valido in attesa della conferma dell'EL).
     \item Una volta che la prova è disponibile e verificata, il servizio ritorna \texttt{VALID}.
     \item Lighthouse transita a \texttt{INFO Synced ... (verified)}.
 \end{enumerate}
 
-Questo approccio rappresenta un \textbf{workaround funzionale} per il PoC: il blocco del thread RPC per un massimo di $\sim$10 secondi è accettabile in un contesto di dimostrazione, ma non sarebbe sostenibile in un ambiente di produzione dove la reattività dell'Engine API è critica. Un'implementazione production-ready richiede prima un addattamento e modifica del protocollo attuale.
+Questo approccio rappresenta un \textbf{workaround funzionale} per il PoC: il blocco del thread RPC è accettabile in un contesto di dimostrazione, ma non sarebbe sostenibile in un ambiente di produzione dove la reattività dell'Engine API è critica. Un'implementazione production-ready richiede prima un addattamento e modifica del protocollo attuale.
 
 \subsection{Adattamento del BlockValidator}
 
@@ -968,7 +945,6 @@ Il \texttt{BlockValidator} sviluppato nella sezione \ref{sec:foundation} (standa
     \item Medesima logica di majority voting, con gestione degli errori adattata: un errore su un singolo verifier non interrompe il processo, ma viene registrato e conteggiato nella votazione.
 \end{itemize}
 
-% ------------------------------------------------------------------
 \section{Profilo di Configurazione}\label{sec:config}
 
 Il file \texttt{zk-mainnet.json} definisce il profilo operativo che trasforma Nethermind in un validatore ``Fort Mode''. La \ref{tab:config_disabled} riassume le componenti disabilitate e le relative motivazioni.
@@ -993,7 +969,7 @@ TxPool & Size & 0 & Nessun gossip di transazioni, nessun mempool \\
 
 I moduli che restano attivi sono esclusivamente quelli necessari al funzionamento del validatore stateless: \texttt{JsonRpc} (con i soli moduli \texttt{Net}, \texttt{Web3}, \texttt{Engine} per la comunicazione con il CL), \texttt{Merge} (prerequisito per l'Engine API post-Merge), \texttt{ZkValidation} (attivazione del plugin), \texttt{HealthChecks} e \texttt{Metrics} (monitoraggio e telemetria).
 
-Il risultato è un nodo che non ha database su disco (MemDb al posto dei $\sim$2\,TB di RocksDB), non scopre né gestisce peer (riceve blocchi esclusivamente dal CL adiacente), non esegue transazioni (il \\ \texttt{BlockchainProcessor} è disattivato), non partecipa al gossip delle transazioni, e valida esclusivamente tramite prove ZK. Questo profilo materializza concretamente il concetto di ``Fort Mode'' descritto nel Capitolo~\ref{chap:introduzione}: un validatore leggero, deployabile su hardware consumer, che contribuisce alla sicurezza della rete delegando la generazione delle prove ai ``Beast'' e concentrandosi sulla sola verifica crittografica.
+Il risultato è un nodo che non ha database su disco (MemDb al posto dei $\sim$2\,TB di RocksDB), non scopre né gestisce peer (riceve blocchi esclusivamente dal CL adiacente), non esegue transazioni (il \\ \texttt{BlockchainProcessor} è disattivato), non partecipa al gossip delle transazioni, e valida esclusivamente tramite prove ZK. Questo profilo materializza concretamente il concetto di ``Fort Mode'' descritto nel \texttt{capitolo\ref{chap:introduzione}}: un validatore leggero, deployabile su hardware consumer, che contribuisce alla sicurezza della rete delegando la generazione delle prove ai ``Beast'' e concentrandosi sulla sola verifica crittografica.
 
 
 
@@ -1090,11 +1066,11 @@ L'utilizzo di MEV-Boost per entrambe le tipologie di nodo è intenzionale: deleg
 
 \subsubsection{Obiettivo}
 
-Quantificare il divario di risorse hardware tra validazione per ri-esecuzione EVM ($O(N)$) e validazione per verifica crittografica ($O(1)$), in un ambiente dove le condizioni di rete, il carico transazionale e l'hardware sono identici per tutti i nodi.
+Quantificare il divario di risorse hardware tra validazione per ri-esecuzione EVM ($O(N_{gas})$) e validazione per verifica crittografica ($O(1)$), in un ambiente dove le condizioni di rete, il carico transazionale e l'hardware sono identici per tutti i nodi.
 
 \subsubsection{Procedura}
 
-La Demo~2 adotta un protocollo a \textbf{carico progressivo} della durata di ~45 minuti, articolato in due fasi:
+La Demo~2 adotta un protocollo a \textbf{carico progressivo} della durata di $\sim$45 minuti, articolato in due fasi:
 
 \begin{enumerate}
     \item \textbf{Fase Baseline} (primi $\sim$15 minuti): la devnet opera con un throughput transazionale minimo (1 transazione per tipo di spammer), al fine di stabilire i valori di riferimento per tutte le metriche di interesse.
@@ -1158,7 +1134,7 @@ Il risultato più significativo è la sproporzione tra il tempo di download e il
 
 \section{Demo~2: Analisi in Ambiente Controllato}\label{sec:demo2_risultati}
 
-I risultati della Demo~2 confermano quantitativamente le ipotesi formulate nel Capitolo \ref{chap:introduzione}: il paradigma di validazione per verifica crittografica ($O(1)$) presenta vantaggi strutturali rispetto alla ri-esecuzione EVM ($O(N)$), sia in termini di tempo di elaborazione sia di consumo di risorse hardware.
+I risultati della Demo~2 confermano quantitativamente le ipotesi formulate nel \texttt{capitolo \ref{chap:introduzione}}: il paradigma di validazione per verifica crittografica ($O(1)$) presenta vantaggi strutturali rispetto alla ri-esecuzione EVM ($O(N_{gas})$), sia in termini di tempo di elaborazione sia di consumo di risorse hardware.
 
 \subsection{Velocità di Verifica}\label{sec:velocita}
 
@@ -1188,7 +1164,7 @@ el-3 ZeroNethermind & 128 & 268  & 147 & 334   & 141 & 334   \\
 \label{tab:demo2_validation}
 \end{table}
 
-In condizioni di basso carico (\textit{Baseline}), i nodi standard risultano più veloci ($\sim$57--64\,ms) rispetto a ZeroNethermind ($\sim$128\,ms), poiché la ri-esecuzione di transazioni leggere è computazionalmente meno costosa del download e della verifica di 5 prove crittografiche in parallelo. Tuttavia, sotto carico transazionale crescente, il rapporto si inverte drasticamente: i nodi standard rallentano a $\sim$211--310\,ms con picchi fino a $\sim$1\,500\,ms, mentre ZeroNethermind resta sostanzialmente invariato a $\sim$147\,ms. L'incremento medio per i nodi standard è di $\sim 3{,}7 \times$ rispetto alla baseline, contro un aumento di appena il 15\% per ZeroNethermind. Questa è la manifestazione empirica della complessità $O(N)$ vs $O(1)$: il tempo di verifica crittografica è \textbf{indipendente} dalla complessità computazionale del blocco.
+In condizioni di basso carico (\textit{Baseline}), i nodi standard risultano più veloci ($\sim$57--64\,ms) rispetto a ZeroNethermind ($\sim$128\,ms), poiché la ri-esecuzione di transazioni leggere è computazionalmente meno costosa del download e della verifica di 5 prove crittografiche in parallelo. Tuttavia, sotto carico transazionale crescente, il rapporto si inverte drasticamente: i nodi standard rallentano a $\sim$211--310\,ms con picchi fino a $\sim$1\,500\,ms, mentre ZeroNethermind resta sostanzialmente invariato a $\sim$147\,ms. L'incremento medio per i nodi standard è di $\sim 3{,}7 \times$ rispetto alla baseline, contro un aumento di appena il 15\% per ZeroNethermind. Questa è la manifestazione empirica della complessità $O(N_{gas})$ vs $O(1)$: il tempo di verifica crittografica è indipendente dalla complessità computazionale del blocco.
 
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
@@ -1220,7 +1196,7 @@ Il \textbf{Grafico~\ref{fig:demo2_graph2}} fornisce la dimensione temporale del 
 \label{tab:demo2_trend}
 \end{table}
 
-Durante la fase Baseline (prime 3 finestre), il nodo standard è fino a 3$\times$ più veloce. Il \textbf{crossover} si manifesta nella finestra 17:00--17:05 UTC, corrispondente al primo incremento di throughput ($\uparrow$\#1), dove i due approcci si equivalgono (0.90$\times$). Da quel punto in poi, il nodo standard diventa progressivamente più lento: dopo il $\uparrow$\#3, el-1 impiega quasi il \textbf{doppio} del tempo di el-3 (rapporto 1.93$\times$). Le curve dei nodi standard (blu e rossa) divergono verso l'alto con pendenza crescente, un comportamento coerente con la complessità lineare della ri-esecuzione EVM. Al contrario, la curva di ZeroNethermind (verde) resta \textbf{piatta} all'interno della fascia $\sim$100--200\,ms indipendentemente dagli incrementi di carico, confermando la proprietà $O(1)$.
+Durante la fase Baseline (prime 3 finestre), il nodo standard è fino a 3$\times$ più veloce. Il crossover si manifesta nella finestra 17:00--17:05 UTC, corrispondente al primo incremento di throughput ($\uparrow$\#1), dove i due approcci si equivalgono (0.90$\times$). Da quel punto in poi, il nodo standard diventa progressivamente più lento: dopo il $\uparrow$\#3, el-1 impiega quasi il doppio del tempo di el-3 (rapporto 1.93$\times$). Le curve dei nodi standard (blu e rossa) divergono verso l'alto con pendenza crescente, un comportamento coerente con la complessità lineare della ri-esecuzione EVM. Al contrario, la curva di ZeroNethermind (verde) resta piatta all'interno della fascia $\sim$100--200\,ms indipendentemente dagli incrementi di carico, confermando un tempo di verifica empiricamente costante, indipendente dal volume di gas consumato.
 
 \subsection{Footprint delle Risorse}\label{sec:footprint}
 
@@ -1228,18 +1204,18 @@ Durante la fase Baseline (prime 3 finestre), il nodo standard è fino a 3$\times
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.78\linewidth]{img/demo2_graph3_radar.png}
-    \caption{Radar chart: confronto del footprint hardware tra Nethermind Standard (media dei 2 nodi) e ZeroNethermind.}
+    \caption{Confronto del footprint hardware tra Nethermind Standard (media dei 2 nodi) e ZeroNethermind.}
     \label{fig:demo2_graph3}
 \end{figure}
 \end{minipage}\\
 
-Il \textbf{Grafico~\ref{fig:demo2_graph3}} mostra il profilo di risorse dei due approcci architetturali su 4 dimensioni, normalizzate rispetto al valore massimo di ciascun asse. Si evidenziano due profili \textbf{complementari} che riflettono architetture di validazione radicalmente diverse:
+Il \textbf{Grafico~\ref{fig:demo2_graph3}} mostra il profilo di risorse dei due approcci architetturali su 4 dimensioni, normalizzate rispetto al valore massimo di ciascun asse. Si evidenziano due profili complementari che riflettono architetture di validazione radicalmente diverse:
 \begin{itemize}
     \item \textbf{Nethermind Standard:} Domina su CPU ($\sim$11,8\% vs $\sim$2,0\%, un fattore $\sim$6$\times$) e RAM ($\sim$823\,MB vs $\sim$427\,MB), riflettendo il pesante onere computazionale della ri-esecuzione EVM e della gestione in memoria dell'albero di Merkle Patricia (MPT). Si nota inoltre un maggiore I/O Read dal disco ($\sim$28,5\,KB/s vs $\sim$7,7\,KB/s) necessario per caricare i rami dello stato richiesti dalle transazioni.
-    \item \textbf{ZeroNethermind:} Ribalta il paradigma dominando quasi esclusivamente sulla Bandwidth in ricezione ($\sim$300,6\,KB/s vs $\sim$29,7\,KB/s, un fattore $\sim$10$\times$). Le risorse locali (CPU, RAM, Disco) rimangono compresse vicino al centro del grafico.
+    \item \textbf{ZeroNethermind:} Ribalta il paradigma, spostando il carico predominante sulla Bandwidth in ricezione ($\sim$300,6\,KB/s vs $\sim$29,7\,KB/s, un fattore $\sim$10$\times$). Le risorse locali (CPU, RAM, Disco) rimangono compresse vicino al centro del grafico.
 \end{itemize}
 
-Questo radar quantifica visivamente un principio architetturale chiave: il passaggio alla validazione crittografica non "azzera" magicamente il costo del network, ma ne \textbf{trasla la natura}, sostituendo risorse locali costose e rigidamente limitate (CPU, IOPS del disco) con una risorsa esterna, elastica e naturalmente scalabile (la larghezza di banda).
+Questo radar quantifica visivamente un principio architetturale chiave: il passaggio alla validazione crittografica non "azzera" magicamente il costo del network, ma ne trasla la natura, sostituendo risorse locali costose e rigidamente limitate (CPU, IOPS del disco) con una risorsa esterna, elastica e naturalmente scalabile (la larghezza di banda).
 
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
@@ -1249,28 +1225,22 @@ Questo radar quantifica visivamente un principio architetturale chiave: il passa
 \end{figure}
 \end{minipage}\\
 
-Il \textbf{Grafico~\ref{fig:demo2_graph4}} dimostra materialmente il paradigma \textit{Zero State} introdotto nel Capitolo~\ref{chap:introduzione}. I due nodi standard partono da $\sim$248\,MB e raggiungono $\sim$338\,MB in 47 minuti (crescita di $\sim$90\,MB ciascuno), con un tasso medio di $\sim$1,9\,MB/min. ZeroNethermind, partendo da $\sim$258\,MB, raggiunge soli $\sim$262\,MB (crescita di $\sim$3,9\,MB), pari al \textbf{4,3\%} di quella standard.
+Il \textbf{Grafico~\ref{fig:demo2_graph4}} dimostra empiricamente il paradigma \textit{Zero State} introdotto nel \texttt{capitolo \ref{chap:introduzione}}. I due nodi standard partono da $\sim$248\,MB e raggiungono $\sim$338\,MB in $\sim$45 minuti (crescita di $\sim$90\,MB ciascuno). ZeroNethermind, partendo da $\sim$258\,MB, raggiunge soli $\sim$262\,MB, pari al \textbf{4,3\%} di quella standard. La crescita residua di ZeroNethermind è attribuibile ai soli metadati operativi del client (log interni, cache del Consensus Layer), non all'accumulo di stato della blockchain. 
 
-La crescita residua di ZeroNethermind è attribuibile ai soli metadati operativi del client (log interni, cache del Consensus Layer), non all'accumulo di stato della blockchain. Estrapolando linearmente:\footnote{L'estrapolazione assume un carico costante e non tiene conto della compressione dello stato; serve come ordine di grandezza indicativo.}
-\begin{itemize}
-    \item \textbf{Standard:} $\sim 90\,\text{MB} \times \frac{60}{47} \times 24 \times 365 \approx 1\,\text{TB/anno}$, coerente con i $\sim 1\,\text{TB}$ di stato osservati sulla Mainnet.
-    \item \textbf{ZeroNethermind:} $\sim 3{,}9\,\text{MB} \times \frac{60}{47} \times 24 \times 365 \approx 43\,\text{GB/anno}$ e azzerabile con rotazione periodica.
-\end{itemize}
-Questo risultato dimostra che l'eliminazione del database di stato persistente non è solo un vantaggio teorico, ma produce un impatto \textbf{misurabile e significativo} sulla sostenibilità operativa a lungo termine di un nodo validatore.
-
+Questo risultato dimostra che l'eliminazione del database di stato persistente non è solo un vantaggio teorico, ma produce un impatto misurabile e significativo sulla sostenibilità operativa a lungo termine di un nodo validatore.
 
 \section{Discussione dei Risultati}\label{sec:discussione}
 
 I risultati delle due campagne sperimentali, pur condotte in contesti operativi distinti, convergono verso un quadro coerente che può essere sintetizzato lungo tre assi tematici.
 
-\paragraph{1. Paradigma computazionale: da $O(N)$ a $O(1)$.}
+\paragraph{1. Paradigma computazionale: da $O(N_{gas})$ a $O(1)$.}
 La Demo~1 ha dimostrato che la verifica crittografica FFI richiede mediamente $\sim$122\,ms per blocco Mainnet, indipendentemente dalla complessità del blocco stesso (fino a 30M Gas). La Demo~2 ha confermato questa proprietà sotto carico controllato e crescente: mentre i nodi standard vedono il tempo di validazione aumentare di $\sim$3,7$\times$ passando dalla fase Baseline a quella sotto carico (con picchi fino a $\sim$1\,500\,ms), ZeroNethermind resta nell'intervallo 128--147\,ms, mostrando un incremento del solo 15\%. Il crossover tra i due approcci avviene già con carichi transazionali moderati (Tabella~\ref{tab:demo2_trend}), suggerendo che il vantaggio della verifica ZK si manifesta \textit{prima} della saturazione dei blocchi.
 
 \paragraph{2. Spostamento del collo di bottiglia architetturale.}
 Sia la Demo~1 sia la Demo~2 confermano lo spostamento del bottleneck da \textit{I/O-bound} a \textit{bandwidth-bound}. Nella Demo~1, il download delle prove da \texttt{ethproofs.org} assorbe il 94,5\% del tempo totale di validazione, relegando la verifica FFI al 5,5\%. Nella Demo~2, il radar chart (Grafico~\ref{fig:demo2_graph3}) quantifica questo spostamento: il consumo di bandwidth di ZeroNethermind è $\sim$10$\times$ quello dei nodi standard, mentre CPU e RAM sono ridotti di $\sim$6$\times$ e $\sim$2$\times$ rispettivamente. Questo risultato ha un'implicazione progettuale importante: una volta che le prove saranno incluse direttamente nel payload del blocco (come previsto dalla roadmap di Ethereum), il collo di bottiglia della bandwidth si azzererà, e il tempo di validazione coinciderà con la sola componente FFI ($\sim$120\,ms).
 
 \paragraph{3. Stabilità operativa e azzeramento dello State Bloat.}
-Durante la Demo~1, ZeroNethermind ha validato 121 blocchi Mainnet consecutivi in sincronizzazione con il Consensus Layer Lighthouse, senza mai perdere un attestation slot e mantenendo la RAM stabilmente sotto i 400\,MB. La Demo~2 ha esteso questa osservazione a 47 minuti di carico sostenuto, confermando che la memoria e la CPU restano piatte anche sotto stress. Il dato forse più rilevante riguarda lo storage: la crescita del disco è pari al 4,3\% di quella standard (Grafico~\ref{fig:demo2_graph4}), dimostrando che il paradigma \textit{Zero State} elimina il problema dello \textit{State Bloat} che costituisce uno degli ostacoli principali alla decentralizzazione di Ethereum.
+Durante la Demo~1, ZeroNethermind ha validato 121 blocchi Mainnet consecutivi in sincronizzazione con il Consensus Layer Lighthouse, senza mai perdere un attestation slot e mantenendo la RAM stabilmente sotto i 400\,MB. La Demo~2 ha esteso questa osservazione a ~45 minuti di carico sostenuto, confermando che la memoria e la CPU restano piatte anche sotto stress. Il dato forse più rilevante riguarda lo storage: la crescita del disco è pari al 4,3\% di quella standard (Grafico~\ref{fig:demo2_graph4}), dimostrando che il paradigma \textit{Zero State} elimina il problema dello \textit{State Bloat} che costituisce uno degli ostacoli principali alla decentralizzazione di Ethereum.
 
 \medskip
 
@@ -1289,7 +1259,7 @@ La Tabella~\ref{tab:confronto_finale} sintetizza le differenze architetturali e 
 \textbf{Impatto CPU} & Saturazione multi-core (EVM) & Picchi minimi transitori ($\sim$120\,ms) \\
 \textbf{I/O Disco (IOPS)} & Elevato (Accesso casuale MPT) & Nullo \\
 \textbf{Collo di Bottiglia} & Limiti Hardware (I/O-bound) & Latenza di Rete (Bandwidth-bound) \\
-\textbf{Complessità} & $O(N)$ --- Lineare al Gas Limit & $O(1)$ --- Costante crittografica \\
+\textbf{Complessità} & $O(N_{gas})$ --- Lineare al Gas Limit & $O(1)$ --- Costante crittografica \\
 \textbf{Sincronizzazione} & Ore / Giorni (State Sync) & Secondi (Checkpoint Sync) \\
 \textbf{Servizi Estesi} & Full RPC, Block Building & Solo Attestation (Fort Mode) \\
 \hline
@@ -1300,23 +1270,76 @@ La Tabella~\ref{tab:confronto_finale} sintetizza le differenze architetturali e 
 
 
 % ============================================================
-%  CAPITOLO 6: CONCLUSIONI
+%  CAPITOLO 6: CONCLUSIONE
 % ============================================================
-\chapter{Conclusioni}\label{chap:conclusioni}
+\chapter{Conclusione}\label{chap:conclusione}
+
+Questo capitolo conclusivo sintetizza i contributi del lavoro svolto, ne analizza le limitazioni ingegneristiche, delinea le direzioni di sviluppo futuro e inquadra il proof-of-concept nella traiettoria evolutiva del protocollo Ethereum.
 
 \section{Riepilogo}
-% Dimostrazione che un Execution Client può operare
-% in modalità stateless affidandosi alla matematica anziché allo potenza di calcolo.
+
+Questa tesi ha dimostrato, attraverso la progettazione, l'implementazione e la validazione sperimentale del proof-of-concept ZeroNethermind, che un client dell'Execution Layer di Ethereum può operare in modalità completamente \textit{stateless}, affidandosi alla verifica matematica delle prove crittografiche Zero-Knowledge anziché alla ri-esecuzione computazionale delle transazioni.
+
+Il PoC ha introdotto tre innovazioni architetturali principali:
+\begin{enumerate}
+    \item \textbf{Il paradigma ``Double Zero'':} L'eliminazione simultanea del database di stato locale (Zero State, tramite MemDb) e della ri-esecuzione EVM (Zero Knowledge, tramite verifica crittografica), realizzando per la prima volta un validatore L1 che non richiede né terabyte di storage né potenza di calcolo multi-core.
+    \item \textbf{Il bridge FFI cross-language:} Un'interfaccia di interoperabilità ad alte prestazioni tra il runtime managed C\#/.NET di Nethermind e le librerie crittografiche native in Rust, capace di verificare prove generate da 5 zkVM indipendenti (Zisk, OpenVM, Pico, SP1, Airbender) con trasferimento Zero-Copy dei payload binari.
+    \item \textbf{L'architettura a plugin:} L'integrazione non invasiva nel client Nethermind tramite il sistema di plugin, che consente di intercettare e sovrascrivere i gestori dell'Engine API senza modificare il codice core, preservando la compatibilità con gli aggiornamenti futuri del client.
+\end{enumerate}
+
+La validazione sperimentale, condotta su due fronti complementari, ha prodotto risultati quantitativi significativi:
+\begin{itemize}
+    \item La \textbf{Demo~1 (Mainnet)} ha validato 121 blocchi in sincronizzazione con il Consensus Layer Lighthouse. Il tempo medio di verifica crittografica FFI è risultato di soli \textbf{122\,ms} (mediana 116\,ms), rappresentando appena il 5,5\% del tempo totale, con il restante 94,5\% dominato dal download delle prove. La RAM si è mantenuta stabilmente sotto i 400\,MB e l'I/O su disco si è azzerato dopo la fase di avvio.
+    \item La \textbf{Demo~2 (devnet Kurtosis)} ha confermato empiricamente la proprietà $O(1)$ della verifica crittografica sotto carico crescente: mentre i nodi standard hanno visto il tempo di validazione aumentare di $\sim$3,7$\times$ con picchi fino a $\sim$1\,500\,ms, ZeroNethermind è rimasto nell'intervallo 128--147\,ms (incremento del solo 15\%). L'utilizzo di CPU è risultato $\sim$6$\times$ inferiore, la RAM $\sim$2$\times$ inferiore, e la crescita del disco è stata pari al \textbf{4,3\%} di quella standard, dimostrando una riduzione del 95,7\% nell'accumulo locale di stato.
+\end{itemize}
+
+Questi risultati rispondono positivamente alle due domande di ricerca poste in fase di progettazione: (i)~la validazione per verifica crittografica è \textit{operativamente fattibile} all'interno di un client production-ready, operando entro i vincoli temporali dello slot di 12 secondi; (ii)~il passaggio dalla ri-esecuzione alla verifica ZK produce un \textit{impatto misurabile e significativo} sul profilo di risorse, spostando il collo di bottiglia dall'I/O su disco alla latenza di rete.
+
+Il supporto nativo a 5 zkVM indipendenti costituisce inoltre una prima forma di \textit{multi-prover diversity}: qualora una singola zkVM presentasse un bug nei circuiti aritmetici, la logica di majority voting distribuirebbe il rischio su molteplici implementazioni indipendenti, offrendo una mitigazione strutturale contro le vulnerabilità crittografiche.
+
 
 \section{Limitazioni}
-% mock prover, latenza ethproofs, assenza di proving locale
 
-\section{Lavori futuri}
- % EIP-8025 adoption, real-time proving integrato, proving on-chain, mobile deployment
+Nonostante i risultati incoraggianti, il PoC presenta tre limitazioni ingegneristiche che ne impediscono l'adozione diretta in un ambiente di produzione.
+
+\paragraph{1. La latenza dell'oracolo HTTP esterno.}
+ZeroNethermind dipende dalle API REST di \texttt{ethproofs.org} per il recupero delle prove crittografiche. Questa dipendenza da un oracolo HTTP centralizzato introduce una latenza di rete inaccettabile per i vincoli di timing del protocollo: nella Demo~1, il download delle prove ha assorbito il 94,5\% del tempo totale di validazione, lasciando alla verifica FFI effettiva soli $\sim$120\,ms. In uno scenario ideale, dove le prove fossero immediatamente disponibili, il tempo di validazione crollerebbe di un ordine di grandezza. Inoltre, la dipendenza da un singolo endpoint centralizzato rappresenta un \textit{single point of failure}, incompatibile con i principi di decentralizzazione del protocollo.
+
+\paragraph{2. Il workaround del protocollo \texttt{SYNCING}.}
+Per gestire il caso in cui la prova per un blocco non sia ancora disponibile al momento della ricezione del \texttt{newPayload}, il PoC adotta una strategia di \textit{Active-Wait}: il gestore custom risponde al CL con lo status \texttt{SYNCING} e blocca il thread RPC in un ciclo di polling finché la prova non diventa disponibile su ethproofs.org. Questo approccio, sebbene funzionale per la dimostrazione, non è scalabile in produzione: il blocco del thread introduce una latenza non deterministica e potrebbe causare timeout del Consensus Layer in caso di ritardi prolungati nella generazione delle prove.
+
+\paragraph{3. Il gap della Data Availability.}
+Un client stateless, per definizione, non possiede il database di stato della blockchain. Questo implica l'impossibilità di rispondere alle query RPC standard degli utenti, come \texttt{eth\_getBalance}, \texttt{eth\_call} o \texttt{eth\_getStorageAt}, che richiedono l'accesso diretto allo stato corrente o storico. Il PoC è pertanto strettamente definito come un nodo \textbf{attester-only} (``Fort Mode''): valida la catena con garanzie crittografiche complete, ma non è in grado di fungere da endpoint RPC \textit{full-service} per applicazioni decentralizzate o wallet. Questa è una scelta progettuale intenzionale che sacrifica la funzionalità RPC estesa in favore dell'estrema efficienza delle risorse.
+
+
+\section{Lavori Futuri}
+
+Le limitazioni descritte nella sezione precedente non sono intrinseche al paradigma della validazione stateless, ma riflettono vincoli dello stato attuale dell'ecosistema. La roadmap di Ethereum prevede diverse evoluzioni che risolverebbero ciascuna di esse.
+
+\paragraph{1. ePBS e l'espansione della finestra di proving.}
+Il protocollo attuale concede ai validatori circa 4 secondi per ricevere e validare un blocco all'interno dello slot di 12 secondi. L'adozione dell'\textit{Enshrined Proposer-Builder Separation} (ePBS, EIP-7732)\cite{eip7732}, prevista per l'hardfork Glamsterdam (stimato per la seconda metà del 2026), espanderebbe la finestra temporale disponibile per gli attestatori da $\sim$2 secondi a $\sim$6--9 secondi\cite{l1_zkevm_roadmap}. Questo incremento è cruciale per la fattibilità del proving in tempo reale: con una finestra di 9 secondi, anche i prover attuali potrebbero generare prove entro i vincoli temporali dello slot.
+
+\paragraph{2. Gossip P2P delle prove e inclusione nel protocollo.}
+La dipendenza da un oracolo HTTP centralizzato verrebbe eliminata attraverso due evoluzioni progressive:
+\begin{itemize}
+    \item \textbf{P2P Proof Gossip:} Le prove verrebbero propagate attraverso la rete peer-to-peer del Consensus Layer, analogamente a come avviene per i blocchi e le attestazioni.
+    \item \textbf{Inclusione nel protocollo (EIP-8025):} La proposta EIP-8025\cite{eip8025} introduce due nuove modalità per i validatori: \textit{zkEVM Proof generating} e \textit{Stateless validation}. I nodi generatori propagherebbero le prove su subnet dedicate del CL, mentre i nodi stateless le consumerebbero senza necessità di alcun endpoint esterno. Essendo le prove opzionali, l'EIP consente una transizione graduale senza impatti sul consenso, fungendo da banco di prova per un futuro obbligo a livello di protocollo.
+\end{itemize}
+
+\paragraph{3. Data Availability tramite Portal Network.}
+Il gap della Data Availability del nodo attester-only potrebbe essere colmato dall'integrazione con la Portal Network\cite{portal_network}, una rete decentralizzata di tipo DHT progettata specificamente per servire dati storici e di stato a client leggeri. La Portal Network distribuisce lo stato globale in frammenti tra i nodi partecipanti, consentendo query RPC come \texttt{eth\_getBalance} senza che alcun singolo nodo debba mantenere l'intero database. L'integrazione di un client ZeroNethermind con un nodo Portal consentirebbe di combinare la validazione stateless con la capacità di rispondere a query di stato, superando la limitazione attester-only senza reintrodurre i requisiti di storage di un full node.
+
+\paragraph{4. Deployment su dispositivi mobili.}
+La combinazione della verifica $O(1)$ ($\sim$120\,ms), del consumo di RAM inferiore ai 500\,MB e dell'assenza di I/O su disco rende concepibile il deployment di un validatore stateless su dispositivi mobili. Il bridge FFI in Rust è già oggi compilabile per architetture ARM64, e l'impronta di risorse misurata nella Demo~2 è compatibile con smartphone di fascia media. Un validatore mobile contribuirebbe alla decentralizzazione della rete in modo senza precedenti, abbattendo la barriera d'ingresso alla partecipazione attiva al consenso.
+
 
 \section{Considerazioni finali}
-% impatto sulla roadmap Ethereum, passo verso "Lean ETH" e validatori mobile-native.
 
+Lo spostamento dal paradigma $O(N_{gas})$ al paradigma $O(1)$ modifica la natura del trade-off nel Blockchain Trilemma: anziché sacrificare la scalabilità per preservare la decentralizzazione, il peso computazionale viene delegato a infrastrutture specializzate (i prover), distribuendo la verifica su una base di validatori più ampia e accessibile. Il requisito hardware per un validatore passerebbe da 2\,TB di SSD NVMe e 32\,GB di RAM a un dispositivo con poche centinaia di megabyte di memoria e una connessione a banda larga. Con l'adozione parallela di PeerDAS per la disponibilità dei dati e delle zkEVM per la validazione, Ethereum potrebbe raggiungere simultaneamente un throughput elevato, un consenso decentralizzato e una validazione universalmente accessibile.
+
+Questa tesi ha dimostrato che il componente Fort Mode di questa visione è tecnicamente realizzabile oggi, all'interno di un client di produzione, con prestazioni compatibili con i vincoli temporali del protocollo. Il lavoro rimanente risiede nella maturazione dell'infrastruttura di proving, nella riduzione della latenza di generazione delle prove e nella loro integrazione nativa nel layer di consenso.
+
+Il principio architetturale alla base di questo lavoro è la trasformazione della validazione da un problema di potenza di calcolo a un problema di matematica: la crittografia Zero-Knowledge introduce un'asimmetria computazionale tale per cui verificare un blocco con diecimila transazioni richiede le medesime risorse di verificare un blocco con una sola transazione. Quando questa proprietà sarà integrata a livello di protocollo, i requisiti hardware cesseranno di costituire una barriera all'ingresso e la partecipazione al consenso potrà estendersi a una classe di dispositivi oggi esclusa dalla validazione attiva.
 
 \renewcommand{\bibsection}{}
 \chapter*{Riferimenti bibliografici}
